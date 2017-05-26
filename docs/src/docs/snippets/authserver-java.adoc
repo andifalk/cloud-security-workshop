@@ -1,6 +1,6 @@
 [source,options="nowrap"]
 ----
-@EnableAuthorizationServer # <1>
+@EnableAuthorizationServer // <1>
 @SpringBootApplication
 public class AuthorizationServerApplication {
 

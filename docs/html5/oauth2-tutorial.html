@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
 <meta name="author" content="Andreas Falk">
-<title>Excercise for OAuth2</title>
+<title>Excercise for OAuth2 security</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -421,7 +421,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Excercise for OAuth2</h1>
+<h1>Excercise for OAuth2 security</h1>
 <div class="details">
 <span id="author" class="author">Andreas Falk</span><br>
 <span id="email" class="email"><a href="mailto:andreas.falk@novatec-gmbh.de">andreas.falk@novatec-gmbh.de</a></span><br>
@@ -430,7 +430,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_what_we_will_build">1. What we will build</a></li>
-<li><a href="#_basic_oauth2_components">2. Basic OAuth2 Components</a>
+<li><a href="#_step_1">2. Step 1</a>
 <ul class="sectlevel2">
 <li><a href="#authorization-server">2.1. Authorization Server</a>
 <ul class="sectlevel3">
@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#resource-server-maven-dependencies">2.2.1. Maven dependencies</a></li>
 <li><a href="#_java_implementation_2">2.2.2. Java Implementation</a></li>
+<li><a href="#resource-server-configuration">2.2.3. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a>
@@ -453,11 +454,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#_advanced_level">3. Advanced Level</a>
+<li><a href="#_step_2">3. Step 2</a>
 <ul class="sectlevel2">
-<li><a href="#_use_persistent_store">3.1. Use persistent store</a></li>
-<li><a href="#_encrypt_the_passwords">3.2. Encrypt the passwords</a></li>
-<li><a href="#_provide_form_based_login">3.3. Provide form based login</a></li>
+<li><a href="#_provide_form_based_login">3.1. Provide form based login</a></li>
+<li><a href="#_use_persistent_store">3.2. Use persistent store</a></li>
+<li><a href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></li>
 </ul>
 </li>
 </ul>
@@ -514,7 +515,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basic_oauth2_components"><a class="link" href="#_basic_oauth2_components">2. Basic OAuth2 Components</a></h2>
+<h2 id="_step_1"><a class="link" href="#_step_1">2. Step 1</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="authorization-server"><a class="link" href="#authorization-server">2.1. Authorization Server</a></h3>
@@ -590,11 +591,11 @@ of the authorization server must be as follows:</p>
 
 	&lt;groupId&gt;com.example&lt;/groupId&gt;
 	&lt;artifactId&gt;authorizationserver&lt;/artifactId&gt;
-	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+	&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
 	&lt;packaging&gt;jar&lt;/packaging&gt;
 
 	&lt;name&gt;authorizationserver&lt;/name&gt;
-	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+	&lt;description&gt;OAuth2 Authorization Server&lt;/description&gt;
 
 	&lt;parent&gt;
 		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
@@ -607,6 +608,7 @@ of the authorization server must be as follows:</p>
 		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
 		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
 		&lt;java.version&gt;1.8&lt;/java.version&gt;
+		&lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
 	&lt;/properties&gt;
 
 	&lt;dependencies&gt;
@@ -615,16 +617,8 @@ of the authorization server must be as follows:</p>
 			&lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
 		&lt;/dependency&gt;
 		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+			&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+			&lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
 		&lt;/dependency&gt;
 		&lt;dependency&gt;
 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
@@ -641,16 +635,23 @@ of the authorization server must be as follows:</p>
 			&lt;scope&gt;runtime&lt;/scope&gt;
 		&lt;/dependency&gt;
 		&lt;dependency&gt;
-			&lt;groupId&gt;com.h2database&lt;/groupId&gt;
-			&lt;artifactId&gt;h2&lt;/artifactId&gt;
-			&lt;scope&gt;runtime&lt;/scope&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
 			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
 			&lt;scope&gt;test&lt;/scope&gt;
 		&lt;/dependency&gt;
 	&lt;/dependencies&gt;
+
+	&lt;dependencyManagement&gt;
+		&lt;dependencies&gt;
+			&lt;dependency&gt;
+				&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+				&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+				&lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+				&lt;type&gt;pom&lt;/type&gt;
+				&lt;scope&gt;import&lt;/scope&gt;
+			&lt;/dependency&gt;
+		&lt;/dependencies&gt;
+	&lt;/dependencyManagement&gt;
 
 	&lt;build&gt;
 		&lt;plugins&gt;
@@ -668,11 +669,7 @@ of the authorization server must be as follows:</p>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Dependency for base security filters (e.g. basic authentication)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Dependency for OAuth2 support</td>
+<td>Dependency for OAuth2 security support</td>
 </tr>
 </table>
 </div>
@@ -705,14 +702,16 @@ public class AuthorizationServerApplication {
 <h4 id="authorization-server-configuration"><a class="link" href="#authorization-server-configuration">2.1.3. Configuration</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code>server.context-path=/users
-server.port=9999
-security.oauth2.client.client-id=productclient <i class="conum" data-value="1"></i><b>(1)</b>
-security.oauth2.client.client-secret=secretkey <i class="conum" data-value="2"></i><b>(2)</b>
-security.oauth2.client.scope=read-products <i class="conum" data-value="3"></i><b>(3)</b>
-security.oauth2.authorization.check-token-access=isAuthenticated() <i class="conum" data-value="4"></i><b>(4)</b>
-security.user.name=user <i class="conum" data-value="5"></i><b>(5)</b>
-security.user.password=secret <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
+<pre class="highlightjs highlight nowrap"><code>server.port=9999
+server.context-path=/users
+
+security.user.name=user <i class="conum" data-value="1"></i><b>(1)</b>
+security.user.password=secret <i class="conum" data-value="2"></i><b>(2)</b>
+
+security.oauth2.client.client-id=productclient <i class="conum" data-value="3"></i><b>(3)</b>
+security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"></i><b>(4)</b>
+security.oauth2.client.scope=read-products <i class="conum" data-value="5"></i><b>(5)</b>
+security.oauth2.authorization.check-token-access=isAuthenticated() <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
 </div>
@@ -751,6 +750,18 @@ public class ProductApplication {
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="resource-server-configuration"><a class="link" href="#resource-server-configuration">2.2.3. Configuration</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>security.user.password=none <i class="conum" data-value="1"></i><b>(1)</b>
+
+security.oauth2.resource.token-info-uri=http://localhost:9999/users/oauth/check_token <i class="conum" data-value="2"></i><b>(2)</b>
+security.oauth2.client.client-id=productclient <i class="conum" data-value="3"></i><b>(3)</b>
+security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="client"><a class="link" href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a></h3>
@@ -759,13 +770,9 @@ public class ProductApplication {
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>    &lt;dependency&gt;
-	    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-		&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
-	&lt;/dependency&gt;
-	&lt;dependency&gt;
-		&lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;
-		&lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;
-	&lt;/dependency&gt;</code></pre>
+    	&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    	&lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+    &lt;/dependency&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -789,12 +796,67 @@ public class UiApplication {
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Add <em>@EnableOAuth2Sso</em> annotation to secure complete UI using OAuth2</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Add new <em>@Bean</em> configuration for OAuth2RestTemplate</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>@Service
+public class ProductService {
+
+    //private RestTemplate template = new RestTemplate();
+    private final OAuth2RestTemplate template; <i class="conum" data-value="1"></i><b>(1)</b>
+
+    @Autowired
+    public ProductService(OAuth2RestTemplate template) {
+        this.template = template;
+    }
+
+    @HystrixCommand(fallbackMethod = "fallbackProducts",
+            commandProperties = {  <i class="conum" data-value="2"></i><b>(2)</b>
+                    @HystrixProperty(name="execution.isolation.strategy", value="SEMAPHORE")
+            })
+    public Collection&lt;Product&gt; getAllProducts() {
+
+        ResponseEntity&lt;Product[]&gt; response = template.getForEntity(
+                "http://localhost:8080/products", Product[].class);
+
+        return Arrays.asList(response.getBody());
+    }
+
+    public Collection&lt;Product&gt; fallbackProducts() {
+        return Collections.emptyList();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace standard <em>RestTemplate</em> with <em>OAuth2RestTemplate</em></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Reconfigure HystrixCommand to use Semaphore to propagate the security context</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_advanced_level"><a class="link" href="#_advanced_level">3. Advanced Level</a></h2>
+<h2 id="_step_2"><a class="link" href="#_step_2">3. Step 2</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <div class="title">To make the sample application even more secure we will enhance the authorization server to&#8230;&#8203;</div>
@@ -811,15 +873,15 @@ public class UiApplication {
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">3.1. Use persistent store</a></h3>
+<h3 id="_provide_form_based_login"><a class="link" href="#_provide_form_based_login">3.1. Provide form based login</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">3.2. Encrypt the passwords</a></h3>
+<h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">3.2. Use persistent store</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_provide_form_based_login"><a class="link" href="#_provide_form_based_login">3.3. Provide form based login</a></h3>
+<h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></h3>
 
 </div>
 </div>
@@ -827,7 +889,7 @@ public class UiApplication {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-26 18:50:00 +02:00
+Last updated 2017-05-26 22:34:03 +02:00
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

@@ -1,5 +1,5 @@
 
-= Excercise for OAuth2
+= Excercise for OAuth2 security
 Andreas Falk <andreas.falk@novatec-gmbh.de>
 :doctype: book
 :icons: font
@@ -31,7 +31,7 @@ image::images/oauth2services.png[scaledwidth="75%",alt="OAuth2 roles"]
 |http://localhost:8080
 |===
 
-== Basic OAuth2 Components
+== Step 1
 
 [[authorization-server]]
 === Authorization Server
@@ -65,8 +65,7 @@ of the authorization server must be as follows:
 
 include::{snippets}/authserver-mavenpom.adoc[]
 
-<1> Dependency for base security filters (e.g. basic authentication)
-<2> Dependency for OAuth2 support
+<1> Dependency for OAuth2 security support
 
 ==== Java Implementation
 
@@ -85,11 +84,16 @@ include::{snippets}/authserver-props.adoc[]
 [[resource-server-maven-dependencies]]
 ==== Maven dependencies
 
-include::{snippets}/mavenpom.adoc[]
+include::{snippets}/resourceserver-mavenpom.adoc[]
 
 ==== Java Implementation
 
 include::{snippets}/resourceserver-java.adoc[]
+
+[[resource-server-configuration]]
+==== Configuration
+
+include::{snippets}/resourceserver-props.adoc[]
 
 [[client]]
 === OAuth2 Client (Thymeleaf UI)
@@ -97,24 +101,33 @@ include::{snippets}/resourceserver-java.adoc[]
 [[client-maven-dependencies]]
 ==== Maven dependencies
 
-include::{snippets}/mavenpom.adoc[]
+include::{snippets}/client-mavenpom.adoc[]
 
 ==== Java Implementation
 
 include::{snippets}/client-java.adoc[]
 
-== Advanced Level
+<1> Add _@EnableOAuth2Sso_ annotation to secure complete UI using OAuth2
+<2> Add new _@Bean_ configuration for OAuth2RestTemplate
+
+include::{snippets}/client-service-java.adoc[]
+
+<1> Replace standard _RestTemplate_ with _OAuth2RestTemplate_
+<2> Reconfigure HystrixCommand to use Semaphore to propagate the security context
+
+== Step 2
 
 .To make the sample application even more secure we will enhance the authorization server to...
 - ...use a persistent store for users
 - ...encrypt the passwords
 - ...enable login using a form login page
 
+=== Provide form based login
+
 === Use persistent store
 
 === Encrypt the passwords
 
-=== Provide form based login
 
 
 
