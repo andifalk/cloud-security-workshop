@@ -1,0 +1,11 @@
+[source,options="nowrap"]
+----
+server.context-path=/users
+server.port=9999
+security.oauth2.client.client-id=productclient # <1>
+security.oauth2.client.client-secret=secretkey # <2>
+security.oauth2.client.scope=read-products # <3>
+security.oauth2.authorization.check-token-access=isAuthenticated() # <4>
+security.user.name=user # <5>
+security.user.password=secret # <6>
+----
