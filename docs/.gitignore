@@ -13,3 +13,4 @@ target/
 *.iws
 *.ipr
 /.idea/
+/.gradle/
