@@ -487,6 +487,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <img src="images/oauth2services.png" alt="OAuth2 roles">
 </div>
 </div>
+<div class="paragraph">
+<p>These microservices have to be configured to be reachable via the following URL addresses (Port 8080 is the default port in spring boot).</p>
+</div>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 1. Microservice URL Adresses</caption>
 <colgroup>
@@ -512,11 +515,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can find more information on building OAuth2 secured microservices with spring in
+<a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2">Spring Boot Reference Documentation</a>
+and in <a href="https://projects.spring.io/spring-security-oauth/docs/oauth2.html">Spring Security OAuth2 Developers Guide</a>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_step_1"><a class="link" href="#_step_1">2. Step 1</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In step 1 we will build a basic OAuth2 secured microservices infrastructure using simple user credentials provided
+via properties in <em>application.properties</em>.</p>
+</div>
 <div class="sect2">
 <h3 id="authorization-server"><a class="link" href="#authorization-server">2.1. Authorization Server</a></h3>
 <div class="admonitionblock tip">
@@ -714,12 +735,43 @@ security.oauth2.client.scope=read-products <i class="conum" data-value="5"></i><
 security.oauth2.authorization.check-token-access=isAuthenticated() <i class="conum" data-value="6"></i><b>(6)</b></code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Definition of username for authentication</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Definition of user password for authentication</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Client id for OAuth2 authorization code grant</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Client secret for OAuth2 authorization code grant</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Scopes to authorize for OAuth2</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Open endpoint for getting token details for authenticated users</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="resource-server"><a class="link" href="#resource-server">2.2. Resource Server (Products)</a></h3>
 <div class="sect3">
 <h4 id="resource-server-maven-dependencies"><a class="link" href="#resource-server-maven-dependencies">2.2.1. Maven dependencies</a></h4>
+<div class="paragraph">
+<p>Add the following required dependencies to the existing maven pom file.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>    &lt;dependency&gt;
@@ -735,6 +787,10 @@ security.oauth2.authorization.check-token-access=isAuthenticated() <i class="con
 </div>
 <div class="sect3">
 <h4 id="_java_implementation_2"><a class="link" href="#_java_implementation_2">2.2.2. Java Implementation</a></h4>
+<div class="paragraph">
+<p>The existing products service now should act as an OAuth2 resource server.
+Therefore it has to be marked as such.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>@EnableResourceServer <i class="conum" data-value="1"></i><b>(1)</b>
@@ -749,9 +805,21 @@ public class ProductApplication {
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Annotation to enable this as a OAuth2 resource server.</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect3">
 <h4 id="resource-server-configuration"><a class="link" href="#resource-server-configuration">2.2.3. Configuration</a></h4>
+<div class="paragraph">
+<p>The following additional properties are required to make the resource server work with our new
+authorization server.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>security.user.password=none <i class="conum" data-value="1"></i><b>(1)</b>
@@ -761,12 +829,35 @@ security.oauth2.client.client-id=productclient <i class="conum" data-value="3"><
 security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This password won&#8217;t be used as this microservice is protected by OAuth2 now</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Endpoint for getting token details required for products resource server</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Client id for OAuth2 authorization code grant</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Client secret for OAuth2 authorization code grant</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="client"><a class="link" href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a></h3>
 <div class="sect3">
 <h4 id="client-maven-dependencies"><a class="link" href="#client-maven-dependencies">2.3.1. Maven dependencies</a></h4>
+<div class="paragraph">
+<p>Add the following required dependencies to the existing maven pom file.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>    &lt;dependency&gt;
@@ -778,6 +869,26 @@ security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"><
 </div>
 <div class="sect3">
 <h4 id="_java_implementation_3"><a class="link" href="#_java_implementation_3">2.3.2. Java Implementation</a></h4>
+<div class="paragraph">
+<p>The UI client now acts as OAuth2 client and must be marked as such.
+Additionally to automatically use the OAuth2 tokens with all calls to REST services
+the currently used <em>RestTemplate</em> has to be replaced with new <em>OAuth2RestTemplate</em></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In more advanced cloud scenarios you may also
+use <a href="http://cloud.spring.io/spring-cloud-static/Dalston.RELEASE/#spring-cloud-feign">Feign Client</a>
+instead of <em>OAuth2RestTemplate</em> to call the REST Api. In that case you have to add an interceptor
+for OAuth2.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>@EnableOAuth2Sso <i class="conum" data-value="1"></i><b>(1)</b>
@@ -804,7 +915,7 @@ public class UiApplication {
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Add new <em>@Bean</em> configuration for OAuth2RestTemplate</td>
+<td>Add new <em>@Bean</em> configuration for OAuth2RestTemplate (will replace the standard <em>RestTemplate</em>)</td>
 </tr>
 </table>
 </div>
@@ -862,34 +973,216 @@ public class ProductService {
 <div class="title">To make the sample application even more secure we will enhance the authorization server to&#8230;&#8203;</div>
 <ul>
 <li>
+<p>&#8230;&#8203;enable login using a form login page</p>
+</li>
+<li>
 <p>&#8230;&#8203;use a persistent store for users</p>
 </li>
 <li>
 <p>&#8230;&#8203;encrypt the passwords</p>
 </li>
-<li>
-<p>&#8230;&#8203;enable login using a form login page</p>
-</li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="_provide_form_based_login"><a class="link" href="#_provide_form_based_login">3.1. Provide form based login</a></h3>
-
+<div class="paragraph">
+<p>A form based login is more user friendly authentication and should always be preferred over
+basic authentication popups.
+To provide an automatically generated form based login just extend the predefined class <em>WebSecurityConfigurerAdapter</em>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>@Configuration
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">3.2. Use persistent store</a></h3>
+<div class="paragraph">
+<p>Until now we have authenticated ourselves using credentials that are defined via application properties
+which is ok for demo purposes but definetly not for production use.</p>
+</div>
+<div class="ulist">
+<div class="title">Therefore we introduce a new persistent <em>User</em> entity which has the following attributes:</div>
+<ul>
+<li>
+<p>firstname</p>
+</li>
+<li>
+<p>lastname</p>
+</li>
+<li>
+<p>email</p>
+</li>
+<li>
+<p>password</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To actually use the new <em>User</em> entity with spring security this entity class has to implement the predefined
+interface <em>UserDetails</em> as well. Please use the attribute <em>email</em> as <em>username</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A corresponding repository interface and a data initializer component (just like the one for products)
+have to be implemented as well.</p>
+</div>
+<div class="paragraph">
+<p>Finally spring security must be aware to use the persistent users now instead of the one
+defined in the properties. To achieve this you have to implement the interface
+<em>UserDetailsService</em> as well to provide an operation loading a user for authentication.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>@Service
+public class StandardUserDetailsService implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
+    public StandardUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        User user = userRepository.findOneByEmail(userName);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user found for " + userName);
+        } else {
+            return user;
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>@Configuration
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public WebSecurityConfiguration(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
+}</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></h3>
+<div class="paragraph">
+<p>In the last step we want to change the storage of cleartext passwords for the users in the database.
+If any attacker gets hold of our database then all passwords are leaked.
+Therefore a production system must <strong>ALWAYS</strong> store any sensible data like passwords, credit card numbers etc.
+encrypted using a proven cryptographic algorithm.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>public interface PasswordEncoder {
 
+	String encode(CharSequence rawPassword);
+
+	boolean matches(CharSequence rawPassword, String encodedPassword);
+
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Lucklily spring security already provides safe implementations of a <em>PasswordEncoder</em>:</div>
+<ul>
+<li>
+<p>Pbkdf2PasswordEncoder</p>
+</li>
+<li>
+<p>BCryptPasswordEncoder</p>
+</li>
+<li>
+<p>SCryptPasswordEncoder</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To support authentication using encrypted passwords the current web security configuration has to be extended
+by the <em>PasswordEncoder</em> to be used.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>@Configuration
+public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public WebSecurityConfiguration(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The passwords have to be stored in encrypted form as well,
+so don&#8217;t forget to inject and use a <em>PasswordEncoder</em> instance in
+your user data initializer.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may use the h2 console to have a look into the in-memory database to see that the user passwords
+are really stored as encrypted values now.
+See <a href="http://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/htmlsingle/#boot-features-sql-h2-console">Spring Boot Reference Docs</a> on
+how to use and configure this.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-26 22:34:03 +02:00
+Last updated 2017-05-28 20:27:32 +02:00
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
