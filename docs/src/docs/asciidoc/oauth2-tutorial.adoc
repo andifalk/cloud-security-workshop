@@ -1,5 +1,5 @@
 
-= Excercise for OAuth2 security
+= Exercise for OAuth2 security
 Andreas Falk <andreas.falk@novatec-gmbh.de>
 :doctype: book
 :icons: font
