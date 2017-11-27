@@ -449,7 +449,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a>
 <ul class="sectlevel3">
 <li><a href="#client-maven-dependencies">2.3.1. Maven dependencies</a></li>
-<li><a href="#_java_implementation_3">2.3.2. Java Implementation</a></li>
+<li><a href="#client-java-implementation">2.3.2. Java Implementation</a></li>
+<li><a href="#client-configuration">2.3.3. Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -868,7 +869,7 @@ security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"><
 </div>
 </div>
 <div class="sect3">
-<h4 id="_java_implementation_3"><a class="link" href="#_java_implementation_3">2.3.2. Java Implementation</a></h4>
+<h4 id="client-java-implementation"><a class="link" href="#client-java-implementation">2.3.2. Java Implementation</a></h4>
 <div class="paragraph">
 <p>The UI client now acts as OAuth2 client and must be marked as such.
 Additionally to automatically use the OAuth2 tokens with all calls to REST services
@@ -959,6 +960,59 @@ public class ProductService {
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>Reconfigure HystrixCommand to use Semaphore to propagate the security context</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="client-configuration"><a class="link" href="#client-configuration">2.3.3. Configuration</a></h4>
+<div class="paragraph">
+<p>The following additional properties are required to make the UI client work with our new
+authorization server.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>server.port=8081
+
+security.user.password=none <i class="conum" data-value="1"></i><b>(1)</b>
+
+security.oauth2.client.client-id=productclient <i class="conum" data-value="2"></i><b>(2)</b>
+security.oauth2.client.client-secret=secretkey <i class="conum" data-value="3"></i><b>(3)</b>
+security.oauth2.client.access-token-uri=http://localhost:9999/users/oauth/token <i class="conum" data-value="4"></i><b>(4)</b>
+security.oauth2.client.user-authorization-uri=http://localhost:9999/users/oauth/authorize <i class="conum" data-value="5"></i><b>(5)</b>
+security.oauth2.client.scope=read-products <i class="conum" data-value="6"></i><b>(6)</b>
+security.oauth2.resource.token-info-uri=http://localhost:9999/users/oauth/check_token <i class="conum" data-value="7"></i><b>(7)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This password won&#8217;t be used as this microservice is protected by OAuth2 now</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Client id for OAuth2 authorization code grant</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Client secret for OAuth2 authorization code grant</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Endpoint for exchanging authorization code for access token</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Endpoint for redirecting to authorization server for authentication</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Scope for the request</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>Endpoint for validating token details</td>
 </tr>
 </table>
 </div>
@@ -1182,7 +1236,7 @@ how to use and configure this.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-28 20:41:59 +02:00
+Last updated 2017-11-27 16:30:45 +01:00
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

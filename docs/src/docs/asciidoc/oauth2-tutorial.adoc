@@ -136,6 +136,7 @@ Add the following required dependencies to the existing maven pom file.
 
 include::{snippets}/client-mavenpom.adoc[]
 
+[[client-java-implementation]]
 ==== Java Implementation
 
 The UI client now acts as OAuth2 client and must be marked as such.
@@ -156,6 +157,22 @@ include::{snippets}/client-service-java.adoc[]
 
 <1> Replace standard _RestTemplate_ with _OAuth2RestTemplate_
 <2> Reconfigure HystrixCommand to use Semaphore to propagate the security context
+
+[[client-configuration]]
+==== Configuration
+
+The following additional properties are required to make the UI client work with our new
+authorization server.
+
+include::{snippets}/client-props.adoc[]
+
+<1> This password won't be used as this microservice is protected by OAuth2 now
+<2> Client id for OAuth2 authorization code grant
+<3> Client secret for OAuth2 authorization code grant
+<4> Endpoint for exchanging authorization code for access token
+<5> Endpoint for redirecting to authorization server for authentication
+<6> Scope for the request
+<7> Endpoint for validating token details
 
 == Step 2
 
