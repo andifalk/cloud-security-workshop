@@ -548,7 +548,7 @@ via properties in <em>application.properties</em>.</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You may look into the spring boot reference documentation <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-authorization-server">Spring Boot Reference Documentation</a>
+You may look into the spring boot reference documentation <a href="https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-authorization-server">Spring Boot Reference Documentation</a>
 on how to implement an authorization server.
 </td>
 </tr>
@@ -561,8 +561,8 @@ on how to implement an authorization server.
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-To prevent conflicts with different JSESSION cookies the authorization server must run
-on a separate context path (not '/'). In our example please use '/users' as context path. In spring boot
+To prevent conflicts with different <code>JSESSION</code> cookies the authorization server must run
+on a separate context path (not in root <em>'/'</em>). In our example please use <em>'/users'</em> as context path. In spring boot
 this can be achieved by the <em>server.context</em> property
 </td>
 </tr>
@@ -622,7 +622,7 @@ of the authorization server must be as follows:</p>
 	&lt;parent&gt;
 		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
 		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-		&lt;version&gt;1.5.3.RELEASE&lt;/version&gt;
+		&lt;version&gt;1.5.13.RELEASE&lt;/version&gt;
 		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
 	&lt;/parent&gt;
 
@@ -630,7 +630,7 @@ of the authorization server must be as follows:</p>
 		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
 		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
 		&lt;java.version&gt;1.8&lt;/java.version&gt;
-		&lt;spring-cloud.version&gt;Dalston.SR1&lt;/spring-cloud.version&gt;
+		&lt;spring-cloud.version&gt;Dalston.SR5&lt;/spring-cloud.version&gt;
 	&lt;/properties&gt;
 
 	&lt;dependencies&gt;
@@ -768,6 +768,19 @@ security.oauth2.authorization.check-token-access=isAuthenticated() <i class="con
 </div>
 <div class="sect2">
 <h3 id="resource-server"><a class="link" href="#resource-server">2.2. Resource Server (Products)</a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may look into the spring boot reference documentation <a href="https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-resource-server">Spring Boot Reference Documentation</a>
+on how to implement a resource server.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="resource-server-maven-dependencies"><a class="link" href="#resource-server-maven-dependencies">2.2.1. Maven dependencies</a></h4>
 <div class="paragraph">
@@ -854,6 +867,19 @@ security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"><
 </div>
 <div class="sect2">
 <h3 id="client"><a class="link" href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a></h3>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may look into the spring boot reference documentation <a href="https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-single-sign-on">Spring Boot Reference Documentation</a>
+on how to implement an OAuth2 single-sign-on client.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="client-maven-dependencies"><a class="link" href="#client-maven-dependencies">2.3.1. Maven dependencies</a></h4>
 <div class="paragraph">
@@ -1051,6 +1077,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may look into the spring security reference documentation <a href="https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#jc-form">Spring Security Reference Documentation</a>
+on how to configure authentication options like form login.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">3.2. Use persistent store</a></h3>
@@ -1139,6 +1178,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may look into the spring security reference documentation <a href="https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#jc-authentication-userdetailsservice">Spring Security Reference Documentation</a>
+on how to add a custom user details service.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></h3>
@@ -1147,6 +1199,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 If any attacker gets hold of our database then all passwords are leaked.
 Therefore a production system must <strong>ALWAYS</strong> store any sensible data like passwords, credit card numbers etc.
 encrypted using a proven cryptographic algorithm.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You may look into the spring security reference documentation <a href="https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#core-services-password-encoding">Spring Security Reference Documentation</a>
+on how to securely encode passwords.
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1224,7 +1289,7 @@ your user data initializer.
 <td class="content">
 You may use the h2 console to have a look into the in-memory database to see that the user passwords
 are really stored as encrypted values now.
-See <a href="http://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/htmlsingle/#boot-features-sql-h2-console">Spring Boot Reference Docs</a> on
+See <a href="http://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-sql-h2-console">Spring Boot Reference Docs</a> on
 how to use and configure this.
 </td>
 </tr>
@@ -1236,7 +1301,7 @@ how to use and configure this.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-27 16:30:45 +01:00
+Last updated 2018-05-11 10:38:19 +02:00
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">

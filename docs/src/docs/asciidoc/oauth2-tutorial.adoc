@@ -45,11 +45,11 @@ via properties in _application.properties_.
 [[authorization-server]]
 === Authorization Server
 
-TIP: You may look into the spring boot reference documentation http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-authorization-server[Spring Boot Reference Documentation]
+TIP: You may look into the spring boot reference documentation https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-authorization-server[Spring Boot Reference Documentation]
 on how to implement an authorization server.
 
-IMPORTANT: To prevent conflicts with different JSESSION cookies the authorization server must run
-on a separate context path (not '/'). In our example please use '/users' as context path. In spring boot
+IMPORTANT: To prevent conflicts with different `JSESSION` cookies the authorization server must run
+on a separate context path (not in root _'/'_). In our example please use _'/users'_ as context path. In spring boot
 this can be achieved by the _server.context_ property
 
 To ensure OAuth2 authorization code grant works correctly with the other components the end points
@@ -97,6 +97,9 @@ include::{snippets}/authserver-props.adoc[]
 [[resource-server]]
 === Resource Server (Products)
 
+TIP: You may look into the spring boot reference documentation https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-resource-server[Spring Boot Reference Documentation]
+on how to implement a resource server.
+
 [[resource-server-maven-dependencies]]
 ==== Maven dependencies
 
@@ -128,6 +131,9 @@ include::{snippets}/resourceserver-props.adoc[]
 
 [[client]]
 === OAuth2 Client (Thymeleaf UI)
+
+TIP: You may look into the spring boot reference documentation https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2-single-sign-on[Spring Boot Reference Documentation]
+on how to implement an OAuth2 single-sign-on client.
 
 [[client-maven-dependencies]]
 ==== Maven dependencies
@@ -189,6 +195,9 @@ To provide an automatically generated form based login just extend the predefine
 
 include::{snippets}/authserver-formlogin-java.adoc[]
 
+TIP: You may look into the spring security reference documentation https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#jc-form[Spring Security Reference Documentation]
+on how to configure authentication options like form login.
+
 === Use persistent store
 
 Until now we have authenticated ourselves using credentials that are defined via application properties
@@ -214,12 +223,18 @@ include::{snippets}/authserver-userdetailsservice-java.adoc[]
 
 include::{snippets}/authserver-userdetailsservice-cfg-java.adoc[]
 
+TIP: You may look into the spring security reference documentation https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#jc-authentication-userdetailsservice[Spring Security Reference Documentation]
+on how to add a custom user details service.
+
 === Encrypt the passwords
 
 In the last step we want to change the storage of cleartext passwords for the users in the database.
 If any attacker gets hold of our database then all passwords are leaked.
 Therefore a production system must *ALWAYS* store any sensible data like passwords, credit card numbers etc.
 encrypted using a proven cryptographic algorithm.
+
+TIP: You may look into the spring security reference documentation https://docs.spring.io/spring-security/site/docs/4.2.x/reference/htmlsingle/#core-services-password-encoding[Spring Security Reference Documentation]
+on how to securely encode passwords.
 
 include::{snippets}/password-encoder-java.adoc[]
 
@@ -239,6 +254,6 @@ your user data initializer.
 
 TIP: You may use the h2 console to have a look into the in-memory database to see that the user passwords
 are really stored as encrypted values now.
-See http://docs.spring.io/spring-boot/docs/1.5.3.RELEASE/reference/htmlsingle/#boot-features-sql-h2-console[Spring Boot Reference Docs] on
+See http://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-sql-h2-console[Spring Boot Reference Docs] on
 how to use and configure this.
 
