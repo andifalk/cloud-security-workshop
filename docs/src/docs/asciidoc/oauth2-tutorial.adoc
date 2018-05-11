@@ -191,7 +191,7 @@ include::{snippets}/client-props.adoc[]
 - ...use a persistent store for users
 - ...encrypt the passwords
 
-If you did not finish step 1 to start implementing step 2 you can use projects in sub folder _'step2'_ of checked out from
+If you did not finish step 1 to start implementing step 2 you can use projects in sub folder _'step1'_ of checked out from
 as starting point.
 
 https://github.com/andifalk/cloud-security-workshop
