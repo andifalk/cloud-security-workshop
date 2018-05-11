@@ -34,13 +34,17 @@ These microservices have to be configured to be reachable via the following URL 
 |===
 
 TIP: You can find more information on building OAuth2 secured microservices with spring in
-http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2[Spring Boot Reference Documentation]
+https://docs.spring.io/spring-boot/docs/1.5.x/reference/htmlsingle/#boot-features-security-oauth2[Spring Boot Reference Documentation]
 and in https://projects.spring.io/spring-security-oauth/docs/oauth2.html[Spring Security OAuth2 Developers Guide]
 
 == Step 1
 
 In step 1 we will build a basic OAuth2 secured microservices infrastructure using simple user credentials provided
 via properties in _application.properties_.
+
+To start implementing make sure you checked out the initial code in sub folder _'initial'_ from
+
+https://github.com/andifalk/cloud-security-workshop
 
 [[authorization-server]]
 === Authorization Server
@@ -186,6 +190,11 @@ include::{snippets}/client-props.adoc[]
 - ...enable login using a form login page
 - ...use a persistent store for users
 - ...encrypt the passwords
+
+If you did not finish step 1 to start implementing step 2 you can use projects in sub folder _'step2'_ of checked out from
+as starting point.
+
+https://github.com/andifalk/cloud-security-workshop
 
 === Provide form based login
 
