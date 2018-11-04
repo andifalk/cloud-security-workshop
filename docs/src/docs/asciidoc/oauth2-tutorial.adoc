@@ -78,25 +78,14 @@ of the authorization server must be as follows:
 
 include::{snippets}/authserver-mavenpom.adoc[]
 
-<1> Dependency for OAuth2 security support
-
 ==== Java Implementation
 
 include::{snippets}/authserver-java.adoc[]
-
-<1> Annotation to enable auto configuration of an Authorization Server
 
 [[authorization-server-configuration]]
 ==== Configuration
 
 include::{snippets}/authserver-props.adoc[]
-
-<1> Definition of username for authentication
-<2> Definition of user password for authentication
-<3> Client id for OAuth2 authorization code grant
-<4> Client secret for OAuth2 authorization code grant
-<5> Scopes to authorize for OAuth2
-<6> Open endpoint for getting token details for authenticated users
 
 [[resource-server]]
 === Resource Server (Products)
@@ -118,8 +107,6 @@ Therefore it has to be marked as such.
 
 include::{snippets}/resourceserver-java.adoc[]
 
-<1> Annotation to enable this as a OAuth2 resource server.
-
 [[resource-server-configuration]]
 ==== Configuration
 
@@ -127,11 +114,6 @@ The following additional properties are required to make the resource server wor
 authorization server.
 
 include::{snippets}/resourceserver-props.adoc[]
-
-<1> This password won't be used as this microservice is protected by OAuth2 now
-<2> Endpoint for getting token details required for products resource server
-<3> Client id for OAuth2 authorization code grant
-<4> Client secret for OAuth2 authorization code grant
 
 [[client]]
 === OAuth2 Client (Thymeleaf UI)
@@ -160,13 +142,7 @@ for OAuth2.
 
 include::{snippets}/client-java.adoc[]
 
-<1> Add _@EnableOAuth2Sso_ annotation to secure complete UI using OAuth2
-<2> Add new _@Bean_ configuration for OAuth2RestTemplate (will replace the standard _RestTemplate_)
-
 include::{snippets}/client-service-java.adoc[]
-
-<1> Replace standard _RestTemplate_ with _OAuth2RestTemplate_
-<2> Reconfigure HystrixCommand to use Semaphore to propagate the security context
 
 [[client-configuration]]
 ==== Configuration
@@ -175,14 +151,6 @@ The following additional properties are required to make the UI client work with
 authorization server.
 
 include::{snippets}/client-props.adoc[]
-
-<1> This password won't be used as this microservice is protected by OAuth2 now
-<2> Client id for OAuth2 authorization code grant
-<3> Client secret for OAuth2 authorization code grant
-<4> Endpoint for exchanging authorization code for access token
-<5> Endpoint for redirecting to authorization server for authentication
-<6> Scope for the request
-<7> Endpoint for validating token details
 
 == Step 2
 

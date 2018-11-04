@@ -10,3 +10,4 @@ public class AuthorizationServerApplication {
 
 }
 ----
+<1> Annotation to enable auto configuration of an Authorization Server

@@ -11,4 +11,10 @@ security.oauth2.client.user-authorization-uri=http://localhost:9999/users/oauth/
 security.oauth2.client.scope=read-products # <6>
 security.oauth2.resource.token-info-uri=http://localhost:9999/users/oauth/check_token # <7>
 ----
-
+<1> This password won't be used as this microservice is protected by OAuth2 now
+<2> Client id for OAuth2 authorization code grant
+<3> Client secret for OAuth2 authorization code grant
+<4> Endpoint for exchanging authorization code for access token
+<5> Endpoint for redirecting to authorization server for authentication
+<6> Scope for the request
+<7> Endpoint for validating token details

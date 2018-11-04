@@ -11,3 +11,4 @@ public class ProductApplication {
 	}
 }
 ----
+<1> Annotation to enable this as a OAuth2 resource server.

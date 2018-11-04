@@ -28,3 +28,5 @@ public class ProductService {
     }
 }
 ----
+<1> Replace standard _RestTemplate_ with _OAuth2RestTemplate_
+<2> Reconfigure HystrixCommand to use Semaphore to propagate the security context
