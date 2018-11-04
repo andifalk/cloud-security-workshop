@@ -20,11 +20,11 @@ public class ProductInitializer implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         Stream.of(
-                new Product("Product 1", "Description 1", 3.50),
-                new Product("Product 2", "Description 2", 7.00),
-                new Product("Product 3", "Description 3", 33.00),
-                new Product("Product 4", "Description 4", 0.50),
-                new Product("Product 5", "Description 5", 25.75)
+                new Product("Apple", "A green apple", 3.50),
+                new Product("Banana", "The perfect banana", 7.00),
+                new Product("Orange", "Lots of sweet oranges", 33.00),
+                new Product("Pineapple", "Exotic pineapple", 1.50),
+                new Product("Grapes", "Red wine grapes", 10.75)
         ).forEach(productsRepository::save);
     }
 }
