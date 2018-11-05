@@ -10,6 +10,16 @@ Andreas Falk <andreas.falk@novatec-gmbh.de>
 :numbered: ''
 :docinfo:
 
+== System Requirements
+
+To successfully complete this exercise you need the following:
+
+* JDK 7 or 8
+* A Java IDE like Eclipse, IntelliJ or Visual Studio Code
+
+WARNING: JDK 9, 10, 11 cannot be used as we are using Spring Framework 4.x and
+Spring Boot 1.5. These are not compatible with JDK 9 and newer!
+
 == What we will build
 
 .We will extend the existing two microservices to use single sign authentication based on OAuth2.

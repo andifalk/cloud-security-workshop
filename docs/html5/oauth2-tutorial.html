@@ -429,37 +429,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_what_we_will_build">1. What we will build</a></li>
-<li><a href="#_step_1">2. Step 1</a>
+<li><a href="#_system_requirements">1. System Requirements</a></li>
+<li><a href="#_what_we_will_build">2. What we will build</a></li>
+<li><a href="#_step_1">3. Step 1</a>
 <ul class="sectlevel2">
-<li><a href="#authorization-server">2.1. Authorization Server</a>
+<li><a href="#authorization-server">3.1. Authorization Server</a>
 <ul class="sectlevel3">
-<li><a href="#authorization-server-maven-dependencies">2.1.1. Maven dependencies</a></li>
-<li><a href="#_java_implementation">2.1.2. Java Implementation</a></li>
-<li><a href="#authorization-server-configuration">2.1.3. Configuration</a></li>
+<li><a href="#authorization-server-maven-dependencies">3.1.1. Maven dependencies</a></li>
+<li><a href="#_java_implementation">3.1.2. Java Implementation</a></li>
+<li><a href="#authorization-server-configuration">3.1.3. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#resource-server">2.2. Resource Server (Products)</a>
+<li><a href="#resource-server">3.2. Resource Server (Products)</a>
 <ul class="sectlevel3">
-<li><a href="#resource-server-maven-dependencies">2.2.1. Maven dependencies</a></li>
-<li><a href="#_java_implementation_2">2.2.2. Java Implementation</a></li>
-<li><a href="#resource-server-configuration">2.2.3. Configuration</a></li>
+<li><a href="#resource-server-maven-dependencies">3.2.1. Maven dependencies</a></li>
+<li><a href="#_java_implementation_2">3.2.2. Java Implementation</a></li>
+<li><a href="#resource-server-configuration">3.2.3. Configuration</a></li>
 </ul>
 </li>
-<li><a href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a>
+<li><a href="#client">3.3. OAuth2 Client (Thymeleaf UI)</a>
 <ul class="sectlevel3">
-<li><a href="#client-maven-dependencies">2.3.1. Maven dependencies</a></li>
-<li><a href="#client-java-implementation">2.3.2. Java Implementation</a></li>
-<li><a href="#client-configuration">2.3.3. Configuration</a></li>
+<li><a href="#client-maven-dependencies">3.3.1. Maven dependencies</a></li>
+<li><a href="#client-java-implementation">3.3.2. Java Implementation</a></li>
+<li><a href="#client-configuration">3.3.3. Configuration</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_step_2">3. Step 2</a>
+<li><a href="#_step_2">4. Step 2</a>
 <ul class="sectlevel2">
-<li><a href="#_provide_form_based_login">3.1. Provide form based login</a></li>
-<li><a href="#_use_persistent_store">3.2. Use persistent store</a></li>
-<li><a href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></li>
+<li><a href="#_provide_form_based_login">4.1. Provide form based login</a></li>
+<li><a href="#_use_persistent_store">4.2. Use persistent store</a></li>
+<li><a href="#_encrypt_the_passwords">4.3. Encrypt the passwords</a></li>
 </ul>
 </li>
 </ul>
@@ -467,7 +468,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_what_we_will_build"><a class="link" href="#_what_we_will_build">1. What we will build</a></h2>
+<h2 id="_system_requirements"><a class="link" href="#_system_requirements">1. System Requirements</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To successfully complete this exercise you need the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JDK 7 or 8</p>
+</li>
+<li>
+<p>A Java IDE like Eclipse, IntelliJ or Visual Studio Code</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+JDK 9, 10, 11 cannot be used as we are using Spring Framework 4.x and
+Spring Boot 1.5. These are not compatible with JDK 9 and newer!
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_we_will_build"><a class="link" href="#_what_we_will_build">2. What we will build</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <div class="title">We will extend the existing two microservices to use single sign authentication based on OAuth2.</div>
@@ -533,7 +565,7 @@ and in <a href="https://projects.spring.io/spring-security-oauth/docs/oauth2.htm
 </div>
 </div>
 <div class="sect1">
-<h2 id="_step_1"><a class="link" href="#_step_1">2. Step 1</a></h2>
+<h2 id="_step_1"><a class="link" href="#_step_1">3. Step 1</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In step 1 we will build a basic OAuth2 secured microservices infrastructure using simple user credentials provided
@@ -546,7 +578,7 @@ via properties in <em>application.properties</em>.</p>
 <p><a href="https://github.com/andifalk/cloud-security-workshop" class="bare">https://github.com/andifalk/cloud-security-workshop</a></p>
 </div>
 <div class="sect2">
-<h3 id="authorization-server"><a class="link" href="#authorization-server">2.1. Authorization Server</a></h3>
+<h3 id="authorization-server"><a class="link" href="#authorization-server">3.1. Authorization Server</a></h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -609,7 +641,7 @@ of the authorization server must be as follows:</p>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="authorization-server-maven-dependencies"><a class="link" href="#authorization-server-maven-dependencies">2.1.1. Maven dependencies</a></h4>
+<h4 id="authorization-server-maven-dependencies"><a class="link" href="#authorization-server-maven-dependencies">3.1.1. Maven dependencies</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
@@ -703,7 +735,7 @@ of the authorization server must be as follows:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_java_implementation"><a class="link" href="#_java_implementation">2.1.2. Java Implementation</a></h4>
+<h4 id="_java_implementation"><a class="link" href="#_java_implementation">3.1.2. Java Implementation</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>@EnableAuthorizationServer <i class="conum" data-value="1"></i><b>(1)</b>
@@ -727,7 +759,7 @@ public class AuthorizationServerApplication {
 </div>
 </div>
 <div class="sect3">
-<h4 id="authorization-server-configuration"><a class="link" href="#authorization-server-configuration">2.1.3. Configuration</a></h4>
+<h4 id="authorization-server-configuration"><a class="link" href="#authorization-server-configuration">3.1.3. Configuration</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>server.port=9999
@@ -773,7 +805,7 @@ security.oauth2.authorization.check-token-access=isAuthenticated() <i class="con
 </div>
 </div>
 <div class="sect2">
-<h3 id="resource-server"><a class="link" href="#resource-server">2.2. Resource Server (Products)</a></h3>
+<h3 id="resource-server"><a class="link" href="#resource-server">3.2. Resource Server (Products)</a></h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -788,7 +820,7 @@ on how to implement a resource server.
 </table>
 </div>
 <div class="sect3">
-<h4 id="resource-server-maven-dependencies"><a class="link" href="#resource-server-maven-dependencies">2.2.1. Maven dependencies</a></h4>
+<h4 id="resource-server-maven-dependencies"><a class="link" href="#resource-server-maven-dependencies">3.2.1. Maven dependencies</a></h4>
 <div class="paragraph">
 <p>Add the following required dependencies to the existing maven pom file.</p>
 </div>
@@ -806,7 +838,7 @@ on how to implement a resource server.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_java_implementation_2"><a class="link" href="#_java_implementation_2">2.2.2. Java Implementation</a></h4>
+<h4 id="_java_implementation_2"><a class="link" href="#_java_implementation_2">3.2.2. Java Implementation</a></h4>
 <div class="paragraph">
 <p>The existing products service now should act as an OAuth2 resource server.
 Therefore it has to be marked as such.</p>
@@ -835,7 +867,7 @@ public class ProductApplication {
 </div>
 </div>
 <div class="sect3">
-<h4 id="resource-server-configuration"><a class="link" href="#resource-server-configuration">2.2.3. Configuration</a></h4>
+<h4 id="resource-server-configuration"><a class="link" href="#resource-server-configuration">3.2.3. Configuration</a></h4>
 <div class="paragraph">
 <p>The following additional properties are required to make the resource server work with our new
 authorization server.</p>
@@ -872,7 +904,7 @@ security.oauth2.client.client-secret=secretkey <i class="conum" data-value="4"><
 </div>
 </div>
 <div class="sect2">
-<h3 id="client"><a class="link" href="#client">2.3. OAuth2 Client (Thymeleaf UI)</a></h3>
+<h3 id="client"><a class="link" href="#client">3.3. OAuth2 Client (Thymeleaf UI)</a></h3>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -887,7 +919,7 @@ on how to implement an OAuth2 single-sign-on client.
 </table>
 </div>
 <div class="sect3">
-<h4 id="client-maven-dependencies"><a class="link" href="#client-maven-dependencies">2.3.1. Maven dependencies</a></h4>
+<h4 id="client-maven-dependencies"><a class="link" href="#client-maven-dependencies">3.3.1. Maven dependencies</a></h4>
 <div class="paragraph">
 <p>Add the following required dependencies to the existing maven pom file.</p>
 </div>
@@ -901,7 +933,7 @@ on how to implement an OAuth2 single-sign-on client.
 </div>
 </div>
 <div class="sect3">
-<h4 id="client-java-implementation"><a class="link" href="#client-java-implementation">2.3.2. Java Implementation</a></h4>
+<h4 id="client-java-implementation"><a class="link" href="#client-java-implementation">3.3.2. Java Implementation</a></h4>
 <div class="paragraph">
 <p>The UI client now acts as OAuth2 client and must be marked as such.
 Additionally to automatically use the OAuth2 tokens with all calls to REST services
@@ -997,7 +1029,7 @@ public class ProductService {
 </div>
 </div>
 <div class="sect3">
-<h4 id="client-configuration"><a class="link" href="#client-configuration">2.3.3. Configuration</a></h4>
+<h4 id="client-configuration"><a class="link" href="#client-configuration">3.3.3. Configuration</a></h4>
 <div class="paragraph">
 <p>The following additional properties are required to make the UI client work with our new
 authorization server.</p>
@@ -1053,7 +1085,7 @@ security.oauth2.resource.token-info-uri=http://localhost:9999/users/oauth/check_
 </div>
 </div>
 <div class="sect1">
-<h2 id="_step_2"><a class="link" href="#_step_2">3. Step 2</a></h2>
+<h2 id="_step_2"><a class="link" href="#_step_2">4. Step 2</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <div class="title">To make the sample application even more secure we will enhance the authorization server to&#8230;&#8203;</div>
@@ -1077,7 +1109,7 @@ as starting point.</p>
 <p><a href="https://github.com/andifalk/cloud-security-workshop" class="bare">https://github.com/andifalk/cloud-security-workshop</a></p>
 </div>
 <div class="sect2">
-<h3 id="_provide_form_based_login"><a class="link" href="#_provide_form_based_login">3.1. Provide form based login</a></h3>
+<h3 id="_provide_form_based_login"><a class="link" href="#_provide_form_based_login">4.1. Provide form based login</a></h3>
 <div class="paragraph">
 <p>A form based login is more user friendly authentication and should always be preferred over
 basic authentication popups.
@@ -1105,7 +1137,7 @@ on how to configure authentication options like form login.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">3.2. Use persistent store</a></h3>
+<h3 id="_use_persistent_store"><a class="link" href="#_use_persistent_store">4.2. Use persistent store</a></h3>
 <div class="paragraph">
 <p>Until now we have authenticated ourselves using credentials that are defined via application properties
 which is ok for demo purposes but definetly not for production use.</p>
@@ -1206,7 +1238,7 @@ on how to add a custom user details service.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">3.3. Encrypt the passwords</a></h3>
+<h3 id="_encrypt_the_passwords"><a class="link" href="#_encrypt_the_passwords">4.3. Encrypt the passwords</a></h3>
 <div class="paragraph">
 <p>In the last step we want to change the storage of cleartext passwords for the users in the database.
 If any attacker gets hold of our database then all passwords are leaked.
@@ -1314,7 +1346,7 @@ how to use and configure this.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-04 21:00:33 +01:00
+Last updated 2018-11-05 13:51:13 +01:00
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
