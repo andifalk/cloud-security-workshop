@@ -15,7 +15,6 @@ import java.util.Collections;
 @Service
 public class ProductService {
 
-    //private RestTemplate template = new RestTemplate();
     private final OAuth2RestTemplate template;
 
     @Autowired
