@@ -1,0 +1,25 @@
+server:
+  servlet:
+    context-path: /client
+  port: 9095
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          auth0:
+            issuer-uri: https://access-me.eu.auth0.com/
+            user-name-attribute: sub
+        registration:
+          auth0:
+            client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
+            client-secret: 'Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL'
+            authorizationGrantType: authorization_code
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

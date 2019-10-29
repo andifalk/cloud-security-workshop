@@ -7,7 +7,6 @@ import com.example.productuser.ProductUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -20,15 +19,11 @@ public class ProductInitializer implements CommandLineRunner {
 
   private final ProductRepository productRepository;
   private final ProductUserRepository productUserRepository;
-  private final PasswordEncoder passwordEncoder;
 
   public ProductInitializer(
-      ProductRepository productRepository,
-      ProductUserRepository productUserRepository,
-      PasswordEncoder passwordEncoder) {
+      ProductRepository productRepository, ProductUserRepository productUserRepository) {
     this.productRepository = productRepository;
     this.productUserRepository = productUserRepository;
-    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -48,14 +43,14 @@ public class ProductInitializer implements CommandLineRunner {
                 "auth0|5bc44fceb144eb0173391741",
                 "Uwe",
                 "User",
-                passwordEncoder.encode("user_4demo!"),
+                "n/a",
                 "user@example.com",
                 Collections.singletonList("USER")),
             new ProductUser(
                 "auth0|5bc4b1553385d56f61f70e3b",
                 "Alex",
                 "Admin",
-                passwordEncoder.encode("admin_4demo!"),
+                "n/a",
                 "admin@example.com",
                 Collections.singletonList("ADMIN")))
         .forEach(productUserRepository::save);

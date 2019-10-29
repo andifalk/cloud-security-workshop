@@ -1,31 +1,53 @@
 package com.example;
 
-
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Collections;
 
 @Service
 public class ProductService {
 
-    private RestTemplate template = new RestTemplate();
+  private final RestTemplate template;
 
-    @HystrixCommand(fallbackMethod = "fallbackProducts")
-    public Collection<Product> getAllProducts() {
+  @Autowired
+  public ProductService(RestTemplate template) {
+    this.template = template;
+  }
 
-        ResponseEntity<Product[]> response = template.getForEntity(
-                "http://localhost:8080/products", Product[].class);
+  public Collection<Product> getAllProducts() {
 
-        return Arrays.asList(response.getBody());
+    ResponseEntity<Product[]> response =
+        template.exchange(
+            "http://localhost:9090/server/products",
+            HttpMethod.GET,
+            new HttpEntity<Product[]>(createAuthorizationHeader()),
+            Product[].class);
+
+    if (response.getBody() != null) {
+      return Arrays.asList(response.getBody());
+    } else {
+      return Collections.emptyList();
     }
+  }
 
-    public Collection<Product> fallbackProducts() {
-        return Collections.emptyList();
-    }
-
+  private HttpHeaders createAuthorizationHeader() {
+    return new HttpHeaders() {
+      {
+        String auth = "user@example.com:secret";
+        byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
+        String authHeader = "Basic " + new String(encodedAuth);
+        set("Authorization", authHeader);
+      }
+    };
+  }
 }

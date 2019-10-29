@@ -1,0 +1,12 @@
+server:
+  servlet:
+    context-path: /server
+  port: 9090
+spring:
+  jpa:
+    open-in-view: false
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://access-me.eu.auth0.com/.well-known/jwks.json

@@ -12,8 +12,7 @@
 
     <modules>
         <module>initial</module>
-        <module>step1</module>
-        <module>step2</module>
+        <module>solution</module>
     </modules>
 
     <build>
