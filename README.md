@@ -1,12 +1,17 @@
 [![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
 [![Build Status](https://travis-ci.org/andifalk/cloud-security-workshop.svg?branch=master)](https://travis-ci.org/andifalk/cloud-security-workshop)
 
-# cloud-security-workshop
-Workshop on building secure cloud-native applications using spring cloud security (OAuth2)
+# Cloud Security Workshop
+Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
 
 This workshop is the hands-on part of the [cloud security presentation](https://andifalk.github.io/security-cloud-presentation/index.html).
 
-## OAuth2 Security Workshop Tutorial
+## System Requirements
+
+* A Java SDK of version 8, 10 or 11
+* A Java IDE (like Eclipse, SpringToolSuite, IntelliJ, Visual Studio Code)
+
+## OAuth2/OIDC Security Workshop Tutorial
 
 You can find the step-by-step tutorial documentation in different formats here:
 
