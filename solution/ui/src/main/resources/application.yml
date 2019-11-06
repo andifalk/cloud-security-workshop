@@ -9,7 +9,6 @@ spring:
         provider:
           auth0:
             issuer-uri: https://access-me.eu.auth0.com/
-            user-name-attribute: sub
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
