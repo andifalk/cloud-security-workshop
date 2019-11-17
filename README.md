@@ -8,16 +8,17 @@
   * [Project contents](#project-contents)
   * [OAuth 2.0/OpenID Connect Security Workshop Tutorial](#oauth-20-openid-connect-security-workshop-tutorial)
     + [Resource Server (Products)](#resource-server-products)
-      - [Step 1: Change Maven dependencies](#step-1-change-maven-dependencies)
-      - [Step 2: Add required properties](#step-2-add-required-properties)
-      - [Step 3: Change security configuration](#step-3-change-security-configuration)
+      - [Step 1: Change Maven dependencies](#step-1-change-maven-dependencies-for-resource-server)
+      - [Step 2: Add required properties](#step-2-add-required-properties-for-resource-server)
+      - [Step 3: Change security configuration](#step-3-change-security-configuration-for-resource-server)
       - [Step 4: Convert the JWT into the ProductUser](#step-4-convert-the-jwt-into-the-productuser)
-      - [Step 5: Run the application](#step-5-run-the-application)
+      - [Step 5: Run the application](#step-5-run-the-product-server-application)
     + [Client (UI)](#client--ui-)
-      - [Step 1: Change Maven dependencies](#step-1--change-maven-dependencies-1)
-      - [Step 2: Add required properties](#step-2--add-required-properties-1)
-      - [Step 3: Add OAuth2/OIDC client security configuration](#step-3--add-oauth2-oidc-client-security-configuration)
-      - [Step 4: Update the call to the resource server](#step-4--update-the-call-to-the-resource-server)
+      - [Step 1: Change Maven dependencies](#step-1-change-maven-dependencies-for-the-client)
+      - [Step 2: Add required properties](#step-2-add-required-properties-for-the-client)
+      - [Step 3: Add OAuth2/OIDC client security configuration](#step-3-add-oauth2oidc-client-security-configuration)
+      - [Step 4: Update the call to the resource server](#step-4-update-the-call-to-the-resource-server)
+      - [Step 5: Run the application](#step-5-run-the-client-application)
 
 # Cloud Security Workshop
 Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
@@ -91,7 +92,7 @@ __Tip__:
 You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-server)
  and the [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2resourceserver) on how to implement a resource server.
 
-#### Step 1: Change Maven dependencies
+#### Step 1: Change Maven dependencies for resource server
 
 The existing product server is using the base spring security
 lib to secure its endpoints using basic authentication and
@@ -120,7 +121,7 @@ with this new dependency:
 </dependency>
 ```
 
-#### Step 2: Add required properties
+#### Step 2: Add required properties for resource server
 
 The resource server requires the public key(s) to validate the signature of incoming JSON web tokens (JWT). This way nobody can
 just issue hier/her own JWT tokens or modify the issued token along the transmission path.
@@ -149,7 +150,7 @@ __Important:__
 Please check that all indents are correct. Otherwise you may get strange runtime errors when starting
 the application.
 
-#### Step 3: Change security configuration
+#### Step 3: Change security configuration for resource server
 
 <u>_com.example.security.WebSecurityConfiguration.java_:</u>
 
@@ -450,7 +451,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-#### Step 5: Run the application
+#### Step 5: Run the product server application
 
 Now we are ready to start the product server.
 Select the class _com.example.ProductApplication_ and run this (use the right mouse button in your IDE or the spring boot dashboard if applicable).
@@ -493,7 +494,7 @@ __Tip__:
 You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-client)
  and the [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2client) on how to implement a client.
 
-#### Step 1: Change Maven dependencies
+#### Step 1: Change Maven dependencies for the client
 
 Replace the following dependency in the existing maven _pom.xml_ file:
 
@@ -515,7 +516,7 @@ with the following new dependency:
 </dependency>
 ```
 
-#### Step 2: Add required properties
+#### Step 2: Add required properties for the client
 
 The resource server requires the public key(s) to validate the signature of incoming 
 JSON web tokens (JWT). The key(s) will be automatically grabbed from the JSON web key set provided by the
@@ -687,6 +688,8 @@ public class ProductController {
   }
 }
 ```
+
+#### Step 5: Run the client application
 
 ## License
 
