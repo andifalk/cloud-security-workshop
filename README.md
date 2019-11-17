@@ -94,11 +94,15 @@ You may look into the [Spring Boot Reference Documentation](https://docs.spring.
 
 #### Step 1: Change Maven dependencies for resource server
 
+To start with this tutorial please navigate to the project __initial/product_ in your IDE.
+This is the starting point for all following implementation steps.
+
 The existing product server is using the base spring security
 lib to secure its endpoints using basic authentication and
 form login.
 
-To change these existing authentication machanisms to JWT authentication as a resource server we need to adapt the spring security dependencies, i.e. use the corresponding one for building a secure OAuth2/OIDC resource server instead of simple
+To change these existing authentication mechanisms to JWT authentication as a resource server we need to adapt the 
+spring security dependencies, i.e. use the corresponding one for building a secure OAuth2/OIDC resource server instead of simple
 basic authentication.
 
 To perform this required change replace the following dependency in the existing maven _pom.xml_ file:
@@ -124,7 +128,7 @@ with this new dependency:
 #### Step 2: Add required properties for resource server
 
 The resource server requires the public key(s) to validate the signature of incoming JSON web tokens (JWT). This way nobody can
-just issue hier/her own JWT tokens or modify the issued token along the transmission path.
+just issue their own JWT tokens or modify the issued token along the transmission path.
 The public key(s) will be automatically grabbed from the JSON web key set provided by the
 identity provider at https://access-me.eu.auth0.com/.well-known/jwks.json.
 
@@ -151,6 +155,9 @@ Please check that all indents are correct. Otherwise you may get strange runtime
 the application.
 
 #### Step 3: Change security configuration for resource server
+
+Please navigate to the class _com.example.security.WebSecurityConfiguration_ in your IDE
+and change this with the following contents.
 
 <u>_com.example.security.WebSecurityConfiguration.java_:</u>
 
@@ -200,7 +207,8 @@ In this updated security configuration we
 
 Please note that the bean definition for the ```PasswordEncoder``` has been removed as well as the password encoding
 is not required any more.
-This will cause compilation errors in ```ProductInitializer``` class. To solve these just remove all references to the encoder.
+This will cause compilation errors in ```ProductInitializer``` class. To solve these just remove all references 
+to the encoder in that class.
 
 <u>_com.example.ProductInitializer.java_:</u>
 
@@ -271,7 +279,8 @@ public class ProductInitializer implements CommandLineRunner {
 
 With the changes of step 3 the base configuration for a resource server is set up.
 But there is one issue with this change.
-In class ```com.example.product.ProductRestController``` we do not get _ProductUser_ as input for _@AuthenticationPrincipal_, instead by default the class _org.springframework.security.oauth2.jwt.Jwt_ will be provided as input. 
+In class ```com.example.product.ProductRestController``` we do not get _ProductUser_ as input for _@AuthenticationPrincipal_, 
+instead by default the class _org.springframework.security.oauth2.jwt.Jwt_ will be provided as input. 
 
 ```  
 @RestController
