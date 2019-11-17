@@ -1,6 +1,24 @@
 [![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
 [![Build Status](https://travis-ci.org/andifalk/cloud-security-workshop.svg?branch=master)](https://travis-ci.org/andifalk/cloud-security-workshop)
 
+- [Cloud Security Workshop](#cloud-security-workshop)
+  * [Setup](#setup)
+    + [System Requirements](#system-requirements)
+    + [Import the project into your IDE](#import-the-project-into-your-ide)
+  * [Project contents](#project-contents)
+  * [OAuth 2.0/OpenID Connect Security Workshop Tutorial](#oauth-20-openid-connect-security-workshop-tutorial)
+    + [Resource Server (Products)](#resource-server--products-)
+      - [Step 1: Change Maven dependencies](#step-1--change-maven-dependencies)
+      - [Step 2: Add required properties](#step-2--add-required-properties)
+      - [Step 3: Change security configuration](#step-3--change-security-configuration)
+      - [Step 4: Convert the JWT into the ProductUser](#step-4--convert-the-jwt-into-the-productuser)
+      - [Step 5: Run the application](#step-5--run-the-application)
+    + [Client (UI)](#client--ui-)
+      - [Step 1: Change Maven dependencies](#step-1--change-maven-dependencies-1)
+      - [Step 2: Add required properties](#step-2--add-required-properties-1)
+      - [Step 3: Add OAuth2/OIDC client security configuration](#step-3--add-oauth2-oidc-client-security-configuration)
+      - [Step 4: Update the call to the resource server](#step-4--update-the-call-to-the-resource-server)
+
 # Cloud Security Workshop
 Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
 
