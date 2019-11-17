@@ -9,14 +9,6 @@ jobs:
   include:
 
     - stage: build
-      jdk: openjdk8
-      script:
-        - ./mvnw package
-    - stage: build
-      jdk: openjdk10
-      script:
-        - ./mvnw package
-    - stage: build
       jdk: openjdk11
       script:
         - ./mvnw package
