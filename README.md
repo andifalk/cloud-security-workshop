@@ -6,7 +6,7 @@
     + [System Requirements](#system-requirements)
     + [Import the project into your IDE](#import-the-project-into-your-ide)
   * [Project contents](#project-contents)
-  * [OAuth 2.0/OpenID Connect Security Workshop Tutorial](#oauth-20-openid-connect-security-workshop-tutorial)
+  * [OAuth 2.0/OpenID Connect Security Workshop Tutorial](#oauth-20openid-connect-security-workshop-tutorial)
     + [Resource Server (Products)](#resource-server-products)
       - [Step 1: Change Maven dependencies](#step-1-change-maven-dependencies-for-resource-server)
       - [Step 2: Add required properties](#step-2-add-required-properties-for-resource-server)
@@ -496,17 +496,7 @@ You may look into the [Spring Boot Reference Documentation](https://docs.spring.
 
 #### Step 1: Change Maven dependencies for the client
 
-Replace the following dependency in the existing maven _pom.xml_ file:
-
-<u>_pom.xml_:</u>
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
-```
-
-with the following new dependency:
+Add the following dependency to the existing maven _pom.xml_ file:
 
 <u>_pom.xml_:</u>
 ```xml
