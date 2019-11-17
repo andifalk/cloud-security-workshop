@@ -251,8 +251,25 @@ public class ProductInitializer implements CommandLineRunner {
 #### Step 4: Convert the JWT into the ProductUser
 
 With the changes of step 3 the base configuration for a resource server is set up.
-But there is one issue with this change: ```  ``` 
+But there is one issue with this change.
+In class ```com.example.product.ProductRestController``` we do not get _ProductUser_ as input for _@AuthenticationPrincipal_, instead by default the class _org.springframework.security.oauth2.jwt.Jwt_ will be provided as input. 
 
+```  
+@RestController
+public class ProductRestController {
+  ...
+  @GetMapping(path = "/products")
+  public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
+    ...
+  }
+}
+``` 
+
+To change this behavior we have to add our own converter from the JWT token to the _ProductUser_ class.
+This is done in several steps.
+
+First we need to define our own type for _AuthenticationToken_. This is the central point where Spring Security stores all
+authentication details after authentication has been successfully performed.
 
 <u>_com.example.security.ProductUserAuthenticationToken_:</u>
 
@@ -286,6 +303,9 @@ public class ProductUserAuthenticationToken extends AbstractAuthenticationToken 
   }
 }
 ```
+
+The previous class will now be used as part of the _ProductJwtAuthenticationConverter_.
+This converts contents of the JWT token into attributes of our _ProductUser_.
 
 <u>_com.example.security.ProductJwtAuthenticationConverter_:</u>
 
@@ -322,6 +342,9 @@ public class ProductJwtAuthenticationConverter implements Converter<Jwt, Abstrac
   }
 }
 ```
+
+Also the existing _ProductUserDetailsService_ class has to be changed because now we will use
+the attribute _userid_ to identify the user in our database instead of _email_. The user id is given to us as _subject_ claim inside the JWT token.
 
 <u>_com.example.security.ProductUserDetailsService_:</u>
 
@@ -360,6 +383,8 @@ public class ProductUserDetailsService implements UserDetailsService {
   }
 }
 ```
+
+Finally we have to add this new _ProductJwtAuthenticationConverter_ to our security configuration.
 
 <u>_com.example.security.WebSecurityConfiguration.java_:</u>
 
