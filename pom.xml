@@ -17,8 +17,10 @@
     </properties>
 
     <modules>
-        <module>initial</module>
-        <module>solution</module>
+        <module>initial/product</module>
+        <module>initial/ui</module>
+        <module>solution/product</module>
+        <module>solution/ui</module>
     </modules>
 
 </project>
