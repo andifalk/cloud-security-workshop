@@ -13,7 +13,7 @@
       - [Step 3: Change security configuration](#step-3-change-security-configuration-for-resource-server)
       - [Step 4: Convert the JWT into the ProductUser](#step-4-convert-the-jwt-into-the-productuser)
       - [Step 5: Run the application](#step-5-run-the-product-server-application)
-    + [Client (UI)](#client--ui-)
+    + [Client (UI)](#client-ui)
       - [Step 1: Change Maven dependencies](#step-1-change-maven-dependencies-for-the-client)
       - [Step 2: Add required properties](#step-2-add-required-properties-for-the-client)
       - [Step 3: Add OAuth2/OIDC client security configuration](#step-3-add-oauth2oidc-client-security-configuration)
