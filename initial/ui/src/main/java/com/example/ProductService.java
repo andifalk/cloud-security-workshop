@@ -40,6 +40,7 @@ public class ProductService {
     }
   }
 
+  @SuppressWarnings("serial")
   private HttpHeaders createAuthorizationHeader() {
     return new HttpHeaders() {
       {

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("serial")
 @Entity
 public class ProductUser extends AbstractPersistable<Long> implements UserDetails {
 
