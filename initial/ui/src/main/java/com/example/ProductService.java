@@ -17,14 +17,9 @@ import java.util.Collections;
 @Service
 public class ProductService {
 
-  private final RestTemplate template;
-
-  @Autowired
-  public ProductService(RestTemplate template) {
-    this.template = template;
-  }
-
   public Collection<Product> getAllProducts() {
+
+    RestTemplate template = new RestTemplate();
 
     ResponseEntity<Product[]> response =
         template.exchange(

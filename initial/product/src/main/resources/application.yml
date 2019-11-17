@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /server
+  port: 9090
+spring:
+  jpa:
+    open-in-view: false
