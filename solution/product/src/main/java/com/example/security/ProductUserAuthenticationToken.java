@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
+@SuppressWarnings("serial")
 public class ProductUserAuthenticationToken extends AbstractAuthenticationToken {
 
   private final ProductUser productUser;

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("serial")
 @Entity
 public class ProductUser extends AbstractPersistable<Long> implements UserDetails {
 
@@ -75,7 +75,9 @@ public class ProductUser extends AbstractPersistable<Long> implements UserDetail
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return AuthorityUtils.createAuthorityList(
-        getRoles().stream().map(s -> "ROLE_" + s).collect(Collectors.joining()));
+        getRoles().stream()
+            .map(s -> "ROLE_" + s)
+            .collect(Collectors.joining()));
   }
 
   @Override

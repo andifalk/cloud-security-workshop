@@ -33,6 +33,7 @@ public class ProductService {
     }
   }
 
+  @SuppressWarnings("serial")
   private HttpHeaders createAuthorizationHeader(OAuth2AccessToken oAuth2AccessToken) {
     return new HttpHeaders() {
       {

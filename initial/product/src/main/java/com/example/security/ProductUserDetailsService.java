@@ -3,11 +3,13 @@ package com.example.security;
 import com.example.productuser.ProductUser;
 import com.example.productuser.ProductUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@Primary
 @Service
 public class ProductUserDetailsService implements UserDetailsService {
 
