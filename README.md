@@ -25,7 +25,7 @@ Workshop on building secure cloud-native applications using spring cloud securit
 
 This workshop is the hands-on part of the cloud security presentation.
 
-[Presentation Slides](https://github.com/andifalk/cloud-security-workshop/raw/master/Cloud_Native_Security_Presentation_2019.pdf)
+[Presentation Slides (PDF)](https://github.com/andifalk/cloud-security-workshop/raw/master/Cloud_Native_Security_Presentation_2019.pdf)
 
 You may follow the workshop by reading this readme or
 by following the [GitBook Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
