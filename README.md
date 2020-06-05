@@ -34,7 +34,7 @@ by following the [GitBook Tutorial](https://andifalk.gitbook.io/cloud-security-w
 
 ### System Requirements
 
-* Version 11 of the [Java SDK](https://adoptopenjdk.net/), version 13 might also work but is not tested
+* Version 11 of the [Java SDK](https://adoptopenjdk.net/), version 14 might also work but is not tested
 * A Java IDE (like [Eclipse](https://www.eclipse.org/downloads/), [SpringToolSuite](https://spring.io/tools), [IntelliJ](https://www.jetbrains.com/idea/download), [Visual Studio Code](https://code.visualstudio.com/))
 * [Postman](https://www.getpostman.com/downloads/) to test requests to the REST Api
 
