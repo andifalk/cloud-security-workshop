@@ -23,12 +23,9 @@
 # Cloud Security Workshop
 Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
 
-This workshop is the hands-on part of the cloud security presentation.
+This workshop is the hands-on part of the [cloud security presentation (PDF)](https://github.com/andifalk/cloud-security-workshop/raw/master/Cloud_Native_Security.pdf).
 
-[Presentation Slides (PDF)](https://github.com/andifalk/cloud-security-workshop/raw/master/Cloud_Native_Security_Presentation_2019.pdf)
-
-You may follow the workshop by reading this readme or
-by following the [GitBook Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
+Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
 
 ## Setup
 
