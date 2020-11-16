@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
-[![Build Status](https://travis-ci.org/andifalk/cloud-security-workshop.svg?branch=master)](https://travis-ci.org/andifalk/cloud-security-workshop)
+![Java CI](https://github.com/andifalk/cloud-security-workshop/workflows/JavaCI/badge.svg)
 
 - [Cloud Security Workshop](#cloud-security-workshop)
   * [Setup](#setup)
