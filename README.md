@@ -761,7 +761,7 @@ __Important:__
 The user credentials are noted here just for the purpose of this tutorial. In your real productive applications 
 you should __NEVER__ publish user credentials or any other sensitive data!!
 
-After successful login you should again be redirected back to the client application and you should see
+After successful login you should again be redirected back to the client application, and you should see
 the main screen.
 
 ![Client main screen](docs/images/client_main.png)
@@ -775,6 +775,6 @@ This ends the whole tutorial.
 ## License
 
 Apache 2.0 licensed
-Copyright (c) by 2019 Andreas Falk
+Copyright (c) by 2020 Andreas Falk
 
 [1]:http://www.apache.org/licenses/LICENSE-2.0.txt

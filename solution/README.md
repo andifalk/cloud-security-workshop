@@ -9,7 +9,6 @@ You can find the completed applications for step 1 of the workshop here:
 
 * product: Spring boot application providing a rest api for products: http://localhost:8080/products
 * ui: A Spring boot application providing thymeleaf based html frontend to display products
-* authorizationserver: A Spring boot based OAuth2 authorization server
 
 In this step user credentials are configured using the _application.properties_ file.
 Here the authorization server uses basic authentication as login type. 
