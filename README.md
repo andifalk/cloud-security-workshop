@@ -23,15 +23,13 @@
 # Cloud Security Workshop
 Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
 
-This workshop is the hands-on part of the [cloud security presentation (PDF)](https://github.com/andifalk/cloud-security-workshop/raw/master/Cloud_Native_Security.pdf).
-
 Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
 
 ## Setup
 
 ### System Requirements
 
-* Version 11 of the [Java SDK](https://adoptopenjdk.net/), version 14 might also work but is not tested
+* Version 11 of the [Java SDK](https://adoptopenjdk.net/), later versions might also work but are not tested
 * A Java IDE (like [Eclipse](https://www.eclipse.org/downloads/), [SpringToolSuite](https://spring.io/tools), [IntelliJ](https://www.jetbrains.com/idea/download), [Visual Studio Code](https://code.visualstudio.com/))
 * [Postman](https://www.getpostman.com/downloads/) to test requests to the REST Api
 
