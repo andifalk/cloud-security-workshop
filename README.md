@@ -151,7 +151,7 @@ spring:
 ```
 
 __Important:__  
-Please check that all indents are correct. Otherwise you may get strange runtime errors when starting
+Please check that all indents are correct. Otherwise, you may get strange runtime errors when starting
 the application.
 
 #### Step 3: Change security configuration for resource server
@@ -555,6 +555,9 @@ Spring security provides predefined properties to configure the application as a
 * The property ```spring.security.oauth2.client.provider.auth0.issuer-uri``` specifies 
 the URI for loading the required configuration to setup an OAuth2/OIDC client for the _Auth0_ 
 identity provider.
+* The property ```spring.security.oauth2.client.provider.user-name-attribute``` specifies
+  the attribute claim to use for mapping user data retrieved from user info endpoint in OAuth2/OIDC client for the _Auth0_
+  identity provider.
 * The property ```spring.security.oauth2.client.registration.auth0.client-id``` specifies 
 the _client id_ as it is has been registered at the _Auth0_ identity provider.
 * The property ```spring.security.oauth2.client.registration.auth0.client-secret``` specifies 
@@ -564,6 +567,8 @@ which OAuth2/OIDC grant flow should be used for the client.
 * The property ```spring.security.oauth2.client.registration.auth0.redirect-uri``` specifies 
 the redirect URI to call our client application with the authorization code 
 from the _Auth0_ identity provider. Spring also provides predefined placeholders for the base url and the registration id.
+* The property ```spring.security.oauth2.client.registration.auth0.scope``` specifies
+  the scopes to be used for the OAuth2 login. The value of _openid_ enables the OpenID Connect mode and _profile_/_email_ specifies which attribute claims to include in the token.
 
 After adding the required new properties the updated _application.yml_ should look like this:
 
@@ -576,21 +581,24 @@ spring:
         provider:
           auth0:
             issuer-uri: https://access-me.eu.auth0.com/
+            user-name-attribute: sub
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
             client-secret: 'Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL'
             authorizationGrantType: authorization_code
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - profile
+              - email
 ```
 
 __Important:__  
-Please check that all indents are correct. Otherwise you may get strange runtime errors when starting
+Please check that all indents are correct. Otherwise, you may get strange runtime errors when starting
 the application.
 The client secret is noted here just for the purpose of this tutorial. In your real productive applications 
 you should __NEVER__ publish sensitive data like this client secret or any other sensitive data!!
-
-
 
 #### Step 3: Add OAuth2/OIDC client security configuration 
 
