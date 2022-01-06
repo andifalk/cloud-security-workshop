@@ -560,8 +560,8 @@ identity provider.
   identity provider.
 * The property ```spring.security.oauth2.client.registration.auth0.client-id``` specifies 
 the _client id_ as it is has been registered at the _Auth0_ identity provider.
-* The property ```spring.security.oauth2.client.registration.auth0.client-secret``` specifies 
-the _client secret_ to authorize the application to act as a registered at the _Auth0_ identity provider.
+* The property ```spring.security.oauth2.client.registration.auth0.clientAuthenticationMethod``` specifies 
+the authentication method to use when calling the token endpoint at the _Auth0_ identity provider. The value of _NONE_ specifies that no _client_secret_ is specified, instead the dynamic _Proof Key for Key Exchange (PKCE)_ is used instead. 
 * The property ```spring.security.oauth2.client.registration.auth0.authorizationGrantType``` specifies 
 which OAuth2/OIDC grant flow should be used for the client.
 * The property ```spring.security.oauth2.client.registration.auth0.redirect-uri``` specifies 
@@ -585,8 +585,8 @@ spring:
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
-            client-secret: 'Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL'
             authorizationGrantType: authorization_code
+            clientAuthenticationMethod: NONE
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid

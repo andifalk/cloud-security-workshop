@@ -13,8 +13,8 @@ spring:
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
-            client-secret: 'Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL'
             authorizationGrantType: authorization_code
+            clientAuthenticationMethod: NONE
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid
