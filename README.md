@@ -21,7 +21,7 @@
       - [Step 5: Run the application](#step-5-run-the-client-application)
 
 # Cloud Security Workshop
-Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect)
+Workshop on building secure cloud-native applications using spring cloud security (OAuth 2.0 and OpenID Connect 1.0)
 
 Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
 
@@ -29,7 +29,7 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/c
 
 ### System Requirements
 
-* Version 11 of the [Java SDK](https://adoptopenjdk.net/), later versions might also work but are not tested
+* LTS versions 11 or 17 of the [Java SDK](https://adoptopenjdk.net/), other versions later than 11 or 17 might also work but are not tested
 * A Java IDE (like [Eclipse](https://www.eclipse.org/downloads/), [SpringToolSuite](https://spring.io/tools), [IntelliJ](https://www.jetbrains.com/idea/download), [Visual Studio Code](https://code.visualstudio.com/))
 * [Postman](https://www.getpostman.com/downloads/) to test requests to the REST Api
 
@@ -73,11 +73,11 @@ These microservices have to be configured to be reachable via the following URL 
 
 Service URL Adresses
 
-|Service                     |URL                              |
-|----------------------------|---------------------------------|
-|Identity Provider           |https://access-me.eu.auth0.com   |
-|Client (UI)                 |http://localhost:9095/client     |
-|Resource Server (Products)  |http://localhost:9090/server     |
+| Service                    | URL                            |
+|----------------------------|--------------------------------|
+| Identity Provider          | https://access-me.eu.auth0.com |
+| Client (UI)                | http://localhost:9095/client   |
+| Resource Server (Products) | http://localhost:9090/server   |
 
 __Note:__  
 You can find more information on building OAuth 2.0/OIDC secured microservices with spring in
@@ -485,14 +485,14 @@ Then you will see a dialog as shown in the picture below.
 
 Just fill in the required values from the table below and then click on _Request Token_:
 
-|Input             |Value                                                             |
+| Input            | Value                                                            |
 |------------------|------------------------------------------------------------------|
-|Grant Type        |Password Credentials                                              |
-|Access Token URL  |https://access-me.eu.auth0.com/oauth/token                        |
-|Username          |user@example.com                                                  |
-|Password          |user_4demo!                                                       |
-|Client ID         |v13BSQLEZnw4N96V36dDdsGRd022isKe                                  |
-|Client Secret     |Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL  |
+| Grant Type       | Password Credentials                                             |
+| Access Token URL | https://access-me.eu.auth0.com/oauth/token                       |
+| Username         | user@example.com                                                 |
+| Password         | user_4demo!                                                      |
+| Client ID        | v13BSQLEZnw4N96V36dDdsGRd022isKe                                 |
+| Client Secret    | Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL |
 
 After you got a token you can close this dialog and try again to send the request.
 This time it should work and you should see a list of products as JSON response.
