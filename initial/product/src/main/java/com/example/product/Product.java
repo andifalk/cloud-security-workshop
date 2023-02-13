@@ -1,55 +1,59 @@
 package com.example.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Entity;
-
-/** Product entity. */
+/**
+ * Product entity.
+ */
 @Entity
 public class Product extends AbstractPersistable<Long> {
 
-  private String name;
-  private String description;
-  private double price;
+    private String name;
+    private String description;
+    private double price;
 
-  /** For JPA. */
-  public Product() {}
+    /**
+     * For JPA.
+     */
+    public Product() {
+    }
 
-  /**
-   * Constructor.
-   *
-   * @param name product name
-   * @param description product description
-   * @param price product price
-   */
-  public Product(String name, String description, double price) {
-    this.name = name;
-    this.description = description;
-    this.price = price;
-  }
+    /**
+     * Constructor.
+     *
+     * @param name        product name
+     * @param description product description
+     * @param price       product price
+     */
+    public Product(String name, String description, double price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
-  @JsonIgnore
-  @Override
-  public Long getId() {
-    return super.getId();
-  }
+    @JsonIgnore
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
 
-  @JsonIgnore
-  @Override
-  public boolean isNew() {
-    return super.isNew();
-  }
+    @JsonIgnore
+    @Override
+    public boolean isNew() {
+        return super.isNew();
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public double getPrice() {
-    return price;
-  }
+    public double getPrice() {
+        return price;
+    }
 }

@@ -10,27 +10,27 @@ import java.util.List;
 @Service
 public class ProductUserService {
 
-  private final ProductUserRepository productUserRepository;
+    private final ProductUserRepository productUserRepository;
 
-  @Autowired
-  public ProductUserService(ProductUserRepository productUserRepository) {
-    this.productUserRepository = productUserRepository;
-  }
+    @Autowired
+    public ProductUserService(ProductUserRepository productUserRepository) {
+        this.productUserRepository = productUserRepository;
+    }
 
-  @Transactional
-  public ProductUser save(ProductUser productUser) {
-    return productUserRepository.save(productUser);
-  }
+    @Transactional
+    public ProductUser save(ProductUser productUser) {
+        return productUserRepository.save(productUser);
+    }
 
-  public List<ProductUser> findAll() {
-    return productUserRepository.findAll();
-  }
+    public List<ProductUser> findAll() {
+        return productUserRepository.findAll();
+    }
 
-  public ProductUser findByUserId(String userId) {
-    return productUserRepository.findOneByUserId(userId);
-  }
+    public ProductUser findByUserId(String userId) {
+        return productUserRepository.findOneByUserId(userId);
+    }
 
-  public ProductUser findByEmail(String email) {
-    return productUserRepository.findOneByEmail(email);
-  }
+    public ProductUser findByEmail(String email) {
+        return productUserRepository.findOneByEmail(email);
+    }
 }

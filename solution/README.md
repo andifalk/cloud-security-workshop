@@ -1,7 +1,5 @@
 # cloud-security-workshop
-Workshop on building secure cloud-native applications using spring cloud security (OAuth2)
-
-This workshop is the hands-on part of the [cloud security presentation](https://andifalk.github.io/security-cloud-presentation/index.html).
+Workshop on building secure cloud-native applications using spring cloud security (OAuth2).
 
 ## OAuth2 Security Workshop Reference (Step 1)
 

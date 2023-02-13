@@ -29,7 +29,7 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/c
 
 ### System Requirements
 
-* LTS versions 11 or 17 of the [Java SDK](https://adoptopenjdk.net/), other versions later than 11 or 17 might also work but are not tested
+* LTS version 17 of the [Java SDK](https://adoptopenjdk.net/), other versions later than 17 might also work but are not tested
 * A Java IDE (like [Eclipse](https://www.eclipse.org/downloads/), [SpringToolSuite](https://spring.io/tools), [IntelliJ](https://www.jetbrains.com/idea/download), [Visual Studio Code](https://code.visualstudio.com/))
 * [Postman](https://www.getpostman.com/downloads/) to test requests to the REST Api
 
@@ -164,36 +164,37 @@ and change this with the following contents.
 ```java
 package com.example.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration {
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
+  @Bean
+  public SecurityFilterChain api(HttpSecurity http) throws Exception {
     http.csrf()
-        .disable()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .httpBasic()
-        .disable()
-        .formLogin()
-        .disable()
-        .authorizeRequests()
-        .anyRequest()
-        .fullyAuthenticated()
-        .and()
-        .oauth2ResourceServer()
-        .jwt();
+            .disable()
+            .sessionManagement()
+            .sessionCreationPolicy(STATELESS)
+            .and()
+            .httpBasic()
+            .disable()
+            .formLogin()
+            .disable()
+            .authorizeHttpRequests()
+            .anyRequest()
+            .fullyAuthenticated()
+            .and()
+            .oauth2ResourceServer()
+            .jwt().jwtAuthenticationConverter(productJwtAuthenticationConverter);
+    return http.build();
   }
 }
 ```
@@ -371,7 +372,7 @@ public class ProductJwtAuthenticationConverter implements Converter<Jwt, Abstrac
 }
 ```
 
-Also the existing _ProductUserDetailsService_ class has to be changed because now we will use
+Also, the existing _ProductUserDetailsService_ class has to be changed because now we will use
 the attribute _userid_ to identify the user in our database instead of _email_. The user id is given to us as _subject_ claim inside the JWT token.
 
 <u>_com.example.security.ProductUserDetailsService_:</u>
@@ -412,7 +413,7 @@ public class ProductUserDetailsService implements UserDetailsService {
 }
 ```
 
-Finally we have to add this new _ProductJwtAuthenticationConverter_ to our security configuration.
+Finally, we have to add this new _ProductJwtAuthenticationConverter_ to our security configuration.
 
 <u>_com.example.security.WebSecurityConfiguration.java_:</u>
 
@@ -612,26 +613,27 @@ To achieve this create a new class named _WebSecurityConfiguration_ in package _
 ```java
 package com.example;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
 @Configuration
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfiguration {
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
+  @Bean
+  public SecurityFilterChain api(HttpSecurity http) throws Exception {
     http
-            .authorizeRequests(authorizeRequests ->
+            .authorizeHttpRequests(authorizeRequests ->
                     authorizeRequests
                             .anyRequest().authenticated()
             )
             .oauth2Client().and()
             .oauth2Login(withDefaults());
+    return http.build();
   }
 }
 ```
@@ -781,6 +783,6 @@ This ends the whole tutorial.
 ## License
 
 Apache 2.0 licensed
-Copyright (c) by 2020 Andreas Falk
+Copyright (c) by 2023 Andreas Falk
 
 [1]:http://www.apache.org/licenses/LICENSE-2.0.txt

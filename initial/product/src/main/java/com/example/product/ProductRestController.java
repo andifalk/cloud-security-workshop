@@ -9,20 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/** Rest API for {@link Product products}. */
+/**
+ * Rest API for {@link Product products}.
+ */
 @RestController
 public class ProductRestController {
-  private static final Logger LOG = LoggerFactory.getLogger(ProductRestController.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(ProductRestController.class.getName());
 
-  private final ProductService productService;
+    private final ProductService productService;
 
-  public ProductRestController(ProductService productService) {
-    this.productService = productService;
-  }
+    public ProductRestController(ProductService productService) {
+        this.productService = productService;
+    }
 
-  @GetMapping(path = "/products")
-  public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
-    LOG.info("Return all products using authenticated user '" + productUser.getEmail() + "'");
-    return productService.findAll();
-  }
+    @GetMapping(path = "/products")
+    public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
+        LOG.info("Return all products using authenticated user '" + productUser.getEmail() + "'");
+        return productService.findAll();
+    }
 }

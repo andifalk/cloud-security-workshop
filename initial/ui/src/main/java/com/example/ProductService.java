@@ -16,33 +16,33 @@ import java.util.Collections;
 @Service
 public class ProductService {
 
-  public Collection<Product> getAllProducts() {
+    public Collection<Product> getAllProducts() {
 
-    RestTemplate template = new RestTemplate();
+        RestTemplate template = new RestTemplate();
 
-    ResponseEntity<Product[]> response =
-        template.exchange(
-            "http://localhost:9090/server/products",
-            HttpMethod.GET,
-            new HttpEntity<Product[]>(createAuthorizationHeader()),
-            Product[].class);
+        ResponseEntity<Product[]> response =
+                template.exchange(
+                        "http://localhost:9090/server/products",
+                        HttpMethod.GET,
+                        new HttpEntity<Product[]>(createAuthorizationHeader()),
+                        Product[].class);
 
-    if (response.getBody() != null) {
-      return Arrays.asList(response.getBody());
-    } else {
-      return Collections.emptyList();
+        if (response.getBody() != null) {
+            return Arrays.asList(response.getBody());
+        } else {
+            return Collections.emptyList();
+        }
     }
-  }
 
-  @SuppressWarnings("serial")
-  private HttpHeaders createAuthorizationHeader() {
-    return new HttpHeaders() {
-      {
-        String auth = "user@example.com:secret";
-        byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
-        String authHeader = "Basic " + new String(encodedAuth);
-        set("Authorization", authHeader);
-      }
-    };
-  }
+    @SuppressWarnings("serial")
+    private HttpHeaders createAuthorizationHeader() {
+        return new HttpHeaders() {
+            {
+                String auth = "user@example.com:secret";
+                byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
+                String authHeader = "Basic " + new String(encodedAuth);
+                set("Authorization", authHeader);
+            }
+        };
+    }
 }

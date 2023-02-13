@@ -11,15 +11,15 @@ import java.util.List;
 @Service
 public class ProductService {
 
-  private final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-  @Autowired
-  public ProductService(ProductRepository productRepository) {
-    this.productRepository = productRepository;
-  }
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
-  @PreAuthorize("hasRole('USER')")
-  public List<Product> findAll() {
-    return productRepository.findAll();
-  }
+    @PreAuthorize("hasRole('USER')")
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
 }

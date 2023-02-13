@@ -13,21 +13,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductUserDetailsService implements UserDetailsService {
 
-  private final ProductUserService productUserService;
+    private final ProductUserService productUserService;
 
-  @Autowired
-  public ProductUserDetailsService(ProductUserService productUserService) {
-    this.productUserService = productUserService;
-  }
-
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    ProductUser user = productUserService.findByEmail(username);
-    if (user == null) {
-      throw new UsernameNotFoundException(
-          "No user could be found for user name '" + username + "'");
+    @Autowired
+    public ProductUserDetailsService(ProductUserService productUserService) {
+        this.productUserService = productUserService;
     }
 
-    return user;
-  }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        ProductUser user = productUserService.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(
+                    "No user could be found for user name '" + username + "'");
+        }
+
+        return user;
+    }
 }

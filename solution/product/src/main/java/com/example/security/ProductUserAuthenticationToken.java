@@ -9,21 +9,21 @@ import java.util.Collection;
 @SuppressWarnings("serial")
 public class ProductUserAuthenticationToken extends AbstractAuthenticationToken {
 
-  private final ProductUser productUser;
+    private final ProductUser productUser;
 
-  public ProductUserAuthenticationToken( ProductUser productUser, Collection<? extends GrantedAuthority> authorities) {
-    super(authorities);
-    setAuthenticated(true);
-    this.productUser = productUser;
-  }
+    public ProductUserAuthenticationToken(ProductUser productUser, Collection<? extends GrantedAuthority> authorities) {
+        super(authorities);
+        setAuthenticated(true);
+        this.productUser = productUser;
+    }
 
-  @Override
-  public Object getCredentials() {
-    return "n/a";
-  }
+    @Override
+    public Object getCredentials() {
+        return "n/a";
+    }
 
-  @Override
-  public Object getPrincipal() {
-    return this.productUser;
-  }
+    @Override
+    public Object getPrincipal() {
+        return this.productUser;
+    }
 }
