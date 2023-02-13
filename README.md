@@ -193,7 +193,7 @@ public class WebSecurityConfiguration {
             .fullyAuthenticated()
             .and()
             .oauth2ResourceServer()
-            .jwt().jwtAuthenticationConverter(productJwtAuthenticationConverter);
+            .jwt();
     return http.build();
   }
 }
@@ -434,8 +434,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final ProductJwtAuthenticationConverter productJwtAuthenticationConverter;
-
-  @Autowired
+  
   public WebSecurityConfiguration(ProductJwtAuthenticationConverter productJwtAuthenticationConverter) {
     this.productJwtAuthenticationConverter = productJwtAuthenticationConverter;
   }
@@ -496,7 +495,7 @@ Just fill in the required values from the table below and then click on _Request
 | Client Secret    | Rf9cHEZge0LLbMsAPIEDPhdVZ4OeDFU-DSxfcacUh2lvxuzYGmYLaH54ZX1-cmNL |
 
 After you got a token you can close this dialog and try again to send the request.
-This time it should work and you should see a list of products as JSON response.
+This time it should work, and you should see a list of products as JSON response.
 
 ### Client (UI)
 
