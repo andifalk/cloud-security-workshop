@@ -4,7 +4,7 @@
 # OAuth 2.1 and OpenID Connect for Java Developers (Hands-On Workshop)
 Workshop on building secure cloud-native applications using OAuth 2.0 and OpenID Connect 1.0 authentication and authorization.
 
-Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/cloud-security-workshop) for this workshop.
+Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/oauth-2.1-and-openid-connect-for-java-developers) for this workshop.
 
 * [Introduction](#introduction)
 * [Intro Lab](#intro-lab)
@@ -13,7 +13,7 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/c
 ## Introduction
 
 * [Requirements and Setup](setup/README.md)
-* [Introduction to OAuth 2.0/2.1 (OAuth2) and OpenID Connect (OIDC)](introduction/README.md)
+* [Introduction to OAuth 2.1 and OpenID Connect](introduction/README.md)
 * [Sample Application Architecture](architecture/README.md)
 
 ## Intro Lab
@@ -22,8 +22,8 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/c
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side (Resource server)](initial/product/README.md)
-* [Lab 2: OAuth2/OIDC on the client side (Client)](initial/ui/README.md)
+* [Lab 1: OAuth2/OIDC on the server side](initial/product/README.md)
+* [Lab 2: OAuth2/OIDC on the client side](initial/ui/README.md)
 
 ## License
 
