@@ -31,4 +31,8 @@ public class ProductUserService {
     public ProductUser findByUserId(String userId) {
         return productUserRepository.findOneByUserId(userId);
     }
+
+    public ProductUser findByEmail(String email) {
+        return productUserRepository.findOneByEmail(email);
+    }
 }

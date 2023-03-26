@@ -2,6 +2,36 @@ server:
   servlet:
     context-path: /server
   port: 9090
+  error:
+    include-stacktrace: never
+
 spring:
+  application:
+    name: product-service
   jpa:
     open-in-view: false
+
+info:
+  application:
+    name: product-service
+    version: 1.0
+
+springdoc:
+  show-actuator: true
+
+management:
+  endpoint:
+    health:
+      show-details: when_authorized
+    info:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+api:
+  server.url: http://localhost:${server.port}${server.servlet.context-path}
+  products:
+    version: '1'
+    description: 'The Product API is used to retrieve products and users to access products'
