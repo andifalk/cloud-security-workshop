@@ -13,10 +13,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <modules>
+        <module>auth-code-in-action</module>
         <module>initial/product</module>
         <module>initial/ui</module>
         <module>solution/product</module>

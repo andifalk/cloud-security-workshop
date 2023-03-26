@@ -2,15 +2,18 @@
 
 * [README](README.md)
 
+## Setup
+
+* [Requirements and Setup](requirements/README.md)
+
 ## Introduction
 
-* [Requirements and Setup](setup/README.md)
 * [Introduction to OAuth 2.1 and OpenID Connect](introduction/README.md)
 * [Sample Application Architecture](architecture/README.md)
 
 ## Intro Lab
 
-* [OAuth2 Authorization Code Grant in Action](reactive-playground/README.md)
+* [OAuth2 Authorization Code Grant in Action](auth-code-in-action/README.md)
 
 ## Hands-On Labs
 
