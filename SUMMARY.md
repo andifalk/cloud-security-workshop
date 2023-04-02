@@ -17,5 +17,5 @@
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side](initial/product/README.md)
+* [Lab 1: OAuth2/OIDC on the server side](initial/productEntity/README.md)
 * [Lab 2: OAuth2/OIDC on the client side](initial/ui/README.md)

@@ -1,5 +1,6 @@
 package com.example.productuser;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,9 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("serial")
 @Entity
 public class ProductUser extends AbstractPersistable<Long> implements UserDetails {
 
@@ -77,6 +78,19 @@ public class ProductUser extends AbstractPersistable<Long> implements UserDetail
         return roles;
     }
 
+    @JsonIgnore
+    @Override
+    public Long getId() {
+        return super.getId();
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isNew() {
+        return super.isNew();
+    }
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList(
@@ -85,6 +99,7 @@ public class ProductUser extends AbstractPersistable<Long> implements UserDetail
                         .collect(Collectors.joining()));
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return this.password;
@@ -95,23 +110,53 @@ public class ProductUser extends AbstractPersistable<Long> implements UserDetail
         return this.email;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ProductUser that = (ProductUser) o;
+        return Objects.equals(userId, that.userId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(password, that.password) && Objects.equals(email, that.email) && Objects.equals(roles, that.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), userId, firstName, lastName, password, email, roles);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductUser{" +
+                "userId='" + userId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

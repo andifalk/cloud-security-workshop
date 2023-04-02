@@ -11,6 +11,7 @@ spring:
   jpa:
     open-in-view: false
 
+
 info:
   application:
     name: product-service
@@ -35,3 +36,7 @@ api:
   products:
     version: '1'
     description: 'The Product API is used to retrieve products and users to access products'
+
+logging:
+  level:
+    org.springframework.security: TRACE

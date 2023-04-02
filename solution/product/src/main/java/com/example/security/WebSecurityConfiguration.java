@@ -2,6 +2,7 @@ package com.example.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,6 +17,15 @@ public class WebSecurityConfiguration {
 
     public WebSecurityConfiguration(ProductJwtAuthenticationConverter productJwtAuthenticationConverter) {
         this.productJwtAuthenticationConverter = productJwtAuthenticationConverter;
+    }
+
+    @Order(1)
+    @Bean
+    public SecurityFilterChain docs(HttpSecurity http) throws Exception {
+        http.securityMatcher("/v3/**", "/swagger-ui.html", "/swagger-ui/**", "/actuator/health", "/actuator/info")
+                .httpBasic().disable().formLogin().disable()
+                .authorizeHttpRequests().anyRequest().permitAll();
+        return http.build();
     }
 
     @Bean

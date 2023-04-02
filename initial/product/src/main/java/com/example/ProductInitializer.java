@@ -1,9 +1,9 @@
 package com.example;
 
-import com.example.product.Product;
-import com.example.product.ProductRepository;
-import com.example.productuser.ProductUser;
-import com.example.productuser.ProductUserRepository;
+import com.example.product.ProductEntity;
+import com.example.product.ProductEntityRepository;
+import com.example.productuser.ProductUserEntity;
+import com.example.productuser.ProductUserEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 /**
@@ -22,55 +24,53 @@ public class ProductInitializer implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(ProductInitializer.class.getName());
 
     // Identity Provider: Auth0
-    private static final String STANDARD_USER_ID = "auth0|5bc44fceb144eb0173391741";
     private static final String STANDARD_USER_FIRST_NAME = "Uwe";
     private static final String STANDARD_USER_LAST_NAME = "User";
-    private static final String ADMIN_USER_ID = "auth0|5bc4b1553385d56f61f70e3b";
     private static final String ADMIN_USER_FIRST_NAME = "Alex";
     private static final String ADMIN_USER_LAST_NAME = "Admin";
 
-    private final ProductRepository productRepository;
-    private final ProductUserRepository productUserRepository;
+    private final ProductEntityRepository productEntityRepository;
+    private final ProductUserEntityRepository productUserEntityRepository;
     private final PasswordEncoder passwordEncoder;
 
     public ProductInitializer(
-            ProductRepository productRepository,
-            ProductUserRepository productUserRepository,
+            ProductEntityRepository productEntityRepository,
+            ProductUserEntityRepository productUserEntityRepository,
             PasswordEncoder passwordEncoder) {
-        this.productRepository = productRepository;
-        this.productUserRepository = productUserRepository;
+        this.productEntityRepository = productEntityRepository;
+        this.productUserEntityRepository = productUserEntityRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void run(String... strings) {
         Stream.of(
-                        new Product("Apple", "A green apple", BigDecimal.valueOf(3.50)),
-                        new Product("Banana", "The perfect banana", BigDecimal.valueOf(7.00)),
-                        new Product("Orange", "Lots of sweet oranges", BigDecimal.valueOf(33.00)),
-                        new Product("Pineapple", "Exotic pineapple", BigDecimal.valueOf(1.50)),
-                        new Product("Grapes", "Red wine grapes", BigDecimal.valueOf(10.75)))
-                .forEach(productRepository::save);
+                        new ProductEntity("Apple", "A green apple", BigDecimal.valueOf(3.50)),
+                        new ProductEntity("Banana", "The perfect banana", BigDecimal.valueOf(7.00)),
+                        new ProductEntity("Orange", "Lots of sweet oranges", BigDecimal.valueOf(33.00)),
+                        new ProductEntity("Pineapple", "Exotic pineapple", BigDecimal.valueOf(1.50)),
+                        new ProductEntity("Grapes", "Red wine grapes", BigDecimal.valueOf(10.75)))
+                .forEach(productEntityRepository::save);
 
-        LOG.info("Created " + productRepository.count() + " products");
+        LOG.info("Created " + productEntityRepository.count() + " products");
 
         Stream.of(
-                        new ProductUser(
-                                STANDARD_USER_ID,
+                        new ProductUserEntity(
+                                UUID.randomUUID().toString(),
                                 STANDARD_USER_FIRST_NAME,
                                 STANDARD_USER_LAST_NAME,
                                 passwordEncoder.encode("user_4demo!"),
                                 "user@example.com",
                                 Collections.singletonList("USER")),
-                        new ProductUser(
-                                ADMIN_USER_ID,
+                        new ProductUserEntity(
+                                UUID.randomUUID().toString(),
                                 ADMIN_USER_FIRST_NAME,
                                 ADMIN_USER_LAST_NAME,
                                 passwordEncoder.encode("admin_4demo!"),
                                 "admin@example.com",
-                                Collections.singletonList("ADMIN")))
-                .forEach(productUserRepository::save);
+                                Arrays.asList("USER", "ADMIN")))
+                .forEach(productUserEntityRepository::save);
 
-        LOG.info("Created " + productUserRepository.count() + " users");
+        LOG.info("Created " + productUserEntityRepository.count() + " users");
     }
 }

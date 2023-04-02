@@ -1,6 +1,5 @@
 package com.example.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -11,41 +10,20 @@ import java.util.Objects;
  * Product entity.
  */
 @Entity
-public class Product extends AbstractPersistable<Long> {
+public class ProductEntity extends AbstractPersistable<Long> {
 
     private String name;
     private String description;
     private BigDecimal price;
 
-    /**
-     * For JPA.
-     */
-    public Product() {
+    public ProductEntity() {
+        // For JPA
     }
 
-    /**
-     * Constructor.
-     *
-     * @param name        product name
-     * @param description product description
-     * @param price       product price
-     */
-    public Product(String name, String description, BigDecimal price) {
+    public ProductEntity(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    @JsonIgnore
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isNew() {
-        return super.isNew();
     }
 
     public String getName() {
@@ -77,8 +55,8 @@ public class Product extends AbstractPersistable<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Product product = (Product) o;
-        return Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(price, product.price);
+        ProductEntity productEntity = (ProductEntity) o;
+        return Objects.equals(name, productEntity.name) && Objects.equals(description, productEntity.description) && Objects.equals(price, productEntity.price);
     }
 
     @Override
@@ -88,7 +66,7 @@ public class Product extends AbstractPersistable<Long> {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductEntity{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +

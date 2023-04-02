@@ -6,33 +6,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @Service
 public class ProductUserService {
 
-    private final ProductUserRepository productUserRepository;
+    private final ProductUserEntityRepository productUserEntityRepository;
 
     @Autowired
-    public ProductUserService(ProductUserRepository productUserRepository) {
-        this.productUserRepository = productUserRepository;
+    public ProductUserService(ProductUserEntityRepository productUserEntityRepository) {
+        this.productUserEntityRepository = productUserEntityRepository;
     }
 
     @Transactional
-    public ProductUser save(ProductUser productUser) {
-        return productUserRepository.save(productUser);
+    public ProductUserEntity save(ProductUserEntity productUserEntity) {
+        return productUserEntityRepository.save(productUserEntity);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<ProductUser> findAll() {
-        return productUserRepository.findAll();
+        return productUserEntityRepository.findAll().stream().map(pue ->
+                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
+                        pue.getPassword(), pue.getEmail(), pue.getRoles())).toList();
     }
 
-    public ProductUser findByUserId(String userId) {
-        return productUserRepository.findOneByUserId(userId);
+    public Optional<ProductUser> findByUserId(String userId) {
+        return productUserEntityRepository.findOneByUserId(userId).map(pue ->
+                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
+                        pue.getPassword(), pue.getEmail(), pue.getRoles()));
     }
 
-    public ProductUser findByEmail(String email) {
-        return productUserRepository.findOneByEmail(email);
+    public Optional<ProductUser> findByEmail(String email) {
+        return productUserEntityRepository.findOneByEmail(email).map(pue ->
+                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
+                        pue.getPassword(), pue.getEmail(), pue.getRoles()));
     }
 }

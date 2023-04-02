@@ -21,7 +21,7 @@ public class ProductService {
 
         ResponseEntity<Product[]> response =
                 template.exchange(
-                        "http://localhost:9090/server/products",
+                        "http://localhost:9090/server/api/v1/products",
                         HttpMethod.GET,
                         new HttpEntity<Product[]>(createAuthorizationHeader(oAuth2AccessToken)),
                         Product[].class);
@@ -33,7 +33,6 @@ public class ProductService {
         }
     }
 
-    @SuppressWarnings("serial")
     private HttpHeaders createAuthorizationHeader(OAuth2AccessToken oAuth2AccessToken) {
         return new HttpHeaders() {
             {

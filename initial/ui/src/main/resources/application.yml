@@ -2,3 +2,7 @@ server:
   servlet:
     context-path: /client
   port: 9095
+
+product:
+  server:
+    url: "http://localhost:9090/server"

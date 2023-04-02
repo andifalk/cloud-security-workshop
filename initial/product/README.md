@@ -9,7 +9,7 @@ You may look into the [Spring Boot Reference Documentation](https://docs.spring.
 To start with this tutorial please navigate to the project __initial/product_ in your IDE.
 This is the starting point for all following implementation steps.
 
-The existing product server is using the base spring security
+The existing productEntity server is using the base spring security
 lib to secure its endpoints using basic authentication and
 form login.
 
@@ -128,9 +128,10 @@ to the encoder in that class.
 ```java
 package com.example;
 
-import com.example.product.Product;
-import com.example.product.ProductRepository;
-import com.example.productuser.ProductUser;
+import com.example.product.ProductEntityEntity;
+import com.example.product.ProductEntityRepository;
+import com.example.productuser.ProductUserEntity;
+import com.example.productuser.ProductUserEntityRepository;
 import com.example.productuser.ProductUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -143,48 +144,48 @@ import java.util.stream.Stream;
 /** Initializes some products in database. */
 @Component
 public class ProductInitializer implements CommandLineRunner {
-  private static final Logger LOG = LoggerFactory.getLogger(ProductInitializer.class.getName());
+ private static final Logger LOG = LoggerFactory.getLogger(ProductInitializer.class.getName());
 
-  private final ProductRepository productRepository;
-  private final ProductUserRepository productUserRepository;
+ private final ProductEntityRepository productEntityRepository;
+ private final ProductUserEntityRepository productUserEntityRepository;
 
-  public ProductInitializer(
-      ProductRepository productRepository, ProductUserRepository productUserRepository) {
-    this.productRepository = productRepository;
-    this.productUserRepository = productUserRepository;
-  }
+ public ProductInitializer(
+         ProductEntityRepository productEntityRepository, ProductUserEntityRepository productUserEntityRepository) {
+  this.productEntityRepository = productEntityRepository;
+  this.productUserEntityRepository = productUserEntityRepository;
+ }
 
-  @Override
-  public void run(String... strings) {
-    Stream.of(
-            new Product("Apple", "A green apple", 3.50),
-            new Product("Banana", "The perfect banana", 7.00),
-            new Product("Orange", "Lots of sweet oranges", 33.00),
-            new Product("Pineapple", "Exotic pineapple", 1.50),
-            new Product("Grapes", "Red wine grapes", 10.75))
-        .forEach(productRepository::save);
+ @Override
+ public void run(String... strings) {
+  Stream.of(
+                  new ProductEntity("Apple", "A green apple", 3.50),
+                  new ProductEntity("Banana", "The perfect banana", 7.00),
+                  new ProductEntity("Orange", "Lots of sweet oranges", 33.00),
+                  new ProductEntity("Pineapple", "Exotic pineapple", 1.50),
+                  new ProductEntity("Grapes", "Red wine grapes", 10.75))
+          .forEach(productEntityRepository::save);
 
-    LOG.info("Created " + productRepository.count() + " products");
+  LOG.info("Created " + productEntityRepository.count() + " products");
 
-    Stream.of(
-            new ProductUser(
-                "auth0|5bc44fceb144eb0173391741",
-                "Uwe",
-                "User",
-                "n/a",
-                "user@example.com",
-                Collections.singletonList("USER")),
-            new ProductUser(
-                "auth0|5bc4b1553385d56f61f70e3b",
-                "Alex",
-                "Admin",
-                "n/a",
-                "admin@example.com",
-                Collections.singletonList("ADMIN")))
-        .forEach(productUserRepository::save);
+  Stream.of(
+                  new ProductUserEntity(
+                          "auth0|5bc44fceb144eb0173391741",
+                          "Uwe",
+                          "User",
+                          "n/a",
+                          "user@example.com",
+                          Collections.singletonList("USER")),
+                  new ProductUserEntity(
+                          "auth0|5bc4b1553385d56f61f70e3b",
+                          "Alex",
+                          "Admin",
+                          "n/a",
+                          "admin@example.com",
+                          Collections.singletonList("ADMIN")))
+          .forEach(productUserEntityRepository::save);
 
-    LOG.info("Created " + productUserRepository.count() + " users");
-  }
+  LOG.info("Created " + productUserEntityRepository.count() + " users");
+ }
 }
 ```
 
@@ -192,7 +193,7 @@ public class ProductInitializer implements CommandLineRunner {
 
 With the changes of step 3 the base configuration for a resource server is set up.
 But there is one issue with this change.
-In class ```com.example.product.ProductRestController``` we do not get _ProductUser_ as input for _@AuthenticationPrincipal_, 
+In class ```com.example.productEntity.ProductRestController``` we do not get _ProductUser_ as input for _@AuthenticationPrincipal_, 
 instead by default the class _org.springframework.security.oauth2.jwt.Jwt_ will be provided as input. 
 
 ```  
@@ -200,7 +201,7 @@ instead by default the class _org.springframework.security.oauth2.jwt.Jwt_ will 
 public class ProductRestController {
   ...
   @GetMapping(path = "/products")
-  public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
+  public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUserEntity) {
     ...
   }
 }
@@ -217,7 +218,7 @@ authentication details after authentication has been successfully performed.
 ```java
 package com.example.security;
 
-import com.example.productuser.ProductUser;
+import com.example.productuser.ProductUserEntity;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -225,23 +226,23 @@ import java.util.Collection;
 
 public class ProductUserAuthenticationToken extends AbstractAuthenticationToken {
 
-  private final ProductUser productUser;
+    private final ProductUserEntity productUserEntity;
 
-  public ProductUserAuthenticationToken( ProductUser productUser, Collection<? extends GrantedAuthority> authorities) {
-    super(authorities);
-    setAuthenticated(true);
-    this.productUser = productUser;
-  }
+    public ProductUserAuthenticationToken(ProductUserEntity productUserEntity, Collection<? extends GrantedAuthority> authorities) {
+        super(authorities);
+        setAuthenticated(true);
+        this.productUserEntity = productUserEntity;
+    }
 
-  @Override
-  public Object getCredentials() {
-    return "n/a";
-  }
+    @Override
+    public Object getCredentials() {
+        return "n/a";
+    }
 
-  @Override
-  public Object getPrincipal() {
-    return this.productUser;
-  }
+    @Override
+    public Object getPrincipal() {
+        return this.productUserEntity;
+    }
 }
 ```
 
@@ -253,7 +254,7 @@ This converts contents of the JWT token into attributes of our _ProductUser_.
 ```java
 package com.example.security;
 
-import com.example.productuser.ProductUser;
+import com.example.productuser.ProductUserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -265,22 +266,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductJwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
-  private final UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-  @Autowired
-  public ProductJwtAuthenticationConverter(UserDetailsService userDetailsService) {
-    this.userDetailsService = userDetailsService;
-  }
-
-  @Override
-  public AbstractAuthenticationToken convert(Jwt jwt) {
-    UserDetails userDetails = userDetailsService.loadUserByUsername(jwt.getSubject());
-    if (userDetails instanceof ProductUser) {
-      return new ProductUserAuthenticationToken((ProductUser) userDetails, userDetails.getAuthorities());
-    } else {
-      return null;
+    @Autowired
+    public ProductJwtAuthenticationConverter(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
-  }
+
+    @Override
+    public AbstractAuthenticationToken convert(Jwt jwt) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(jwt.getSubject());
+        if (userDetails instanceof ProductUserEntity) {
+            return new ProductUserAuthenticationToken((ProductUserEntity) userDetails, userDetails.getAuthorities());
+        } else {
+            return null;
+        }
+    }
 }
 ```
 
@@ -292,7 +293,7 @@ the attribute _userid_ to identify the user in our database instead of _email_. 
 ```java
 package com.example.security;
 
-import com.example.productuser.ProductUser;
+import com.example.productuser.ProductUserEntity;
 import com.example.productuser.ProductUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -305,23 +306,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductUserDetailsService implements UserDetailsService {
 
-  private final ProductUserService productUserService;
+    private final ProductUserService productUserService;
 
-  @Autowired
-  public ProductUserDetailsService(ProductUserService productUserService) {
-    this.productUserService = productUserService;
-  }
-
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    ProductUser user = productUserService.findByUserId(username);
-    if (user == null) {
-      throw new UsernameNotFoundException(
-          "No user could be found for user name '" + username + "'");
+    @Autowired
+    public ProductUserDetailsService(ProductUserService productUserService) {
+        this.productUserService = productUserService;
     }
 
-    return user;
-  }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        ProductUserEntity user = productUserService.findByUserId(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(
+                    "No user could be found for user name '" + username + "'");
+        }
+
+        return user;
+    }
 }
 ```
 
@@ -372,12 +373,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-## Step 5: Run the product server application
+## Step 5: Run the productEntity server application
 
-Now we are ready to start the product server.
+Now we are ready to start the productEntity server.
 Select the class _com.example.ProductApplication_ and run this (use the right mouse button in your IDE or the spring boot dashboard if applicable).
 
-To test the REST Api (http://localhost:9090/server/products) of the running product server we will use
+To test the REST Api (http://localhost:9090/server/products) of the running productEntity server we will use
 Postman. You may also use command line tools like _curl_ or _httpie_ as well.
 
 After starting Postman you can create a new collection by clicking the button _New Collection_ on the left.

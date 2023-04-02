@@ -1,51 +1,26 @@
 package com.example.product;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
  * Product entity.
  */
-@Entity
-public class Product extends AbstractPersistable<Long> {
+public class Product implements Serializable {
 
     private String name;
     private String description;
     private BigDecimal price;
 
-    /**
-     * For JPA.
-     */
     public Product() {
+        // For Jackson
     }
 
-    /**
-     * Constructor.
-     *
-     * @param name        product name
-     * @param description product description
-     * @param price       product price
-     */
     public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    @JsonIgnore
-    @Override
-    public Long getId() {
-        return super.getId();
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isNew() {
-        return super.isNew();
     }
 
     public String getName() {

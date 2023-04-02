@@ -1,6 +1,6 @@
 # Product Client Frontend UI
 
-Now we will implement the corresponding client for the product server to show the product list in a web UI.
+Now we will implement the corresponding client for the productEntity server to show the productEntity list in a web UI.
 
 __Tip__:  
 You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-client)
@@ -8,7 +8,7 @@ You may look into the [Spring Boot Reference Documentation](https://docs.spring.
 
 To start with this tutorial part, navigate to the project __initial/ui__ in your IDE.
 
-First just run this unfinished client. Please make sure that you also have started the product server from previous 
+First just run this unfinished client. Please make sure that you also have started the productEntity server from previous 
 part.
 
 Just run class _com.example.UiApplication_. Then navigate your web browser to http://localhost:9095/client.
@@ -21,7 +21,7 @@ Now try to click the link for _Products_. This should lead to the following whit
 ![Client main screen](images/unauthorized_client.png)
 
 This is because our initial client still only sends a basic authentication header to authenticate the request for getting the
-product list. But the product server now requires a JWT token instead. This is why we now get a 401 http status error (unauthorized).
+productEntity list. But the productEntity server now requires a JWT token instead. This is why we now get a 401 http status error (unauthorized).
 
 So let's start with fixing this issue by implementing an OAuth2/OIDC client. 
 
@@ -140,7 +140,7 @@ public class WebSecurityConfiguration {
 
 ## Step 4: Update the call to the resource server
 
-We already extended the product server requiring a bearer token in the _Authorization_ header with each request.
+We already extended the productEntity server requiring a bearer token in the _Authorization_ header with each request.
 To be able to call the server from the client we need to add the access token.
 
 To achieve this we have to change the class _ProductService_ to add the required header with the token.
@@ -250,7 +250,7 @@ Please note that _"auth0"_ refers to the corresponding id of the client configur
 
 ## Step 5: Run the client application
 
-Now we can run the finished client as well. Please make sure that you also have started the product server from previous 
+Now we can run the finished client as well. Please make sure that you also have started the productEntity server from previous 
 part.
 
 Just run class _com.example.UiApplication_. Then navigate your web browser to http://localhost:9095/client.

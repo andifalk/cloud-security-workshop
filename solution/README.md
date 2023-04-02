@@ -5,7 +5,7 @@ Workshop on building secure cloud-native applications using spring cloud securit
 
 You can find the completed applications for step 1 of the workshop here:
 
-* product: Spring boot application providing a rest api for products: http://localhost:8080/products
+* productEntity: Spring boot application providing a rest api for products: http://localhost:8080/products
 * ui: A Spring boot application providing thymeleaf based html frontend to display products
 
 In this step user credentials are configured using the _application.properties_ file.

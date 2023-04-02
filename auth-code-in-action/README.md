@@ -13,9 +13,11 @@ The [authorization code grant](https://www.rfc-editor.org/rfc/rfc6749.html#secti
 It is used for resource owner authorization in many internet services like for example [SlideShare](https://www.slideshare.net/) 
 or [StackOverflow](https://stackoverflow.com/). 
 
-Even for single page applications the latest best-practice drafts by the [IETF](https://datatracker.ietf.org/wg/oauth/documents/) recommend 
+For single page applications the latest best-practice drafts by the [IETF](https://datatracker.ietf.org/wg/oauth/documents/) mandates 
 using this grant (with the addition of [PKCE](https://www.rfc-editor.org/rfc/rfc7636.html)) 
 instead of the [implicit grant](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.2).
+
+This demo implements a server-side web application using spring mvc + thymeleaf. Even for such web application type the IETF recommends to add PKCE to the authorization code grant.
 
 Enterprise applications usually add [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) 
 on top of [OAuth 2.0](https://www.rfc-editor.org/rfc/rfc6749.html) for implementing real authentication scenarios. 
@@ -34,8 +36,9 @@ You can see each of these steps in the demo client application of this intro lab
 Usually only step 1 is visible to a user of the client. Steps 2 and 3 are only visible here
 to visualize the whole flow.
 
-In addition, the demo client can also call the token introspection endpoint to verify if a 
-token is still valid and get a new access token by using the refresh token.
+In addition, the demo client can also 
+* call the token introspection endpoint to verify if a token is still valid 
+* and can retrieve a new access token by using a refresh token
            
 ## Run the demo application           
                 

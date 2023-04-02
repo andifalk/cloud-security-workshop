@@ -16,10 +16,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="product: ${products}">
-        <td th:text="${product.name}"></td>
-        <td th:text="${product.description}"></td>
-        <td th:text="${product.price}"></td>
+    <tr th:each="productEntity: ${products}">
+        <td th:text="${productEntity.name}"></td>
+        <td th:text="${productEntity.description}"></td>
+        <td th:text="${productEntity.price}"></td>
     </tr>
     </tbody>
 </table>

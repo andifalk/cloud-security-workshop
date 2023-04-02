@@ -27,4 +27,12 @@ public class ProductController {
         model.addAttribute("products", products);
         return "products";
     }
+
+    @GetMapping(path = "/users")
+    public String getAllUsers(Model model) {
+        Iterable<ProductUser> users = productService.getAllProductUsers();
+        model.addAttribute("users", users);
+        return "users";
+    }
+
 }

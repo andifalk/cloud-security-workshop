@@ -15,26 +15,24 @@
     </div>
 </nav>
 <div class="container">
-    <h1>Products</h1>
+    <h1>Users</h1>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="productEntity: ${products}">
-            <td th:text="${productEntity.name}"></td>
-            <td th:text="${productEntity.description}"></td>
-            <td th:text="${productEntity.price}"></td>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
         </tr>
         </tbody>
     </table>
 </div>
-
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
-
 </body>
 </html>

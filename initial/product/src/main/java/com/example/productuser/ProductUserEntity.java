@@ -1,18 +1,19 @@
 package com.example.productuser;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class ProductUser implements UserDetails {
+import static jakarta.persistence.FetchType.EAGER;
+
+@Entity
+public class ProductUserEntity extends AbstractPersistable<Long> {
 
     @NotBlank
     private String userId;
@@ -29,13 +30,15 @@ public class ProductUser implements UserDetails {
     @NotBlank
     private String email;
 
+    @NotNull
+    @ElementCollection(fetch = EAGER)
     private List<String> roles = new ArrayList<>();
 
-    public ProductUser() {
-        // For Jackson
+    public ProductUserEntity() {
+        // For JPA
     }
 
-    public ProductUser(
+    public ProductUserEntity(
             String userId,
             String firstName,
             String lastName,
@@ -70,52 +73,12 @@ public class ProductUser implements UserDetails {
         return roles;
     }
 
-    @JsonIgnore
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(
-                getRoles().stream()
-                        .map(s -> "ROLE_" + s)
-                        .collect(Collectors.joining(",")));
-    }
-
-    @JsonIgnore
-    @Override
     public String getPassword() {
         return this.password;
     }
 
-    @Override
     public String getUsername() {
         return this.email;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @JsonIgnore
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public String getDisplayName() {
-        return String.format("%s %s (%s)", getFirstName(), getLastName(), getEmail());
     }
 
     @Override
@@ -123,7 +86,7 @@ public class ProductUser implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        ProductUser that = (ProductUser) o;
+        ProductUserEntity that = (ProductUserEntity) o;
         return Objects.equals(userId, that.userId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(password, that.password) && Objects.equals(email, that.email) && Objects.equals(roles, that.roles);
     }
 
@@ -134,7 +97,7 @@ public class ProductUser implements UserDetails {
 
     @Override
     public String toString() {
-        return "ProductUser{" +
+        return "ProductUserEntity{" +
                 "userId='" + userId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

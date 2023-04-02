@@ -10,18 +10,18 @@ After importing the project into your IDE you should see a project structure lik
 Basically you find 2 top level folders:
 
 * workshop-initial: This will be the starting point to implement code as part of this workshop
-    - product-initial: This is the provided sample product server microservice
-    - ui-initial: This is the provided sample product ui client microservice
+    - productEntity-initial: This is the provided sample productEntity server microservice
+    - ui-initial: This is the provided sample productEntity ui client microservice
 * workshop-solution: This is the reference solution for this workshop (please do NOT look into this now)
-    - product-solution: This is the reference solution of a OAuth2/OIDC product server microservice
-    - ui-solution: This is the reference solution of a OAuth2/OIDC product ui client microservice
+    - productEntity-solution: This is the reference solution of a OAuth2/OIDC productEntity server microservice
+    - ui-solution: This is the reference solution of a OAuth2/OIDC productEntity ui client microservice
 
 ## Architecture
 
 We will extend the existing two microservices to use federated authentication based on OAuth 2.0 and OpenID Connect (OIDC).
 
 * __Identity Provider__: This is central identity provider for single sign on which holds all users with their credentials
-* __OAuth2/OIDC Resource Server (product-initial)__: The backend microservice providing product data (the OAuth2/OIDC resource server)
+* __OAuth2/OIDC Resource Server (productEntity-initial)__: The backend microservice providing productEntity data (the OAuth2/OIDC resource server)
 * __OAuth2/OIDC Client (ui-initial)__: The frontend UI microservice consuming the products (the OAuth2/OIDC client)
 
 ![Architecture](images/architecture.png)
