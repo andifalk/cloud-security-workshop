@@ -1,5 +1,9 @@
 package com.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class ProductController {
+    private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
 
@@ -17,7 +22,9 @@ public class ProductController {
     }
 
     @GetMapping(path = "/")
-    public String index() {
+    public String index(@AuthenticationPrincipal User user, Model model) {
+        String fullName = user.getUsername();
+        model.addAttribute("username", fullName);
         return "index";
     }
 

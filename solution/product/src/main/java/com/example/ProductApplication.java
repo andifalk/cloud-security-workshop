@@ -17,8 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         servers = @Server(url = "${api.server.url}", description = "development"),
         security = {@SecurityRequirement(name = "BasicAuth"), @SecurityRequirement(name = "BearerAuth")})
 @SecuritySchemes({
-    @SecurityScheme(name= "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic"),
-    @SecurityScheme(name= "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")}
+        @SecurityScheme(name = "basicAuth", type = SecuritySchemeType.HTTP, scheme = "basic"),
+        @SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")}
 )
 @SpringBootApplication
 public class ProductApplication {

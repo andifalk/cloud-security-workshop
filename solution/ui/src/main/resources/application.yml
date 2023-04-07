@@ -9,10 +9,34 @@ spring:
         provider:
           auth0:
             issuer-uri: https://access-me.eu.auth0.com/
-            user-name-attribute: sub
+            user-name-attribute: name
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/workshop
+            user-name-attribute: name
+          spring:
+            issuer-uri: http://localhost:9000
+            user-name-attribute: name
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: NONE
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - profile
+              - email
+          keycloak:
+            client-id: 'product-client'
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: NONE
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - profile
+              - email
+          spring:
+            client-id: 'demo-client-pkce'
             authorizationGrantType: authorization_code
             clientAuthenticationMethod: NONE
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
@@ -26,3 +50,7 @@ logging:
     org:
       springframework:
         security: debug
+
+product:
+  server:
+    url: "http://localhost:9090/server"

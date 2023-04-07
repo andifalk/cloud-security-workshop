@@ -3,6 +3,12 @@ server:
     context-path: /client
   port: 9095
 
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+
 product:
   server:
     url: "http://localhost:9090/server"

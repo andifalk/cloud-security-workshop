@@ -11,15 +11,18 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductEntityRepository productEntityRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductService(ProductEntityRepository productEntityRepository) {
+        this.productEntityRepository = productEntityRepository;
     }
 
     @PreAuthorize("hasRole('USER')")
     public List<Product> findAll() {
-        return productRepository.findAll();
+        return productEntityRepository.findAll().stream().map(pe ->
+                new Product(pe.getName(), pe.getDescription(), pe.getPrice())).toList();
     }
+
+
 }

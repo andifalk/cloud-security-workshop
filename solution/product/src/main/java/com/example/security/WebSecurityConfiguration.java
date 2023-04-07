@@ -41,7 +41,7 @@ public class WebSecurityConfiguration {
                 .disable()
                 .authorizeHttpRequests()
                 .anyRequest()
-                .fullyAuthenticated()
+                .authenticated()
                 .and()
                 .oauth2ResourceServer()
                 .jwt().jwtAuthenticationConverter(productJwtAuthenticationConverter);

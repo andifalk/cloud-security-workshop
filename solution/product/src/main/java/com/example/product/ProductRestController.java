@@ -3,6 +3,7 @@ package com.example.product;
 import com.example.productuser.ProductUser;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Rest API for {@link Product products}.
+ * Rest API for {@link ProductEntity products}.
  */
 @Tag(name = "Product", description = "The Product API. Contains all the operations that can be performed on a product.")
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/v1/products")
 public class ProductRestController {
@@ -37,7 +39,7 @@ public class ProductRestController {
     )
     @GetMapping
     public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
-        LOG.info("Return all products using authenticated user '" + productUser.getEmail() + "'");
+        LOG.info("Return all products using authenticated user '{}'", productUser.getDisplayName());
         return productService.findAll();
     }
 }

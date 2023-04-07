@@ -1,38 +1,48 @@
 package com.example.productuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 @Service
 public class ProductUserService {
 
-    private final ProductUserRepository productUserRepository;
+    private final ProductUserEntityRepository productUserEntityRepository;
 
     @Autowired
-    public ProductUserService(ProductUserRepository productUserRepository) {
-        this.productUserRepository = productUserRepository;
+    public ProductUserService(ProductUserEntityRepository productUserEntityRepository) {
+        this.productUserEntityRepository = productUserEntityRepository;
     }
 
     @Transactional
     public ProductUser save(ProductUser productUser) {
-        return productUserRepository.save(productUser);
+        return productUserEntityRepository.save(
+                new ProductUserEntity(productUser)).toProductUser();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<ProductUser> findAll() {
-        return productUserRepository.findAll();
+        return productUserEntityRepository.findAll().stream().map(ProductUserEntity::toProductUser).toList();
     }
 
-    public ProductUser findByUserId(String userId) {
-        return productUserRepository.findOneByUserId(userId);
+    public Optional<ProductUser> findByUserId(String userId) {
+        return productUserEntityRepository.findOneByUserId(userId).map(ProductUserEntity::toProductUser);
     }
 
-    public ProductUser findByEmail(String email) {
-        return productUserRepository.findOneByEmail(email);
+    public Optional<ProductUser> findByEmail(String email) {
+        return productUserEntityRepository.findOneByEmail(email).map(ProductUserEntity::toProductUser);
+    }
+
+    public Optional<ProductUser> findByProductUser(ProductUser productUser) {
+        Example<ProductUserEntity> productUserEntityExample = Example.of(new ProductUserEntity(productUser));
+        return productUserEntityRepository
+                .findOne(productUserEntityExample)
+                .map(ProductUserEntity::toProductUser);
     }
 }

@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.UUID;
 import java.util.stream.Stream;
+
+import static java.util.UUID.randomUUID;
 
 /**
  * Initializes some products in database.
@@ -23,11 +24,10 @@ import java.util.stream.Stream;
 public class ProductInitializer implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(ProductInitializer.class.getName());
 
-    // Identity Provider: Auth0
-    private static final String STANDARD_USER_FIRST_NAME = "Uwe";
-    private static final String STANDARD_USER_LAST_NAME = "User";
-    private static final String ADMIN_USER_FIRST_NAME = "Alex";
-    private static final String ADMIN_USER_LAST_NAME = "Admin";
+    private static final String STANDARD_USER_FIRST_NAME = "Bruce";
+    private static final String STANDARD_USER_LAST_NAME = "Wayne";
+    private static final String ADMIN_USER_FIRST_NAME = "Peter";
+    private static final String ADMIN_USER_LAST_NAME = "Parker";
 
     private final ProductEntityRepository productEntityRepository;
     private final ProductUserEntityRepository productUserEntityRepository;
@@ -56,18 +56,18 @@ public class ProductInitializer implements CommandLineRunner {
 
         Stream.of(
                         new ProductUserEntity(
-                                UUID.randomUUID().toString(),
+                                randomUUID().toString(),
                                 STANDARD_USER_FIRST_NAME,
                                 STANDARD_USER_LAST_NAME,
-                                passwordEncoder.encode("user_4demo!"),
-                                "user@example.com",
+                                passwordEncoder.encode("bruce_4demo!"),
+                                "bruce.wayne@example.com",
                                 Collections.singletonList("USER")),
                         new ProductUserEntity(
-                                UUID.randomUUID().toString(),
+                                randomUUID().toString(),
                                 ADMIN_USER_FIRST_NAME,
                                 ADMIN_USER_LAST_NAME,
-                                passwordEncoder.encode("admin_4demo!"),
-                                "admin@example.com",
+                                passwordEncoder.encode("peter_4demo!"),
+                                "peter.parker@example.com",
                                 Arrays.asList("USER", "ADMIN")))
                 .forEach(productUserEntityRepository::save);
 

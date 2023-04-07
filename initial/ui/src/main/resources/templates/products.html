@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Products</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,7 +11,7 @@
             <li class="nav-item"><a class="nav-link" th:href="@{/}" href="#">Home</a></li>
             <li class="nav-item"><a class="nav-link" th:href="logout" href="#">Logout</a></li>
         </ul>
-        <span class="navbar-text" sec:authentication="name">User</span>
+        <span class="navbar-text" th:text="${username}">User</span>
     </div>
 </nav>
 <div class="container">

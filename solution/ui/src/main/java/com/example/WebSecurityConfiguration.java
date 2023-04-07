@@ -20,7 +20,7 @@ public class WebSecurityConfiguration {
                                 .anyRequest().authenticated()
                 )
                 .oauth2Client().and()
-                .oauth2Login(withDefaults());
+                .oauth2Login(withDefaults()).logout().invalidateHttpSession(true);
         return http.build();
     }
 }
