@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Abstract OAuth 2.1 Protocol Flow
+
+autonumber
+
+actor "Resource Owner"
+participant "Authorization Server" as authzserver
+participant "Client" as client
+participant "Resource Server" as rs
+
+client -> "Resource Owner": Authorization Request
+"Resource Owner" --> client: Authorization Grant
+
+client -> authzserver: Authorization Grant
+client <-- authzserver: Access Token
+
+client -> rs: Access Token
+client <-- rs: Protected Resource
+
+@enduml

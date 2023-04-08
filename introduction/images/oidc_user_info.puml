@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title "<$oauth>\nOpenID Connect UserInfo"
+
+autonumber
+
+participant "Client/Resource Server" as client
+participant "Authorization Server/Identity Provider" as authzserver
+
+client -> authzserver: UserInfo request (with //access token// as bearer token in\n//authorization// http header)
+authzserver --> authzserver: UserInfo Endpoint:\nValidate //token//
+client <-- authzserver: UserInfo response
+
+@enduml

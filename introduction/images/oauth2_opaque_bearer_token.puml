@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include <logos/oauth>
+!include <logos/angular>
+!include <logos/java>
+
+title "<$oauth>\nOAuth 2.0 Bearer Token (Opaque Tokens)"
+
+autonumber
+
+participant "<$angular>\nClient" as client
+participant "<$java>\nResource Server" as rs
+participant "Authorization Server" as authzserver
+
+client -> rs: Request resource (with //opaque token// \nsent as //Authorization// http header)
+rs -> authzserver: Introspection request to validate opaque token
+authzserver --> authzserver: Introspection Endpoint:\nAuthenticates //client_id/client_secret//\n& validates //access token//)
+rs <-- authzserver: Introspection response (with //active// flag telling if token is valid)
+rs -> rs: Checks returned //active// flag
+rs -> client: Response with requested resource
+
+@enduml

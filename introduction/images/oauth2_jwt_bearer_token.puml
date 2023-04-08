@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include <logos/oauth>
+!include <logos/angular>
+!include <logos/java>
+
+title "<$oauth>\nOAuth 2.0 Bearer Token (JWT)"
+
+autonumber
+
+participant "<$angular>\nClient" as client
+participant "<$java>\nResource Server" as rs
+participant "Authorization Server" as authzserver
+
+client -> rs: Request resource (with //json web token (jwt)// \nsent as //Authorization// http header)
+rs -> authzserver: Retrieve public key to validate token signature
+rs <-- authzserver: Public key
+rs -> rs: Validate jwt signature with public key\n and check expiration time
+rs -> client: Response with requested resource
+
+@enduml

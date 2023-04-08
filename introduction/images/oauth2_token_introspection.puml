@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include <logos/oauth>
+!include <logos/dotnet>
+
+title "<$oauth>\nOAuth 2.0 Token Introspection"
+
+autonumber
+
+participant "<$dotnet>\nClient" as client
+participant "Authorization Server" as authzserver
+
+client -> authzserver: Introspection request (with //token// & //client_id// & //client_secret//)
+authzserver --> authzserver: Introspection Endpoint:\nAuthenticates //client_id/client_secret//\n& validates //access token//)
+client <-- authzserver: Introspection response (with //active// flag telling if token is valid)
+
+@enduml
