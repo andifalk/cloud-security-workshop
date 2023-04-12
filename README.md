@@ -18,11 +18,11 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 
 ## Intro Lab
 
-* [OAuth2 Authorization Code Grant in Action](reactive-playground/README.md)
+* [OAuth2 Authorization Code Grant in Action](auth-code-in-action/README.md)
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side](initial/productEntity/README.md)
+* [Lab 1: OAuth2/OIDC on the server side](initial/product/README.md)
 * [Lab 2: OAuth2/OIDC on the client side](initial/ui/README.md)
 
 ## License
