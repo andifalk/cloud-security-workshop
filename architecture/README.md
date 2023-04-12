@@ -1,24 +1,8 @@
 # Sample Application Architecture
 
-## Project contents
-
-After importing the project into your IDE you should see a project structure like in the following picture
-(here the Eclipse project is shown, it may look different in other IDE's).
-
-![Project Structure](images/project_layout.png)
-
-Basically you find 2 top level folders:
-
-* workshop-initial: This will be the starting point to implement code as part of this workshop
-    - productEntity-initial: This is the provided sample productEntity server microservice
-    - ui-initial: This is the provided sample productEntity ui client microservice
-* workshop-solution: This is the reference solution for this workshop (please do NOT look into this now)
-    - productEntity-solution: This is the reference solution of a OAuth2/OIDC productEntity server microservice
-    - ui-solution: This is the reference solution of a OAuth2/OIDC productEntity ui client microservice
-
 ## Architecture
 
-We will extend the existing two microservices to use federated authentication based on OAuth 2.0 and OpenID Connect (OIDC).
+We will extend the existing two microservices to use federated authentication based on OAuth 2.1 and OpenID Connect (OIDC).
 
 * __Identity Provider__: This is central identity provider for single sign on which holds all users with their credentials
 * __OAuth2/OIDC Resource Server (productEntity-initial)__: The backend microservice providing productEntity data (the OAuth2/OIDC resource server)
@@ -38,8 +22,23 @@ Service URLs:
 | Client (UI)                | http://localhost:9095/client   |
 | Resource Server (Products) | http://localhost:9090/server   |
 
-__Note:__  
-You can find more information on building OAuth 2.0/OIDC secured microservices with spring in
+## Project contents
+
+After importing the project into your IDE you should see a project structure like in the following picture
+(here the Eclipse project is shown, it may look different in other IDE's).
+
+![Project Structure](images/project_layout.png)
+
+Basically you find 2 top level folders:
+
+* workshop-initial: This will be the starting point to implement code as part of this workshop
+  - productEntity-initial: This is the provided sample productEntity server microservice
+  - ui-initial: This is the provided sample productEntity ui client microservice
+* workshop-solution: This is the reference solution for this workshop (please do NOT look into this now)
+  - productEntity-solution: This is the reference solution of a OAuth2/OIDC productEntity server microservice
+  - ui-solution: This is the reference solution of a OAuth2/OIDC productEntity ui client microservice
+ 
+> **Note:** You can find more information on building OAuth 2.0/OIDC secured microservices with spring in
 [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2)
 and in [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2)
 
