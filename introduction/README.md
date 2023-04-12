@@ -99,12 +99,14 @@ This becomes clearer if we look at the concrete protocol flow variants, called t
 
 OAuth 2.0 originally defined more authorization grants than OAuth 2.1 does:
 
-* __Resource Owner Password Grant__:  
+* __Resource Owner Password Grant__(deprecated):  
 The intention of this protocol variant was to make migration to OAuth 2.0 easier from other authentication mechanisms like basic authentication or form based authentication. Here still the client asks for user credentials and then sends these to the authorization server to get an access token.  
 This variant was removed from the OAuth 2.1 spec because it contradicts and all concepts of OAuth 2.0/2.1 by insecurely exposing the credentials of the resource owner to the client.
 
-* __Implicit Grant__:  
+* __Implicit Grant__(deprecated):  
   The implicit grant historically has been used by single page applications running as javascript client in the web browser. As this grant type is causing the authorization server to issue access tokens in the authorization response it is vulnerable to access token leakage and access token replay. 
+
+The following sections describe the recommended authorization grants in OAuth 2.1.
 
 ##### Client Credentials grant + PKCE
 
