@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include <logos/oauth>
+!include <logos/firefox>
+!include <logos/angular>
+
+title "<$oauth>\nOAuth 2.0 Implicit Grant"
+
+autonumber
+
+actor "Resource Owner" as ro
+participant "<$angular>\nClient" as client
+participant "<$firefox>\nUser Agent" as ua
+participant "Authorization Server" as authzserver
+
+ro -> client: Access application
+client -> ua: Authorization Request (with //client id// & //redirect uri// & //scopes//)
+ua -> authzserver: Redirect to authorization endpoint
+authzserver -> authzserver: Authorization Endpoint:\nValidate //client id// & //redirect uri//\n& evaluate scopes
+ua <-- authzserver: Render login form
+ro -> ua: User provides credentials (i.e. username/password)
+ua -> authzserver: Post user credentials
+authzserver -> authzserver: Authorization Endpoint:\nAuthenticates user
+ua <-- authzserver: Redirect back to //redirect uri// with access token in fragment
+client <-- ua: Access token
+
+@enduml

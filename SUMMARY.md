@@ -14,6 +14,7 @@
 ## Intro Lab
 
 * [OAuth2 Authorization Code Grant in Action](auth-code-in-action/README.md)
+* [OAuth2 Authorization Grant Flows in Action](oauth-grants/README.md)
 
 ## Hands-On Labs
 

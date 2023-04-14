@@ -19,6 +19,7 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 ## Intro Lab
 
 * [OAuth2 Authorization Code Grant in Action](auth-code-in-action/README.md)
+* [OAuth2 Authorization Grant Flows in Action](oauth-grants/README.md)
 
 ## Hands-On Labs
 
