@@ -10,21 +10,25 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 * [Intro Lab](#intro-lab)
 * [Hands-On Labs](#hands-on-labs)
 
+## Setup
+
+* [Requirements](setup/requirements/README.md)
+* [Setup](setup/README.md)
+
 ## Introduction
 
-* [Requirements and Setup](setup/README.md)
 * [Introduction to OAuth 2.1 and OpenID Connect](introduction/README.md)
-* [Sample Application Architecture](architecture/README.md)
+* [Sample Application Architecture](introduction/architecture/README.md)
 
 ## Intro Lab
 
-* [OAuth2 Authorization Code Grant in Action](auth-code-in-action/README.md)
-* [OAuth2 Authorization Grant Flows in Action](oauth-grants/README.md)
+* [OAuth2 Authorization Code Grant in Action](intro-labs/auth-code-in-action/README.md)
+* [OAuth2 Authorization Grant Flows in Action](intro-labs/oauth-grants/README.md)
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side](initial/product/README.md)
-* [Lab 2: OAuth2/OIDC on the client side](initial/ui/README.md)
+* [Lab 1: OAuth2/OIDC on the server side](labs/initial/product/README.md)
+* [Lab 2: OAuth2/OIDC on the client side](labs/initial/ui/README.md)
 
 ## License
 

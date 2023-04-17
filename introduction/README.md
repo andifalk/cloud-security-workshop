@@ -27,8 +27,7 @@ In the context of digital identities you have to deal with different areas like:
 * Identity architectures and ecosystems
 
 Today, most companies buy their identity systems. Identity and access management (IAM) is now a very big industry.
-The diagram below shows the configuration and operation phases of IAM and additionally the difference between the 
-identity and access management parts.
+The diagram below shows the configuration and operation phases of IAM and additionally the difference between the identity and access management parts.
 
 ![IAM phases](images/iam-phases.png)
 
@@ -57,29 +56,41 @@ Modern self-sovereign identity systems give full control to participants in term
 
 User-centered identity architectures are using federated identity methods and standards to give the participants at least a limited ability to consent to share specific relationships and attributes.
 
-Those methods and standards are:
+<img src="images/federated_methods.png" width="500" height="800" alt="Federated identity methods and standard"/>
 
-* __Security Assertion Markup Language (SAML)__:
+The most important federated methods and standards are described in the following sections with putting emphasis on OAuth and OpenID Connect.
+
+### Security Assertion Markup Language (SAML)
+
   [SAML](https://wiki.oasis-open.org/security/FrontPage) is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). In March 2005, the current SAML 2.0 version was announced as an OASIS Standard.
-* __System for Cross-domain Identity Management (SCIM)__:
-  The [System for Cross-domain Identity Management (SCIM)](https://www.simplecloud.info/) specification is designed to make managing user identities in cloud-based applications and services easier.
-  The current SCIM 2.0 version is built on a object model where a Resource is the common denominator and all SCIM objects are derived from it. It is defined by RFC 7643 and RCF 7644.
+
+### System for Cross-domain Identity Management (SCIM)
+
+The [System for Cross-domain Identity Management (SCIM)](https://www.simplecloud.info/) specification is designed to make managing user identities in cloud-based applications and services easier.
+The current SCIM 2.0 version is built on a object model where a Resource is the common denominator and all SCIM objects are derived from it. It is defined by RFC 7643 and RCF 7644.
+
+![SCIM model](images/scim_model.png)
+
 * __OAuth 2.0__:
   [OAuth 2.0](https://www.rfc-editor.org/rfc/rfc6749.html) is the industry-standard protocol for authorization. OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and other devices.
 * __OpenID Connect__:
   [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
 
-<img src="images/federated_methods.png" width="500" height="800" alt="Federated identity methods and standard"/>
 
 OAuth 2.0/2.1 and OpenID Connect will be described in more detail in the following sections. 
 
-### OAuth 2.0/2.1 (OAuth2)
+### OAuth 2.0/2.1
+
+The OAuth 2.0 authorization framework has been specified by the [Internet Engineering Task Force (IETF)]() as [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html) in 2012.
+
+In 2020 the [IETF]() started to discuss new [general security best practices]() and specific recommendations for [browser based applications]() (single page applications).  
+This led to a new OAuth 2.1 version that currently is available as a [draft specification]() and may be finalized end of this year or next year (unfortunately the IETF does not work based on roadmaps).
 
 > The OAuth 2.1 authorization framework enables an application to obtain limited access to a protected resource, 
 > either on behalf of a resource owner by orchestrating an approval interaction between the resource owner and an
 > authorization service, or by allowing the application to obtain access on its own behalf.
 > 
-> (*RFC 6749, OAuth 2.1 draft specification*)
+> (*OAuth 2.1 draft specification*)
 
 #### Roles
 
@@ -97,18 +108,25 @@ An application making protected resource requests on behalf of the resource owne
 * __Authorization Server__:  
 The server issuing access tokens to the client after successfully authenticating the resource owner and obtaining authorization.
 
+![OAuth Roles](images/oauth_roles.png)
+
 #### Access Tokens
 
 Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client. The string is usually opaque to the client.  
 Tokens  represent specific scopes and durations of access, granted by the resource owner, 
 and enforced by the resource server and authorization server.
-OAuth 2.0/2.1 does __not__ define any token format (it may be a opaque token or a JWT).
 
-Access tokens are transmitted to the resource server as bearer tokens via the _authorization_ http header to authenticate the client at the resource server. The name bearer token implies that every bearer (holder) of the token is authenticated to retrieve protected resources from the resource server. The resource server cannot distinguish between a valid or malicious client presenting the token.
+> OAuth 2.0/2.1 does __not__ define any token format (it may be a opaque token or a JWT).
+
+Access tokens are transmitted to the resource server as bearer tokens via the _authorization_ http header to authenticate the client at the resource server as specified in [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750.html). The name bearer token implies that every bearer (holder) of the token is authenticated to retrieve protected resources from the resource server. The resource server cannot distinguish between a valid or malicious client presenting the token.
+
+![Opaque bearer token](images/oauth2_opaque_bearer_token.png)
+
+Access tokens may be validated by the introspection endpoint of the authorization server.
 
 #### Refresh Tokens
 
-![Opaque bearer token](images/oauth2_opaque_bearer_token.png)
+For security reasons the lifetime of access tokens should be kept short (typically between 5 and 30 minutes). To ensure usability, so that users do not have to log in every 5 minutes, you may use refresh tokens. A refresh token may be returned together with the access token depending on the authorization grant used. The refresh token can be exchanged for a new access token, so every time just before the access token will expire the refresh token is ued to get a new access token. 
 
 #### Scopes
 
@@ -173,22 +191,21 @@ The implicit grant historically has been used by single page applications runnin
 
 ![OAuth2 implicit grant](images/oauth2_implicit_flow.png)
 
-##### Client Credentials grant + PKCE
+##### Client Credentials Grant + PKCE
 
 Client credentials are used as an authorization grant typically when the client is acting on its own behalf (the client is also the resource owner).
 Typical clients are batch processing applications that run in a non-interactive mode without requiring a personal user account. This is comparable with authenticating using a technical user.
 
 ![OAuth2 client credentials grant + PKCE](images/oauth2_client_credentials_flow.png)
 
-##### Authorization Code grant
+##### Authorization Code Grant
 
 ![OAuth2 authorization code grant](images/oauth2_authz_code_flow.png)
 
-##### Authorization Code grant + PKCE
+##### Authorization Code Grant + PKCE
 
 
 ![OAuth2 authorization code grant + PKCE](images/oauth2_authz_code_pkce_flow.png)
-
 
 ### OpenID Connect (OIDC) 1.0
 

@@ -17,11 +17,11 @@
     </properties>
 
     <modules>
-        <module>auth-code-in-action</module>
-        <module>initial/product</module>
-        <module>initial/ui</module>
-        <module>solution/product</module>
-        <module>solution/ui</module>
+        <module>intro-labs/auth-code-in-action</module>
+        <module>labs/initial/product</module>
+        <module>labs/initial/ui</module>
+        <module>labs/solution/product</module>
+        <module>labs/solution/ui</module>
     </modules>
 
 </project>
