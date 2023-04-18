@@ -187,7 +187,7 @@ The implicit grant historically has been used by single page applications runnin
 
 ![OAuth2 implicit grant](images/oauth2_implicit_flow.png)
 
-##### Client Credentials Grant + PKCE
+##### Client Credentials Grant
 
 Client credentials are used as an authorization grant typically when the client is acting on its own behalf (the client is also the resource owner).
 Typical clients are batch processing applications that run in a non-interactive mode without requiring a personal user account. This is comparable with authenticating using a technical user.
@@ -199,7 +199,6 @@ Typical clients are batch processing applications that run in a non-interactive 
 ![OAuth2 authorization code grant](images/oauth2_authz_code_flow.png)
 
 ##### Authorization Code Grant + PKCE
-
 
 ![OAuth2 authorization code grant + PKCE](images/oauth2_authz_code_pkce_flow.png)
 
@@ -214,3 +213,7 @@ Typical clients are batch processing applications that run in a non-interactive 
 #### ID and Access Tokens
 
 ![JWT bearer token](images/oauth2_jwt_bearer_token.png)
+
+#### User Info Endpoint
+
+#### Discovery
