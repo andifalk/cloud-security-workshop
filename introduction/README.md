@@ -71,14 +71,6 @@ The current SCIM 2.0 version is built on a object model where a Resource is the 
 
 ![SCIM model](images/scim_model.png)
 
-* __OAuth 2.0__:
-  [OAuth 2.0](https://www.rfc-editor.org/rfc/rfc6749.html) is the industry-standard protocol for authorization. OAuth 2.0 focuses on client developer simplicity while providing specific authorization flows for web applications, desktop applications, mobile phones, and other devices.
-* __OpenID Connect__:
-  [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
-
-
-OAuth 2.0/2.1 and OpenID Connect will be described in more detail in the following sections. 
-
 ### OAuth 2.0/2.1
 
 The OAuth 2.0 authorization framework has been specified by the [Internet Engineering Task Force (IETF)]() as [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html) in 2012.
@@ -91,6 +83,10 @@ This led to a new OAuth 2.1 version that currently is available as a [draft spec
 > authorization service, or by allowing the application to obtain access on its own behalf.
 > 
 > (*OAuth 2.1 draft specification*)
+
+#### Realworld Example
+
+![OAuth2 Stackoverflow_Example](images/stackoverflow_login.png)
 
 #### Roles
 
@@ -209,7 +205,11 @@ Typical clients are batch processing applications that run in a non-interactive 
 
 ### OpenID Connect (OIDC) 1.0
 
+[OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
+
 #### Authorization Grants
+
+
 
 #### ID and Access Tokens
 

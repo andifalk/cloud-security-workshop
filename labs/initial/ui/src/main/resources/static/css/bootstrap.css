@@ -2801,6 +2801,7 @@ textarea.form-control-lg {
   z-index: 4;
 }
 
+/*noinspection ALL*/
 .btn {
   --bs-btn-padding-x: 0.75rem;
   --bs-btn-padding-y: 0.375rem;
@@ -3525,6 +3526,7 @@ textarea.form-control-lg {
   color: var(--bs-dropdown-link-color);
 }
 
+/*noinspection ALL*/
 .dropdown-menu-dark {
   --bs-dropdown-color: #dee2e6;
   --bs-dropdown-bg: #343a40;
@@ -3640,6 +3642,7 @@ textarea.form-control-lg {
   border-top-right-radius: 0;
 }
 
+/*noinspection ALL*/
 .nav {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
@@ -3814,6 +3817,7 @@ textarea.form-control-lg {
   color: var(--bs-navbar-brand-hover-color);
 }
 
+/*noinspection ALL*/
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
@@ -4184,6 +4188,7 @@ textarea.form-control-lg {
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
+/*noinspection ALL*/
 .card {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
@@ -4501,6 +4506,7 @@ textarea.form-control-lg {
   border-radius: 0;
 }
 
+/*noinspection ALL*/
 .breadcrumb {
   --bs-breadcrumb-padding-x: 0;
   --bs-breadcrumb-padding-y: 0;
@@ -5200,6 +5206,7 @@ textarea.form-control-lg {
   filter: invert(1) grayscale(100%) brightness(200%);
 }
 
+/*noinspection ALL*/
 .toast {
   --bs-toast-zindex: 1090;
   --bs-toast-padding-x: 0.75rem;
@@ -5269,6 +5276,7 @@ textarea.form-control-lg {
   word-wrap: break-word;
 }
 
+/*noinspection ALL*/
 .modal {
   --bs-modal-zindex: 1055;
   --bs-modal-width: 500px;
@@ -5561,6 +5569,8 @@ textarea.form-control-lg {
     overflow-y: auto;
   }
 }
+
+/*noinspection ALL*/
 .tooltip {
   --bs-tooltip-zindex: 1080;
   --bs-tooltip-max-width: 200px;
@@ -5664,6 +5674,7 @@ textarea.form-control-lg {
   border-radius: var(--bs-tooltip-border-radius);
 }
 
+/*noinspection ALL*/
 .popover {
   --bs-popover-zindex: 1070;
   --bs-popover-max-width: 276px;
@@ -6087,6 +6098,8 @@ textarea.form-control-lg {
     --bs-spinner-animation-speed: 1.5s;
   }
 }
+
+/*noinspection ALL*/
 .offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
   --bs-offcanvas-zindex: 1045;
   --bs-offcanvas-width: 400px;

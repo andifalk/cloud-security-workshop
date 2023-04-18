@@ -27,7 +27,7 @@ The first grant type we will evaluate here is the [OAuth 2.0 Client Credentials 
 The required parameters for the client credentials grant are shown here:
 
 | Parameter      | Value                              |
-| -------------- | ---------------------------------- |
+|----------------|------------------------------------|
 | token url      | http://localhost:9000/oauth2/token |
 | grant\_type    | client\_credentials                |
 | client\_id     | demo-client                        |

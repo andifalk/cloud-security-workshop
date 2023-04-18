@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -26,7 +25,7 @@ public class AuthorizationRequestController {
   }
 
   @GetMapping("/")
-  public String initiateAuthRequest(Model model) throws UnsupportedEncodingException {
+  public String initiateAuthRequest(Model model) {
 
     model.addAttribute("pkce", authCodeDemoProperties.isPkce() ? "On" : "Off");
     model.addAttribute("authorization_endpoint", authCodeDemoProperties.getAuthorization().getEndpoint().toString());
