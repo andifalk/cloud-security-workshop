@@ -60,11 +60,11 @@ User-centered identity architectures are using federated identity methods and st
 
 The most important federated methods and standards are described in the following sections with putting emphasis on OAuth and OpenID Connect.
 
-### Security Assertion Markup Language (SAML)
+### SAML 2.0
 
-  [SAML](https://wiki.oasis-open.org/security/FrontPage) is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). In March 2005, the current SAML 2.0 version was announced as an OASIS Standard.
+  [Security Assertion Markup Language (SAML)](https://wiki.oasis-open.org/security/FrontPage) is an XML-based markup language for security assertions (statements that service providers use to make access-control decisions). In March 2005, the current SAML 2.0 version was announced as an OASIS Standard.
 
-### System for Cross-domain Identity Management (SCIM)
+### SCIM
 
 The [System for Cross-domain Identity Management (SCIM)](https://www.simplecloud.info/) specification is designed to make managing user identities in cloud-based applications and services easier.
 The current SCIM 2.0 version is built on a object model where a Resource is the common denominator and all SCIM objects are derived from it. It is defined by RFC 7643 and RCF 7644.
