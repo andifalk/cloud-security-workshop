@@ -118,6 +118,11 @@ Access tokens are transmitted to the resource server as bearer tokens via the _a
 
 ![Opaque bearer token](images/oauth2_opaque_bearer_token.png)
 
+```http request
+GET /v1/customers HTTP/1.1
+Authorization: Bearer RsT5OjbzRn430zqMLgV3Ia
+Host: api.my-resource-server.com
+```
 Access tokens may be validated by the introspection endpoint of the authorization server.
 
 #### Refresh Tokens
@@ -206,6 +211,9 @@ Typical clients are batch processing applications that run in a non-interactive 
 
 [OpenID Connect 1.0 (OIDC)](https://openid.net/specs/openid-connect-core-1_0.html) is a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner.
 
+![OAuth2 OpenID_Connect](images/oauth_openid_connect.png)
+
+
 #### Authorization Grants
 
 
@@ -213,6 +221,12 @@ Typical clients are batch processing applications that run in a non-interactive 
 #### ID and Access Tokens
 
 ![JWT bearer token](images/oauth2_jwt_bearer_token.png)
+
+```http request
+GET /v1/customers HTTP/1.1
+Authorization: Bearer eybe3sT5OjbzRn430zqMLgV3Ia...
+Host: api.my-resource-server.com
+```
 
 #### User Info Endpoint
 
