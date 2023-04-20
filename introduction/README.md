@@ -1,4 +1,4 @@
-# Introduction into OAuth 2.0/2.1 (OAuth2) and OpenID Connect (OIDC)
+# Introduction into OAuth and OpenID Connect (OIDC)
 
 This workshop introduces two of the most important federated identity methods and standards 
 used in current software architectures:
@@ -92,16 +92,19 @@ This led to a new OAuth 2.1 version that currently is available as a [draft spec
 
 OAuth 2.1 defines four roles:
 
-* __Resource Owner__:  
+* __Resource Owner (The User)__:  
 An entity capable of granting access to a protected resource. When the resource owner is a person, it is referred to as an end-user.
 
-* __Resource Server__:  
+* __Resource Server (API)__:  
 The server hosting the protected resources, capable of accepting and responding to protected resource requests using access tokens. The resource server is often accessible via an API (Rest, GraphQL etc.). Typical example here is backend service implemented in Java. 
 
-* __Client__:  
+* __User Agent (Device)__:  
+The user agent is the device tha user interacts with to access the client application. This may be for example the web browser, a mobile phone or a tv device.
+
+* __Client (Application)__:  
 An application making protected resource requests on behalf of the resource owner and with its authorization. The term _client_ does not imply any particular implementation characteristics (e.g., whether the application executes on a server, a desktop, in a web browser, or other devices).
 
-* __Authorization Server__:  
+* __Authorization Server (OAuth Server)__:  
 The server issuing access tokens to the client after successfully authenticating the resource owner and obtaining authorization.
 
 ![OAuth Roles](images/oauth_roles.png)
@@ -127,7 +130,25 @@ Access tokens may be validated by the introspection endpoint of the authorizatio
 
 #### Refresh Tokens
 
-For security reasons the lifetime of access tokens should be kept short (typically between 5 and 30 minutes). To ensure usability, so that users do not have to log in every 5 minutes, you may use refresh tokens. A refresh token may be returned together with the access token depending on the authorization grant used. The refresh token can be exchanged for a new access token, so every time just before the access token will expire the refresh token is ued to get a new access token. 
+For security reasons the lifetime of access tokens should be kept short (typically between 5 and 30 minutes). To ensure usability, and keep the user logged in without having to visit the authorization server again, you may use refresh tokens. Usually a refresh token is returned together with the access token when scope _offline_access_ is given. The refresh token can be exchanged for a new access token, so every time just before the access token will expire the refresh token is ued to get a new access token. Usually this is not issued for Javascript applications due to security issues when storing refresh tokens in the browser storage. 
+
+To request a new access token with a refresh token you have to issue a http post request like this one:
+
+```http request
+POST https://authorization-server.com/token
+ grant_type=refresh_token&refresh_token=REFRESH_TOKEN&
+ client_id=CLIENT_ID&client_secret=CLIENT_SECRET
+```
+
+Then the new access token is returned together with a new refresh token_ 
+
+```json
+{
+"access_token": "RsT5OjbzRn430zqMLgV3Ia",
+"expires_in": 3600,
+"refresh_token": "64d049f8b21191e12522d5d96d5641af5e8"
+}
+```
 
 #### Scopes
 
@@ -182,9 +203,17 @@ __OAuth 2.1__ only defines the following authorization grant types:
 ##### Resource Owner Password Grant (removed in OAuth 2.1)
 
 The intention of this protocol variant was to make migration to OAuth 2.0 easier from other authentication mechanisms like basic authentication or form based authentication. Here still the client asks for user credentials and then sends these to the authorization server to get an access token.  
-This variant was removed from the OAuth 2.1 spec because it contradicts and all concepts of OAuth 2.0/2.1 by insecurely exposing the credentials of the resource owner to the client.
+Originally was added to OAuth to enable migrating applications from HTTP Basic Auth or using a stored password to OAuth
+This variant was removed from the OAuth 2.1 spec because it contradicts and all concepts of OAuth by insecurely exposing the credentials of the resource owner to the client.
+Furthermore, adapting this grant to two-factor authentication (e.g. with WebAuthn) can be hard or impossible.
 
 ![OAuth2 ro_password credentials grant + PKCE](images/oauth2_ro_password_credentials_flow.png)
+
+```http request
+POST https://authz-server.com/token
+ grant_type=password&username=USERNAME
+ &password=PASSWORD&client_id=CLIENT_ID
+```
 
 ##### Implicit Grant (removed in OAuth 2.1)  
 
@@ -192,20 +221,90 @@ The implicit grant historically has been used by single page applications runnin
 
 ![OAuth2 implicit grant](images/oauth2_implicit_flow.png)
 
+```http request
+GET https://authz-server.com/authorize?
+    response_type=token&client_id=abcd
+    &redirect_uri=https://client.example.org/cb
+    &state=af0ifjsldkj
+```
+
+```http request
+HTTP/1.1 302 Found
+Location: https://client.example.org/cb#access_token=SlAV32hkKG
+&token_type=bearer&id_token=eyJ0...
+&expires_in=3600&state=af0ifjsldkj
+```
+
+
 ##### Client Credentials Grant
 
 Client credentials are used as an authorization grant typically when the client is acting on its own behalf (the client is also the resource owner).
 Typical clients are batch processing applications that run in a non-interactive mode without requiring a personal user account. This is comparable with authenticating using a technical user.
 
-![OAuth2 client credentials grant + PKCE](images/oauth2_client_credentials_flow.png)
+![OAuth2 client credentials grant](images/oauth2_client_credentials_flow.png)
+
+```http request
+POST /token HTTP/1.1
+Host: authz-server.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+```
 
 ##### Authorization Code Grant
 
 ![OAuth2 authorization code grant](images/oauth2_authz_code_flow.png)
 
+```http request
+GET /authorize?response_type=code&client_id=s6BhdRkqt3&state=xyz
+&redirect_uri=https://client.example.com/cb HTTP/1.1
+Host: authz-server.com
+```
+
+```http request
+HTTP/1.1 302 Found
+Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA
+&state=xyz&iss=https://authz-server.com/
+```
+
+```http request
+POST /token HTTP/1.1
+Host: authz-server.com
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+&redirect_uri=https://client.example.com/cb
+```
+
 ##### Authorization Code Grant + PKCE
 
 ![OAuth2 authorization code grant + PKCE](images/oauth2_authz_code_pkce_flow.png)
+
+```http request
+GET /authorize?response_type=code&client_id=s6BhdRkqt3&state=xyz
+&redirect_uri=https://client.example.com/cb 
+&code_challenge=6fdkQaPm51l13DSukcAH3Mdx7_ntecHYd1vi3n0hMZY
+&code_challenge_method=S256 HTTP/1.1
+Host: authz-server.com
+```
+
+```http request
+HTTP/1.1 302 Found
+Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA
+&state=xyz&iss=https://authz-server.com/
+```
+
+```http request
+POST /token HTTP/1.1
+Host: authz-server.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+&redirect_uri=https://client.example.com/cb
+&code_verifier=3641a2d12d66101249cdf7a79c000c1f8c05d2aafcf14bf146497bed
+```
 
 ### OpenID Connect 1.0
 
@@ -213,21 +312,82 @@ Typical clients are batch processing applications that run in a non-interactive 
 
 ![OAuth2 OpenID_Connect](images/oauth_openid_connect.png)
 
+#### Roles
 
-#### Authorization Grants
+![OpenID_Connect_Roles](images/openid_connect_roles.png)
 
 
+#### Hybrid Flow Grant
+
+```http request
+GET /authorize?response_type=code%20id_token&client_id=s6BhdRkqt3
+&redirect_uri=https://client.example.org/cb
+&scope=openid%20profile%20email
+&nonce=n-0S6_WzA2Mj
+&state=af0ifjsldkj HTTP/1.1
+Host: authz-server.com
+```
+
+```http request
+HTTP/1.1 302 Found
+Location: https://client.example.org/cb#code=SplxlOBeZQQYbYS6WxSbIA
+&id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkaz...&state=af0ifjsldkj
+```
+
+```http request
+POST /token HTTP/1.1
+  Host: authz-server.com
+  Content-Type: application/x-www-form-urlencoded
+  Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+
+  grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
+    &redirect_uri=https://client.example.org/cb
+```
+
+```json
+{
+"access_token": "SlAV32hkKG",
+"token_type": "Bearer",
+"refresh_token": "8xLOxBtZp8",
+"expires_in": 3600,
+"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkaz..."
+}
+```
 
 #### ID and Access Tokens
+
+![OpenID_Connect tokens](images/openid_connect_tokens.png)
+
 
 ![JWT bearer token](images/oauth2_jwt_bearer_token.png)
 
 ```http request
 GET /v1/customers HTTP/1.1
-Authorization: Bearer eybe3sT5OjbzRn430zqMLgV3Ia...
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkaz...
 Host: api.my-resource-server.com
 ```
 
 #### User Info Endpoint
+
+```http request
+GET /userinfo HTTP/1.1
+Host: server.example.com
+Authorization: Bearer SlAV32hkKG
+```
+
+```http request
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "sub": "248289761001",
+    "name": "Jane Doe",
+    "given_name": "Jane",
+    "family_name": "Doe",
+    "preferred_username": "j.doe",
+    "email": "janedoe@example.com",
+    "picture": "http://example.com/janedoe/me.jpg"
+}
+```
 
 #### Discovery
