@@ -38,7 +38,7 @@ This workshop supports the following identity providers:
 The preferred default identity provider that is pre-configured for all workshop parts is the [Spring Authorization Server](https://spring.io/projects/spring-authorization-server).  
 You will learn how to run this one in the following section.
 
-### Setup Spring Authorization Server
+### Spring Authorization Server
 
 Here we will use a [customized version of the Spring Authorization Server](https://github.com/andifalk/custom-spring-authorization-server). This version contains pre-configured users and registered OAuth/OIDC clients for the sample applications we will use as part of this workshop.
 

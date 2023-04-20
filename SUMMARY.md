@@ -9,7 +9,7 @@
 
 ## Introduction
 
-* [Introduction to OAuth 2.1 and OpenID Connect](introduction/README.md)
+* [Introduction to OAuth and OpenID Connect](introduction/README.md)
 * [Sample Application Architecture](introduction/architecture/README.md)
 
 ## Intro Labs
@@ -19,5 +19,5 @@
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side](labs/initial/product/README.md)
-* [Lab 2: OAuth2/OIDC on the client side](labs/initial/ui/README.md)
+* [Lab 1: OAuth/OIDC on the server side](labs/initial/product/README.md)
+* [Lab 2: OAuth/OIDC on the client side](labs/initial/ui/README.md)
