@@ -1,9 +1,12 @@
 package com.example.productuser;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.util.ArrayList;
@@ -15,19 +18,22 @@ import static jakarta.persistence.FetchType.EAGER;
 @Entity
 public class ProductUserEntity extends AbstractPersistable<Long> {
 
-    @NotBlank
+    @NotEmpty
+    @Size(min = 1, max = 100)
+    @Column(unique = true)
     private String userId;
 
-    @NotBlank
+    @Size(min = 1, max = 50)
     private String firstName;
 
-    @NotBlank
+    @Size(min = 1, max = 50)
     private String lastName;
 
-    @NotBlank
+    @Size(min = 3, max = 100)
     private String password;
 
-    @NotBlank
+    @Email
+    @Column(unique = true)
     private String email;
 
     @NotNull
@@ -36,6 +42,15 @@ public class ProductUserEntity extends AbstractPersistable<Long> {
 
     public ProductUserEntity() {
         // For JPA
+    }
+
+    public ProductUserEntity(ProductUser productUser) {
+        this.userId = productUser.getUserId();
+        this.firstName = productUser.getFirstName();
+        this.lastName = productUser.getLastName();
+        this.password = productUser.getPassword();
+        this.email = productUser.getEmail();
+        this.roles = productUser.getRoles();
     }
 
     public ProductUserEntity(
@@ -105,5 +120,9 @@ public class ProductUserEntity extends AbstractPersistable<Long> {
                 ", email='" + email + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public ProductUser toProductUser() {
+        return new ProductUser(getUserId(), getFirstName(), getLastName(), getPassword(), getEmail(), getRoles());
     }
 }

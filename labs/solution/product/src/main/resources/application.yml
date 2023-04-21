@@ -14,7 +14,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: https://access-me.eu.auth0.com/.well-known/jwks.json
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
 
 info:
   application:

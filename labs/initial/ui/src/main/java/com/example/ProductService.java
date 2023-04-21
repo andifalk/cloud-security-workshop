@@ -108,8 +108,4 @@ public class ProductService {
             }
         };
     }
-
-    private static class ProductClientErrorResponseHandler extends DefaultResponseErrorHandler {
-
-    }
 }

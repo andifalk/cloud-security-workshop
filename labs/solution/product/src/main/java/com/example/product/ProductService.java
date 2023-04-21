@@ -23,6 +23,4 @@ public class ProductService {
         return productEntityRepository.findAll().stream().map(pe ->
                 new Product(pe.getName(), pe.getDescription(), pe.getPrice())).toList();
     }
-
-
 }

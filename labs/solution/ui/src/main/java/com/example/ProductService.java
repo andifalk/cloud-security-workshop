@@ -87,7 +87,6 @@ public class ProductService {
         }
     }
 
-
     private HttpHeaders createAuthorizationHeader(OAuth2AccessToken oAuth2AccessToken) {
         return new HttpHeaders() {
             {

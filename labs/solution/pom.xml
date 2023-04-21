@@ -11,7 +11,7 @@
     <name>Cloud Security Workshop Project (Solution)</name>
 
     <modules>
-        <module>productEntity</module>
+        <module>product</module>
         <module>ui</module>
     </modules>
 

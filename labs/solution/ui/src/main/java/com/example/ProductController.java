@@ -2,7 +2,6 @@ package com.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,7 +24,6 @@ public class ProductController {
     private final ProductService productService;
     private final OAuth2AuthorizedClientService authorizedClientService;
 
-    @Autowired
     public ProductController(ProductService productService, OAuth2AuthorizedClientService authorizedClientService) {
         this.productService = productService;
         this.authorizedClientService = authorizedClientService;

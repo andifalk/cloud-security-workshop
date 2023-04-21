@@ -1,6 +1,9 @@
 package com.example.product;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.math.BigDecimal;
@@ -12,12 +15,24 @@ import java.util.Objects;
 @Entity
 public class ProductEntity extends AbstractPersistable<Long> {
 
+    @Size(min = 1, max = 50)
+    @Column(unique = true)
     private String name;
+
+    @Size(max = 200)
     private String description;
+
+    @NotNull
     private BigDecimal price;
 
     public ProductEntity() {
         // For JPA
+    }
+
+    public ProductEntity(Product product) {
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
     }
 
     public ProductEntity(String name, String description, BigDecimal price) {
@@ -71,5 +86,9 @@ public class ProductEntity extends AbstractPersistable<Long> {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    public Product toProduct() {
+        return new Product(getName(), getDescription(), getPrice());
     }
 }

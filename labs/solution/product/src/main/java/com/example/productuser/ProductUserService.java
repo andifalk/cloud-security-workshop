@@ -1,7 +1,6 @@
 package com.example.productuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,12 +36,5 @@ public class ProductUserService {
 
     public Optional<ProductUser> findByEmail(String email) {
         return productUserEntityRepository.findOneByEmail(email).map(ProductUserEntity::toProductUser);
-    }
-
-    public Optional<ProductUser> findByProductUser(ProductUser productUser) {
-        Example<ProductUserEntity> productUserEntityExample = Example.of(new ProductUserEntity(productUser));
-        return productUserEntityRepository
-                .findOne(productUserEntityExample)
-                .map(ProductUserEntity::toProductUser);
     }
 }

@@ -20,26 +20,21 @@ public class ProductUserService {
     }
 
     @Transactional
-    public ProductUserEntity save(ProductUserEntity productUserEntity) {
-        return productUserEntityRepository.save(productUserEntity);
+    public ProductUser save(ProductUser productUser) {
+        return productUserEntityRepository.save(
+                new ProductUserEntity(productUser)).toProductUser();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<ProductUser> findAll() {
-        return productUserEntityRepository.findAll().stream().map(pue ->
-                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
-                        pue.getPassword(), pue.getEmail(), pue.getRoles())).toList();
+        return productUserEntityRepository.findAll().stream().map(ProductUserEntity::toProductUser).toList();
     }
 
     public Optional<ProductUser> findByUserId(String userId) {
-        return productUserEntityRepository.findOneByUserId(userId).map(pue ->
-                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
-                        pue.getPassword(), pue.getEmail(), pue.getRoles()));
+        return productUserEntityRepository.findOneByUserId(userId).map(ProductUserEntity::toProductUser);
     }
 
     public Optional<ProductUser> findByEmail(String email) {
-        return productUserEntityRepository.findOneByEmail(email).map(pue ->
-                new ProductUser(pue.getUserId(), pue.getFirstName(), pue.getLastName(),
-                        pue.getPassword(), pue.getEmail(), pue.getRoles()));
+        return productUserEntityRepository.findOneByEmail(email).map(ProductUserEntity::toProductUser);
     }
 }
