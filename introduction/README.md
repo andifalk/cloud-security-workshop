@@ -48,7 +48,7 @@ In the context of the internet users are required to have lots of different acco
 __Self-Sovereign:__  
 Modern self-sovereign identity systems give full control to participants in terms of certifiable identifiers, choice on sharing attributes and relationships.
 
-![IAM phases](images/identity_system_architectures.png)
+![Identity_System_Architectures](images/identity_system_architectures.png)
 
 (Source: Learning Digital Identity)
 
@@ -154,7 +154,7 @@ Then the new access token is returned together with a new refresh token_
 
 The authorization and token endpoints allow the client to specify the scope of the access request using the scope request parameter. In turn, the authorization server uses the scope response parameter to inform the client of the scope of the access token issued.
 
-The value of the scope parameter is expressed as a list of space- delimited, case-sensitive strings. The strings are defined by the authorization server. If the value contains multiple space-delimited strings, their order does not matter, and each string adds an additional access range to the requested scope.
+The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings. The strings are defined by the authorization server. If the value contains multiple space-delimited strings, their order does not matter, and each string adds an access range to the requested scope.
 
 Typically, scopes authorize different access levels for APIs like for example the GitHub API or the Google Mail API.
 A sample list of scopes looks like this `user:read notifications:read`. 

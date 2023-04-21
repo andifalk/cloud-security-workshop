@@ -2,10 +2,10 @@
 
 A client demonstrating all steps of an [OAuth 2.0 Authorization Code Grant](https://www.rfc-editor.org/rfc/rfc6749.html#page-24) Flow.
 
-__Important note:   
-This demo client is just for demonstrating purposes. All the mandatory validations
-and recommended security precautions of a production-ready OAuth 2.0 client library are missing here. So do NOT use any code
-of this client for production !!!!__
+> __Important note:__   
+> This demo client is just for demonstrating purposes. All the mandatory validations
+> and recommended security precautions of a production-ready OAuth 2.0 client library are missing 
+> here. So do __NOT__ use any code of this client for production!
 
 ## Authorization code grant flow in detail
 
@@ -44,32 +44,24 @@ In addition, the demo client can also
                 
 To start the demo:
 
-* Make sure _Custom Spring Authorization Server_ is running correctly
-* Browse to [localhost:9095/client](http://localhost:9095/client) to start the demo client                  
+* Make sure _Custom Spring Authorization Server_ is running correctly, see [Setup](../../setup/README.md) for details.
+* Browse to [localhost:9095/client](http://localhost:9095/client) to start the demo client
 
-__Important:__ You can use one of the following users to login:
+You can use one of the following users to login:
 
-| Username | Email                    | Password | Role  |
-|----------|--------------------------|----------|-------|
-| bwayne   | bruce.wayne@example.com  | wayne    | USER  |
-| ckent    | clark.kent@example.com   | kent     | USER  |
-| pparker  | peter.parker@example.com | parker   | ADMIN |
+| Username | Email                    | Password | Role(s)     |
+|----------|--------------------------|----------|-------------|
+| bwayne   | bruce.wayne@example.com  | wayne    | USER        |
+| ckent    | clark.kent@example.com   | kent     | USER        |
+| pparker  | peter.parker@example.com | parker   | ADMIN, USER |
 
-You may use the _username_ or _email_ in the username input field.
-
-If you remain in step 2 for a long time (where you have retrieved the authorization code) then you will
-get an error when proceeding to step 3 (exchanging the code for an access token).  
+If you remain in step 2 for a long time (where you have retrieved the authorization code) then you will get an error when proceeding to step 3 (exchanging the code for an access token).  
 This is because the authorization code timed out.
 
 According to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#section-4.1.2):
 
-<blockquote cite="https://tools.ietf.org/html/rfc6749#section-4.1.2">
-The authorization code MUST expire shortly after it is issued to mitigate the risk of leaks.  
-A maximum authorization code lifetime of 10 minutes is RECOMMENDED. 
-The client MUST NOT use the authorization code more than once. 
-</blockquote>
+> The authorization code MUST expire shortly after it is issued to mitigate the risk of leaks.  
+> A maximum authorization code lifetime of 10 minutes is RECOMMENDED. 
+> The client MUST NOT use the authorization code more than once. 
 
 The spring authorization server follows this recommendation and uses a really short authorization code lifetime.
-
-
-

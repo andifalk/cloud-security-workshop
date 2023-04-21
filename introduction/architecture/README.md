@@ -28,14 +28,20 @@ After importing the project into your IDE you should see a project structure lik
 
 ![Project Structure](images/project_structure.png)
 
-Basically you find 2 top level folders:
+The main contents for this workshop consist of the following directories:
 
-* workshop-initial: This will be the starting point to implement code as part of this workshop
-  - labs/initial/product: This is the provided sample product server microservice
-  - labs/initial/ui: This is the provided sample product ui client microservice
-* workshop-solution: This is the reference solution for this workshop (please do NOT look into this now)
-  - labs/solution/product: This is the reference solution of a OAuth2/OIDC product server microservice
-  - labs/solution/ui: This is the reference solution of a OAuth2/OIDC product ui client microservice
+* __intro-labs__: 
+In the sub-directory _auth-code-in-action_ you find a demo application that illustrates the OAuth 2 authorization code grant flow in details. Here you can follow all the subsequent steps happening during this protocol flow variant.  
+In the sub-directory _oauth_grants_ you get instructions on how to try different OAuth 2 authorization grant flows yourself with different tools like _postman_, _curl_ and _httpie_.
+
+* __labs__:
+In this directory you find the workshop lab parts.
+  * initial: This will be the starting point to implement code as part of this workshop
+    - product: This is the provided sample product server microservice
+    - ui: This is the provided sample product ui client microservice
+  * solution: This is the reference solution for this workshop (please do NOT look into this now)
+    - product: This is the reference solution of a OAuth2/OIDC product server microservice
+    - ui: This is the reference solution of a OAuth2/OIDC product ui client microservice
  
 > **Info:** You can find more information on building OAuth 2.0/OIDC secured microservices with spring in
 [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2)

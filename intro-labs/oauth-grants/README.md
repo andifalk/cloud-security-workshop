@@ -38,7 +38,7 @@ The required parameters for the client credentials grant are shown here:
 
 To retrieve an access token using _curl_ use the following command in a terminal:
 
-```
+```shell
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=client_credentials&client_id=demo-client&client_secret=secret" http://localhost:9000/oauth2/token
 ```
 
@@ -59,7 +59,7 @@ This should return a response similar to this one:
 
 To retrieve an access token using _httpie_ use the following command in a terminal:
 
-```
+```shell
 http --form POST http://localhost:9000/oauth2/token grant_type='client_credentials' client_id='demo-client' client_secret='secret'
 ```
 
