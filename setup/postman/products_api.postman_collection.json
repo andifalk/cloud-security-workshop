@@ -1,0 +1,680 @@
+{
+	"info": {
+		"_postman_id": "6df22ad9-86e9-49f0-bf94-cc0361b58997",
+		"name": "Products API",
+		"description": "The Product API is used to retrieve products and users to access products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7267364"
+	},
+	"item": [
+		{
+			"name": "Basic Auth",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "Get users",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users"
+											]
+										},
+										"description": "Retrieve all existing users"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "products",
+							"item": [
+								{
+									"name": "Get products",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1/products",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"products"
+											]
+										},
+										"description": "Retrieve all existing products"
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "basic",
+						"basic": [
+							{
+								"key": "password",
+								"value": "{{basicAuthPassword}}",
+								"type": "string"
+							},
+							{
+								"key": "username",
+								"value": "{{basicAuthUsername}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "actuator",
+					"item": [
+						{
+							"name": "info",
+							"item": [
+								{
+									"name": "Actuator web endpoint 'info'",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.spring-boot.actuator.v3+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/actuator/info",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"actuator",
+												"info"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/actuator/info",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"actuator",
+														"info"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "health",
+							"item": [
+								{
+									"name": "Actuator web endpoint 'health'",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.spring-boot.actuator.v3+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/actuator/health",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"actuator",
+												"health"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "OAuth2 Bearer Token",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "Get users",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"users"
+											]
+										},
+										"description": "Retrieve all existing users"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "products",
+							"item": [
+								{
+									"name": "Get products",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/v1/products",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"v1",
+												"products"
+											]
+										},
+										"description": "Retrieve all existing products"
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "actuator",
+					"item": [
+						{
+							"name": "info",
+							"item": [
+								{
+									"name": "Actuator web endpoint 'info'",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.spring-boot.actuator.v3+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/actuator/info",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"actuator",
+												"info"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "health",
+							"item": [
+								{
+									"name": "Actuator web endpoint 'health'",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/vnd.spring-boot.actuator.v3+json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/actuator/health",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"actuator",
+												"health"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "authorization server",
+					"item": [
+						{
+							"name": "User Info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/userinfo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"userinfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "tokenName",
+						"value": "bearerToken",
+						"type": "string"
+					},
+					{
+						"key": "tokenType",
+						"value": "",
+						"type": "string"
+					},
+					{
+						"key": "accessToken",
+						"value": "",
+						"type": "string"
+					},
+					{
+						"key": "client_authentication",
+						"value": "body",
+						"type": "string"
+					},
+					{
+						"key": "scope",
+						"value": "openid profile offline_access",
+						"type": "string"
+					},
+					{
+						"key": "clientSecret",
+						"value": "",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "demo-client-pkce",
+						"type": "string"
+					},
+					{
+						"key": "authUrl",
+						"value": "http://localhost:9000/oauth2/authorize",
+						"type": "string"
+					},
+					{
+						"key": "redirect_uri",
+						"value": "http://localhost:9095/client/callback",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "authorization_code_with_pkce",
+						"type": "string"
+					},
+					{
+						"key": "refreshRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "tokenRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "authRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "challengeAlgorithm",
+						"value": "S256",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "bwayne",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "wayne",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					},
+					{
+						"key": "accessTokenUrl",
+						"value": "http://localhost:9000/oauth2/token",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Client Credentials",
+			"item": [],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "refreshRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "tokenRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "authRequestParams",
+						"value": [],
+						"type": "any"
+					},
+					{
+						"key": "tokenName",
+						"value": "client_credentials",
+						"type": "string"
+					},
+					{
+						"key": "challengeAlgorithm",
+						"value": "S256",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "bwayne",
+						"type": "string"
+					},
+					{
+						"key": "scope",
+						"value": "openid",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "wayne",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "string"
+					},
+					{
+						"key": "clientSecret",
+						"value": "secret",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "demo-client",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					},
+					{
+						"key": "client_authentication",
+						"value": "header",
+						"type": "string"
+					},
+					{
+						"key": "accessTokenUrl",
+						"value": "http://localhost:9000/oauth2/token",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:9090/server"
+		},
+		{
+			"key": "basicAuthUsername",
+			"value": "peter.parker@example.com"
+		},
+		{
+			"key": "basicAuthPassword",
+			"value": "parker"
+		},
+		{
+			"key": "accessToken",
+			"value": "eyJraWQiOiJjZjVhMmJkZC05NmJlLTRhZGMtOTk5NS1mNDQzMzY0NGY2NDciLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjNTJiZjdkYi1kYjU1LTRmODktYWM1My04MmI0MGU4YzU3YzIiLCJ3ZWJzaXRlIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInpvbmVpbmZvIjoiRXVyb3BlL0JlcmxpbiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcm9maWxlIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9id2F5bmUiLCJyb2xlcyI6WyJVU0VSIl0sImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6OTAwMCIsInByZWZlcnJlZF91c2VybmFtZSI6ImJ3YXluZSIsImdpdmVuX25hbWUiOiJCcnVjZSIsImxvY2FsZSI6ImRlLURFIiwiYXVkIjoiZGVtby1jbGllbnQtcGtjZSIsIm5iZiI6MTY4MjI3Mjk5MCwidXBkYXRlZF9hdCI6IjE5NzAtMDEtMDFUMDA6MDA6MDBaIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsIm9mZmxpbmVfYWNjZXNzIl0sIm5hbWUiOiJCcnVjZSBXYXluZSIsIm5pY2tuYW1lIjoiYndheW5lIiwiZXhwIjoxNjgyMjczMjkwLCJpYXQiOjE2ODIyNzI5OTAsImZhbWlseV9uYW1lIjoiV2F5bmUiLCJlbWFpbCI6ImJydWNlLndheW5lQGV4YW1wbGUuY29tIn0.N-8IM3gAUjEnbgH7gyrcVvBUVTX_5OeeOS6apwW_jZe54PCGAAPD9_ltowm3KDjgw9YD4TfPgQKvz7oh00MtYCnZeKh-Lg3zJ2wizqhhuJBUPvhcc18WJ7Saebk7SNgWhTgun46LSDqSzhjStnXQWAmSztVLEaAXjcPYRSJkSuIbfmLHmkdw47HjaqXJU-NA93pS_qUQxRKvK2YADd6ZJWHaUIOf5gGEK-n6BAFZS9oXcQLuaxnL9H_N2hxOZ-l72TO9GonS0cUs1LqR9BYcRRw9i5bw9GK_KYlncu9cfx7Cm6zj95Vh0R5FlShTU1Klpa6akhtoWLr5MyrYZVJlng\n",
+			"type": "string"
+		},
+		{
+			"key": "variable_key",
+			"value": ""
+		}
+	]
+}
