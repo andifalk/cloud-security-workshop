@@ -24,11 +24,6 @@ import static java.util.UUID.randomUUID;
 public class ProductInitializer implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(ProductInitializer.class.getName());
 
-    private static final String STANDARD_USER_FIRST_NAME = "Bruce";
-    private static final String STANDARD_USER_LAST_NAME = "Wayne";
-    private static final String ADMIN_USER_FIRST_NAME = "Peter";
-    private static final String ADMIN_USER_LAST_NAME = "Parker";
-
     private final ProductEntityRepository productEntityRepository;
     private final ProductUserEntityRepository productUserEntityRepository;
     private final PasswordEncoder passwordEncoder;
@@ -57,16 +52,23 @@ public class ProductInitializer implements CommandLineRunner {
         Stream.of(
                         new ProductUserEntity(
                                 randomUUID().toString(),
-                                STANDARD_USER_FIRST_NAME,
-                                STANDARD_USER_LAST_NAME,
-                                passwordEncoder.encode("bruce_4demo!"),
+                                "Bruce",
+                                "Wayne",
+                                passwordEncoder.encode("wayne"),
                                 "bruce.wayne@example.com",
                                 Collections.singletonList("USER")),
                         new ProductUserEntity(
                                 randomUUID().toString(),
-                                ADMIN_USER_FIRST_NAME,
-                                ADMIN_USER_LAST_NAME,
-                                passwordEncoder.encode("peter_4demo!"),
+                                "Clark",
+                                "Kent",
+                                passwordEncoder.encode("kent"),
+                                "clark.kent@example.com",
+                                Collections.singletonList("USER")),
+                        new ProductUserEntity(
+                                randomUUID().toString(),
+                                "Peter",
+                                "Parker",
+                                passwordEncoder.encode("parker"),
                                 "peter.parker@example.com",
                                 Arrays.asList("USER", "ADMIN")))
                 .forEach(productUserEntityRepository::save);

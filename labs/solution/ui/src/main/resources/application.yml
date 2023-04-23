@@ -19,8 +19,8 @@ spring:
         registration:
           auth0:
             client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
-            authorizationGrantType: authorization_code
-            clientAuthenticationMethod: NONE
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid
@@ -28,8 +28,8 @@ spring:
               - email
           keycloak:
             client-id: 'product-client'
-            authorizationGrantType: authorization_code
-            clientAuthenticationMethod: NONE
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid
@@ -37,8 +37,8 @@ spring:
               - email
           spring:
             client-id: 'demo-client-pkce'
-            authorizationGrantType: authorization_code
-            clientAuthenticationMethod: NONE
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid
