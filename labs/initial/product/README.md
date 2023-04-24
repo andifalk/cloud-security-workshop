@@ -21,13 +21,13 @@ The corresponding OpenAPI JSON doc can be found at http://localhost:9090/server/
 
 You may also directly access the API endpoints for retrieving protected resources:
 
-http://localhost:9090/server/v1/products
+If you call the [products endpoint](http://localhost:9090/server/v1/products) then you will get the following result:
 
-![Products](images/rest_api_products_response.png)
+![Rest_API_Products](images/rest_api_products_response.png)
 
-http://localhost:9090/server/v1/users
+If you call the [users endpoint](http://localhost:9090/server/v1/users) then you will get these results:
 
-![Users](images/rest_api_users_response.png)
+![Rest_API_Users](images/rest_api_users_response.png)
 
 Both endpoints are secured by basic authentication or form based login.
 you can access the endpoints by using the following user credentials (acces for users list requires `ADMIN` role):
@@ -394,15 +394,12 @@ Then you can add a new request by clicking the 3 dots next to the collection and
 
 Just fill in the URL you see in the picture below.
 
-![Postman request](images/postman_authz_code_pkce.png)
+![Postman_authz_code_pkce_request](images/postman_authz_code_pkce.png)
 
 If you now click send then you will get a 401 error because
 the JWT token is missing to access this endpoint.
 
 To get such a token navigate to the tab _Authorization_ on the request screen and click on the _Get New Access Token_ button.
-Then you will see a dialog as shown in the picture below.
-
-![Postman get new access token](images/postman_get_access_token.png)
 
 Just fill in the required values from the table below and then click on _Request Token_:
 

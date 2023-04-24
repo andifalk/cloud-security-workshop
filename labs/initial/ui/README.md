@@ -14,11 +14,11 @@ part.
 Just run class `com.example.UiApplication`. Then navigate your web browser to http://localhost:9095/client.
 You should see the following screen.
 
-![Client main screen](images/client_main.png)
+![Client main screen](images/client_main_screen.png)
 
 Now try to click the link for _Products_. This should lead to the following whitelabel error screen:
 
-![Client main screen](images/unauthorized_client.png)
+![Client main screen](images/forbidden_error.png)
 
 This is because our initial client still only sends a basic authentication header to authenticate the request for getting the
 product list. But the product server now requires a JWT token instead. This is why we now get a 401 http status error (unauthorized).
@@ -60,7 +60,7 @@ identity provider.
   the attribute claim to use for mapping user data retrieved from user info endpoint in OAuth2/OIDC client for the _Auth0_
   identity provider.
 * The property ```spring.security.oauth2.client.registration.spring.client-id``` specifies 
-the _client id_ as it is has been registered at the _Spring Authorization Server_ identity provider.
+the _client id_ as it has been registered at the _Spring Authorization Server_ identity provider.
 * The property ```spring.security.oauth2.client.registration.spring.clientAuthenticationMethod``` specifies 
 the authentication method to use when calling the token endpoint at the _Spring Authorization Server_ identity provider. The value of _NONE_ specifies that no _client_secret_ is specified, instead the dynamic _Proof Key for Key Exchange (PKCE)_ is used instead. 
 * The property ```spring.security.oauth2.client.registration.spring.authorizationGrantType``` specifies 
@@ -339,10 +339,9 @@ Now we can run the finished client as well. Please make sure that you also have 
 
 Just run class `com.example.UiApplication`. Then navigate your web browser to http://localhost:9095/client.
 
-If you have successfully followed and completed all steps you should be redirected to the login dialog of the
-identity server of _Spring Authorization Server_.
+If you have successfully followed and completed all steps you should be redirected to the login dialog of the identity server of _Spring Authorization Server_.
 
-![Auth0 Login](images/auth0_login.png)
+![Auth0 Login](images/login.png)
 
 To login please use the following user credentials:
 
@@ -356,11 +355,15 @@ To login please use the following user credentials:
 After successful login you should again be redirected back to the client application, and you should see
 the main screen.
 
-![Client main screen](images/client_main.png)
+![Client main screen](images/client_main_screen.png)
 
 After clicking the _Products_ link you should see the list of products.
 
-![Client main screen](images/client_products.png)
+![Client products screen](images/client_products.png)
+
+By clicking the _Users_ link you will get the list of registered users. You might get an access-denied error. Please try the another user with the `ADMIN` role.
+
+![Client users screen](images/client_users.png)
 
 This ends the whole tutorial.
 
