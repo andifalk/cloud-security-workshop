@@ -5,12 +5,44 @@
 > and the [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2resourceserver) on how 
 > to implement a resource server.
 
-## Step 1: Change Maven dependencies for resource server
+## Step 1: Explore the existing server application
 
 To start with this tutorial please navigate to the project `labs/initial/product` in your IDE.  
-This is the starting point for all following implementation steps.
-
+This is the starting point for all following implementation steps.  
 The existing product server is using the base spring security lib to secure its endpoints using basic authentication and form login.
+
+Before diving into changing the server application into a resource server it is recommended to explore the existing application.
+The application exposes several API endpoints. All endpoints are documented by OpenAPI 3.
+
+To start the product server select the class _com.example.ProductApplication_ and run this in your IDE.
+
+You can find the Swagger documentation at http://localhost:9090/server/swagger-ui/index.html.
+The corresponding OpenAPI JSON doc can be found at http://localhost:9090/server/v3/api-docs.
+
+You may also directly access the API endpoints for retrieving protected resources:
+
+http://localhost:9090/server/v1/products
+
+![Products](images/rest_api_products_response.png)
+
+http://localhost:9090/server/v1/users
+
+![Users](images/rest_api_users_response.png)
+
+Both endpoints are secured by basic authentication or form based login.
+you can access the endpoints by using the following user credentials (acces for users list requires `ADMIN` role):
+
+| Username/Password               | Role(s)     |
+|---------------------------------|-------------|
+| bruce.wayne@example.com/wayne   | USER        |
+| clark.kent@example.com/kent     | USER        |
+| peter.parker@example.com/parker | ADMIN, USER |
+
+To make accessing the APIs more convenient you can use the provided postman collection. You can find the collection in the [setup](../../../setup/postman) folder.
+
+Now let's start with changing the server into a resource server using modern authentication with a JSON web token (JWT).
+
+## Step 2: Change Maven dependencies for resource server
 
 To change these existing authentication mechanisms to JWT authentication as a resource server we need to adapt the 
 spring security dependencies, i.e. use the corresponding one for building a secure OAuth2/OIDC resource server instead of simple
@@ -36,7 +68,7 @@ with this new dependency:
 </dependency>
 ```
 
-## Step 2: Add required properties for resource server
+## Step 3: Add required properties for resource server
 
 The resource server requires the public key(s) to validate the signature of incoming JSON web tokens (JWT). This way nobody can
 just issue their own JWT tokens or modify the issued token along the transmission path.
@@ -65,7 +97,7 @@ spring:
 > when starting
 > the application.
 
-## Step 3: Change security configuration for resource server
+## Step 4: Change security configuration for resource server
 
 Please navigate to the class `com.example.security.WebSecurityConfiguration` in your IDE
 and change this with the following contents.
@@ -173,7 +205,7 @@ public class ProductInitializer implements CommandLineRunner {
 }
 ```
 
-## Step 4: Convert the JWT into the ProductUser
+## Step 5: Convert the JWT into the ProductUser object
 
 With the changes of step 3 the base configuration for a resource server is set up.
 But there is one issue with this change.
@@ -349,9 +381,9 @@ public class WebSecurityConfiguration {
 }
 ```
 
-## Step 5: Run the product server application
+## Step 6: Run the product server application
 
-Now we are ready to start the product server.
+Now we are ready to re-start the product server.
 Select the class _com.example.ProductApplication_ and run this (use the right mouse button in your IDE or the spring boot dashboard if applicable).
 
 To test the REST Api (http://localhost:9090/server/products) of the running product server we will use
@@ -362,7 +394,7 @@ Then you can add a new request by clicking the 3 dots next to the collection and
 
 Just fill in the URL you see in the picture below.
 
-![Postman request](images/postman_request.png)
+![Postman request](images/postman_authz_code_pkce.png)
 
 If you now click send then you will get a 401 error because
 the JWT token is missing to access this endpoint.
@@ -376,12 +408,12 @@ Just fill in the required values from the table below and then click on _Request
 
 | Input              | Value                                  |
 |--------------------|----------------------------------------|
-| Grant Type         | Authorization Code                     |
+| Grant Type         | Authorization Code with PKCE           |
 | Authorization URL  | https://localhost:9000/oauth/authorize |
 | Access Token URL   | https://localhost:9000/oauth/token     |
 | Username           | bwayne                                 |
 | Password           | wayne                                  |
-| Client ID          | demo-client                            |
+| Client ID          | demo-client-pkce                       |
 | Client Secret      | secret                                 |
 
 After you got a token you can close this dialog and try again to send the request.

@@ -33,13 +33,19 @@ public class WebSecurityConfiguration {
         return new InMemoryUserDetailsManager(
             builder()
                 .username("bruce.wayne@example.com")
-                .password("bruce_4demo!")
+                .password("wayne")
                 .passwordEncoder(passwordEncoder()::encode)
                 .roles("USER")
                 .build(),
             builder()
+                    .username("clark.kent@example.com")
+                    .password("kent")
+                    .passwordEncoder(passwordEncoder()::encode)
+                    .roles("USER")
+                    .build(),
+            builder()
                 .username("peter.parker@example.com")
-                .password("peter_4demo!")
+                .password("parker")
                 .passwordEncoder(passwordEncoder()::encode)
                 .roles("USER", "ADMIN")
                 .build()

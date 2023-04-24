@@ -1,4 +1,4 @@
-# Intro-Lab: OAuth 2.0 Authorization Code Grant Flow in Detail
+# OAuth 2.0 Authorization Code Grant Flow in Detail
 
 A client demonstrating all steps of an [OAuth 2.0 Authorization Code Grant](https://www.rfc-editor.org/rfc/rfc6749.html#page-24) Flow.
 

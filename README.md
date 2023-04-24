@@ -22,13 +22,13 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 
 ## Intro Lab
 
-* [OAuth2 Authorization Code Grant in Action](intro-labs/auth-code-in-action/README.md)
-* [OAuth2 Authorization Grant Flows in Action](intro-labs/oauth-grants/README.md)
+* [Authorization Code Grant in Action](intro-labs/auth-code-in-action/README.md)
+* [Practice Authorization Grant Flows](intro-labs/oauth-grants/README.md)
 
 ## Hands-On Labs
 
-* [Lab 1: OAuth2/OIDC on the server side](labs/initial/product/README.md)
-* [Lab 2: OAuth2/OIDC on the client side](labs/initial/ui/README.md)
+* [Lab 1: The server side (resource server)](labs/initial/product/README.md)
+* [Lab 2: The client side](labs/initial/ui/README.md)
 
 ## License
 
