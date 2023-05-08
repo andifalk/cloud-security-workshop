@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/workshop
+            user-name-attribute: name
+        registration:
+          keycloak:
+            client-id: 'product-client'
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - profile
+              - email

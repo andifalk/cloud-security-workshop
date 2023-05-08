@@ -3,7 +3,10 @@ package com.example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Service;
@@ -34,11 +37,11 @@ public class ProductService {
 
         try {
             response =
-                template.exchange(
-                        productUrl + "/v1/products",
-                        GET,
-                        new HttpEntity<Product[]>(createAuthorizationHeader(oAuth2AccessToken)),
-                        Product[].class);
+                    template.exchange(
+                            productUrl + "/v1/products",
+                            GET,
+                            new HttpEntity<Product[]>(createAuthorizationHeader(oAuth2AccessToken)),
+                            Product[].class);
 
             LOG.info("Successfully called product server products rest API");
 

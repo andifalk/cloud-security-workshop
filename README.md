@@ -30,9 +30,13 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 * [Lab 1: The server side (resource server)](labs/initial/product/README.md)
 * [Lab 2: The client side](labs/initial/ui/README.md)
 
+## Feedback
+
+Any feedback on this hands-on workshop is highly appreciated.
+Just email _andreas.falk(at)novatec-gmbh.de_ or contact me via Twitter (_@andifalk_).
+
 ## License
 
 Apache 2.0 licensed
-Copyright (c) by 2023 Andreas Falk
 
 [1]:http://www.apache.org/licenses/LICENSE-2.0.txt

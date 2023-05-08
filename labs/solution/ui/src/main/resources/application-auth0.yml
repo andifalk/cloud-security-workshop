@@ -1,0 +1,18 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          auth0:
+            issuer-uri: https://access-me.eu.auth0.com/
+            user-name-attribute: name
+        registration:
+          auth0:
+            client-id: 'v13BSQLEZnw4N96V36dDdsGRd022isKe'
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
+            scope:
+              - openid
+              - profile
+              - email

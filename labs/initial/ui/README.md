@@ -1,4 +1,4 @@
-# Product Client Frontend UI
+# Lab 2: The client side
 
 Now we will implement the corresponding client for the product server to show the product list in a web UI.
 

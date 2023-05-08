@@ -31,24 +31,24 @@ public class WebSecurityConfiguration {
     @Bean
     public UserDetailsService productUserDetailsService() {
         return new InMemoryUserDetailsManager(
-            builder()
-                .username("bruce.wayne@example.com")
-                .password("wayne")
-                .passwordEncoder(passwordEncoder()::encode)
-                .roles("USER")
-                .build(),
-            builder()
-                    .username("clark.kent@example.com")
-                    .password("kent")
-                    .passwordEncoder(passwordEncoder()::encode)
-                    .roles("USER")
-                    .build(),
-            builder()
-                .username("peter.parker@example.com")
-                .password("parker")
-                .passwordEncoder(passwordEncoder()::encode)
-                .roles("USER", "ADMIN")
-                .build()
+                builder()
+                        .username("bruce.wayne@example.com")
+                        .password("wayne")
+                        .passwordEncoder(passwordEncoder()::encode)
+                        .roles("USER")
+                        .build(),
+                builder()
+                        .username("clark.kent@example.com")
+                        .password("kent")
+                        .passwordEncoder(passwordEncoder()::encode)
+                        .roles("USER")
+                        .build(),
+                builder()
+                        .username("peter.parker@example.com")
+                        .password("parker")
+                        .passwordEncoder(passwordEncoder()::encode)
+                        .roles("USER", "ADMIN")
+                        .build()
         );
     }
 

@@ -16,11 +16,11 @@ These microservices are configured to be reachable via the following URL address
 
 Service URLs:
 
-| Service                        | URL                          |
-|--------------------------------|------------------------------|
-| OIDC Identity Provider         | https://localhost:9000       |
-| Client (UI)                    | http://localhost:9095/client |
-| Resource Server (Products API) | http://localhost:9090/server |
+| Service                        | URL                                                          |
+|--------------------------------|--------------------------------------------------------------|
+| OIDC Identity Provider         | [http://localhost:9000](http://localhost:9000)               |
+| Client (UI)                    | [http://localhost:9095/client](http://localhost:9095/client) |
+| Resource Server (Products API) | [http://localhost:9090/server](http://localhost:9090/server) |
 
 ## Project contents
 

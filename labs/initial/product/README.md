@@ -1,4 +1,4 @@
-# Product Server (Resource server)
+# Lab 1: The server side (resource server)
 
 > __Tip__:  
 > You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-server)
@@ -215,10 +215,10 @@ instead by default the class `org.springframework.security.oauth2.jwt.Jwt` will 
 ```java  
 @RestController
 public class ProductRestController {
-  ...
+  //...
   @GetMapping(path = "/products")
   public List<Product> getAllProducts(@AuthenticationPrincipal(errorOnInvalidType = true) ProductUser productUser) {
-    ...
+    //...
   }
 }
 ``` 

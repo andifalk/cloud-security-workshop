@@ -1,16 +1,6 @@
-# cloud-security-workshop
-Workshop on building secure cloud-native applications using spring cloud security (OAuth2).
+# Reference Solution of Sample Applications for the Workshop
 
-## OAuth2 Security Workshop Reference (Step 1)
+You can find the reference solution for the applications of the workshop here:
 
-You can find the completed applications for step 1 of the workshop here:
-
-* product: Spring boot application providing a rest api for products: http://localhost:8080/products
-* ui: A Spring boot application providing thymeleaf based html frontend to display products
-
-In this step user credentials are configured using the _application.properties_ file.
-Here the authorization server uses basic authentication as login type. 
-
-Username: _user_  
-Password: _secret_
-
+* __product__: Spring boot application providing a REST API for products, extended to serve as OAuth/OIDC resource server
+* __ui__: A Spring boot application providing thymeleaf based html frontend to display products, extended as OAuth/OIDC client
