@@ -24,12 +24,12 @@ The application exposes several API endpoints. All endpoints are documented by O
 
 To start the product server select the class _com.example.ProductApplication_ and run this in your IDE.
 
-You can find the Swagger documentation at http://localhost:9090/server/swagger-ui/index.html.
-The corresponding OpenAPI JSON doc can be found at http://localhost:9090/server/v3/api-docs.
+You can find the Swagger documentation at [http://localhost:9090/server/swagger-ui/index.html](http://localhost:9090/server/swagger-ui/index.html).
+The corresponding OpenAPI JSON doc can be found at [http://localhost:9090/server/v3/api-docs](http://localhost:9090/server/v3/api-docs).
 
 You may also directly access the API endpoints for retrieving protected resources:
 
-If you call the [products endpoint](http://localhost:9090/server/v1/products) then you will get the following result:
+If you call the [http://localhost:9090/server/v1/products (products endpoint)](http://localhost:9090/server/v1/products) then you will get the following result:
 
 ![Rest_API_Products](images/rest_api_products_response.png)
 
@@ -38,7 +38,7 @@ If you call the [users endpoint](http://localhost:9090/server/v1/users) then you
 ![Rest_API_Users](images/rest_api_users_response.png)
 
 Both endpoints are secured by basic authentication or form based login.
-you can access the endpoints by using the following user credentials (acces for users list requires `ADMIN` role):
+you can access the endpoints by using the following user credentials (access for users list requires `ADMIN` role):
 
 | Username/Password               | Role(s)     |
 |---------------------------------|-------------|
@@ -46,7 +46,7 @@ you can access the endpoints by using the following user credentials (acces for 
 | clark.kent@example.com/kent     | USER        |
 | peter.parker@example.com/parker | ADMIN, USER |
 
-To make accessing the APIs more convenient you can use the provided postman collection. You can find the collection in the [setup](../../../setup/postman) folder.
+To make accessing the APIs more convenient you can use the provided postman collection. Please check the _setup_ section for details.
 
 Now let's start with changing the server into a resource server using modern authentication with a JSON web token (JWT).
 
@@ -83,11 +83,66 @@ just issue their own JWT tokens or modify the issued token along the transmissio
 The public key(s) will be automatically grabbed from the JSON web key set provided by the
 identity provider at http://localhost:9000/oauth2/jwks.
 
-Spring security provides a predefined property ```spring.security.oauth2.resourceserver.jwt.jwt-set-uri``` to specify this.
+This endpoint publishes the public key(s) that are each identified by their key id (_kid_).
+
+```json
+{
+  "keys": [
+    {
+      "kty": "RSA",
+      "e": "AQAB",
+      "kid": "857967b1-e57e-494f-92a7-1446439a244c",
+      "n": "wiREnTOKYuPrIjoMF_OPKfhb-zKh4V3gAShjKNSIBRrRGhVZDmklQo9occMUiOK_2kywG-6Y_YyU6VVE8R951-QCZNLXQndWHO0pMx05_Va6G1b6TyfHiMZNoGcz5XSiK92bW0rJMHEwu6hbTrTiy-jw2lhQA1mIBYgvmIB_1SZOXEjzvvub6yJrNowYY57i1T2FQP_2E47pIartUNyROQZ-6A3hsy32BGG7xdAZ6WT-L4lr8YzpSiVPdTtmU493CqJ5mckkteln_j7qp8LkkDT49y86hrVo9nhOMUQG2krgrioPyR4tHk1t99tjPjP5cV_rSGAwYPMMboKu8Qj-3Q"
+    }
+  ]
+}
+```
+
+Whenever the resource server gets a JSON Web Token (JWT) with a _kid_ in the header part (like the following sample), then Spring Security fetches the public key with the matching key id from this JWKS endpoint, caches it (so it does not have to load it for every request) and validates the JWt with the loaded public key.
+
+JWT Header:
+
+```json
+{
+  "kid": "857967b1-e57e-494f-92a7-1446439a244c",
+  "alg": "RS256"
+}
+```
+
+JWT Payload:
+
+```json
+{
+  "sub": "c52bf7db-db55-4f89-ac53-82b40e8c57c2",
+  "email_verified": true,
+  "profile": "https://example.com/bwayne",
+  "roles": [
+    "USER"
+  ],
+  "iss": "http://localhost:9000",
+  "preferred_username": "bwayne",
+  "given_name": "Bruce",
+  "aud": "demo-client",
+  "nbf": 1683668207,
+  "updated_at": "1970-01-01T00:00:00Z",
+  "scope": [
+    "profile",
+    "offline_access"
+  ],
+  "name": "Bruce Wayne",
+  "nickname": "bwayne",
+  "exp": 1683668507,
+  "iat": 1683668207,
+  "family_name": "Wayne",
+  "email": "bruce.wayne@example.com"
+}
+```
+
+Spring security provides a predefined property `spring.security.oauth2.resourceserver.jwt.jwt-set-uri` to specify this JWKS endpoint for loading and caching public keys.
 
 After adding this new property the updated _application.yml_ should look like this:
 
-<u>_application.yml_:</u>
+__Application.yml__:
 
 ```yaml
 spring:
@@ -110,7 +165,7 @@ spring:
 Please navigate to the class `com.example.security.WebSecurityConfiguration` in your IDE
 and change this with the following contents.
 
-<u>_com.example.security.WebSecurityConfiguration.java_:</u>
+__com.example.security.WebSecurityConfiguration.java__:
 
 ```java
 package com.example.security;
@@ -158,21 +213,21 @@ public class WebSecurityConfiguration {
 }
 ```
 
-In this updated security configuration we
+In this updated security configuration (the second SecurityFilterChain called api(...)) we:
 
-* disable web sessions as with token authentication each request must contain the token in the header and a session cookie is not required any more 
-* disable [CSRF]() protection as we do not use session cookies any more and therefore are not vulnerable for CSRF attacks
-* disable basic authentication and formular based login
-* enable the application to act as an OAuth2/OIDC resource server requiring JWT tokens in the _authorization_ header
+* disable web sessions as with token authentication each request must contain the token in the header and a session cookie is not required any more (stateless authentication)
+* disable [CSRF]() protection as we do not use session cookies anymore and therefore are not vulnerable for CSRF attacks
+* disable basic authentication and formula based login (we only support token based authentication now)
+* enable the application to act as an OAuth2/OIDC resource server requiring JWT as bearer tokens in the _authorization_ header
 
 Please note that the bean definition for the `PasswordEncoder` has been removed as well as the password encoding
 is not required any more.
 
 This will cause compilation errors in `ProductInitializer` class. To solve these just remove all references 
-to the encoder in that class. There is also no need any more to create users as users are not required any more to log in. 
-This will be achieved by the OAuth authorization server. 
+to the encoder in that class. There is also no need anymore to create users as users are not required any more to log in. 
+This will be achieved by the OAuth authorization server (only this component knows about user credentials and other user details). 
 
-<u>_com.example.ProductInitializer.java_:</u>
+__com.example.ProductInitializer.java__:
 
 ```java
 package com.example;
@@ -217,8 +272,8 @@ public class ProductInitializer implements CommandLineRunner {
 
 With the changes of step 3 the base configuration for a resource server is set up.
 But there is one issue with this change.
-In class `com.example.product.ProductRestController` we do not get `ProductUser` as input for `@AuthenticationPrincipal`, 
-instead by default the class `org.springframework.security.oauth2.jwt.Jwt` will be provided as input. 
+In class `com.example.product.ProductRestController` we do not get `ProductUser` as input for `@AuthenticationPrincipal`.   
+Instead, by default the class `org.springframework.security.oauth2.jwt.Jwt` will be provided as input (as this is the standard authenticated principle object when JWT is used in spring security). 
 
 ```java  
 @RestController
@@ -234,15 +289,16 @@ public class ProductRestController {
 To change this behavior we have to add our own converter from the JWT token to the _ProductUser_ class.
 This is done in several steps.
 
-First we need to define our own type for _AuthenticationToken_. This is the central point where Spring Security stores all
-authentication details after authentication has been successfully performed.
+First we need to define our own type of the interface `AuthenticationToken`. This is the central point where Spring Security stores all authentication details after authentication has been successfully performed.
 
-<u>_com.example.security.ProductUserAuthenticationToken_:</u>
+For convenience spring security provides the `AbstractAuthenticationToken` that implements most parts of `AuthenticationToken`.
+
+__com.example.security.ProductUserAuthenticationToken__:
 
 ```java
 package com.example.security;
 
-import com.example.productuser.ProductUserEntity;
+import com.example.productuser.ProductUser;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -250,12 +306,12 @@ import java.util.Collection;
 
 public class ProductUserAuthenticationToken extends AbstractAuthenticationToken {
 
-    private final ProductUserEntity productUserEntity;
+    private final ProductUser productUser;
 
-    public ProductUserAuthenticationToken(ProductUserEntity productUserEntity, Collection<? extends GrantedAuthority> authorities) {
+    public ProductUserAuthenticationToken(ProductUser productUser, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         setAuthenticated(true);
-        this.productUserEntity = productUserEntity;
+        this.productUser = productUser;
     }
 
     @Override
@@ -265,7 +321,7 @@ public class ProductUserAuthenticationToken extends AbstractAuthenticationToken 
 
     @Override
     public Object getPrincipal() {
-        return this.productUserEntity;
+        return this.productUser;
     }
 }
 ```
@@ -273,7 +329,7 @@ public class ProductUserAuthenticationToken extends AbstractAuthenticationToken 
 The previous class will now be used as part of the _ProductJwtAuthenticationConverter_.
 This converts contents of the JWT token into attributes of our _ProductUser_.
 
-<u>_com.example.security.ProductJwtAuthenticationConverter_:</u>
+__com.example.security.ProductJwtAuthenticationConverter__:
 
 ```java
 package com.example.security;
@@ -329,12 +385,12 @@ public class ProductJwtAuthenticationConverter implements Converter<Jwt, Abstrac
 ```
 
 > __Please note:__   
-> The existing _ProductUserDetailsService_ class has is not required any more and is replaced by the `ProductJwtAuthenticationConverter` above.
+> The existing _ProductUserDetailsService_ class is not required any more and is replaced by the `ProductJwtAuthenticationConverter` above.  
 > So this class can be deleted completely.
 
 Finally, we have to add this new `ProductJwtAuthenticationConverter` to the security configuration.
 
-<u>_com.example.security.WebSecurityConfiguration.java_:</u>
+__com.example.security.WebSecurityConfiguration.java__:
 
 ```java
 package com.example.security;
@@ -353,7 +409,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class WebSecurityConfiguration {
 
     private final ProductJwtAuthenticationConverter productJwtAuthenticationConverter;
-    
+
     public WebSecurityConfiguration(ProductJwtAuthenticationConverter productJwtAuthenticationConverter) {
         this.productJwtAuthenticationConverter = productJwtAuthenticationConverter;
     }
@@ -392,36 +448,28 @@ public class WebSecurityConfiguration {
 ## Step 6: Run the product server application
 
 Now we are ready to re-start the product server.
-Select the class _com.example.ProductApplication_ and run this (use the right mouse button in your IDE or the spring boot dashboard if applicable).
+Select the class `com.example.ProductApplication` and run this (use the right mouse button in your IDE or the spring boot dashboard if applicable).
 
-To test the REST Api (http://localhost:9090/server/products) of the running product server we will use
-Postman. You may also use command line tools like _curl_ or _httpie_ as well.
+To test the REST Api [http://localhost:9090/server/products](http://localhost:9090/server/products) of the running product server we will use Postman. You may also use command line tools like _curl_ or _httpie_ as well.
 
-After starting Postman you can create a new collection by clicking the button _New Collection_ on the left.
-Then you can add a new request by clicking the 3 dots next to the collection and select _Add Request_.
-
-Just fill in the URL you see in the picture below.
+If you have imported the postman collection as described in the _setup_ section then the authorization part should be pre-filled.
 
 ![Postman_authz_code_pkce_request](images/postman_authz_code_pkce.png)
 
-If you now click send then you will get a 401 error because
-the JWT token is missing to access this endpoint.
-
-To get such a token navigate to the tab _Authorization_ on the request screen and click on the _Get New Access Token_ button.
-
-Just fill in the required values from the table below and then click on _Request Token_:
+These are the required values that should be already configured in the _Authorization_ tab:
 
 | Input              | Value                                  |
 |--------------------|----------------------------------------|
 | Grant Type         | Authorization Code with PKCE           |
 | Authorization URL  | https://localhost:9000/oauth/authorize |
 | Access Token URL   | https://localhost:9000/oauth/token     |
-| Username           | bwayne                                 |
-| Password           | wayne                                  |
 | Client ID          | demo-client-pkce                       |
-| Client Secret      | secret                                 |
 
-After you got a token you can close this dialog and try again to send the request.
+All requests of the postman collection inside the folder _OAuth2 Bearer Token_ require a valid JWT. So if you perform such request you will get a 401 error because the JWT token is missing to access this endpoint.
+
+To get such a token click on the folder _OAuth2 Bearer Token_, then navigate to the tab _Authorization_ click on the _Get New Access Token_ button.
+
+After you got a token click _proceed_ and then click on _Use Token_try again to send the request.
 This time it should work, and you should see a list of products as JSON response.
 
 In the next step we will make accessing the backend service a bit more user-friendly by enabling a provided client frontend to retrieve products from the backend using OAuth2/OIDC access tokens. 

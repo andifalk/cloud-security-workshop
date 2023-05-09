@@ -12,10 +12,13 @@
 ## Run the java applications
 
 All spring boot based java projects can either be run using your Java IDE or using the command line
-with changing into the corresponding project directory and issuing a `./gradlew bootRun` command.
+with changing into the corresponding project directory and issuing a `./mvnw spring-boot:run` command.
 
-In this workshop we will use a customized version of [Spring Authorization Server](https://github.com/spring-projects/spring-authorization-server) as local identity provider.  
-[Spring Authorization Server](https://github.com/spring-projects/spring-authorization-server) implements OAuth 2.0 and OpenID Connect 1.0.
+## Postman Collection
+
+To make it easier to test the REST API endpoints of the product service a postman collection is provided in the directory _/setup/postman_.
+If you have not yet installed postman please go to [Postman](https://www.postman.com/downloads/). 
+When you have postman installed you can just import the provided collection.
 
 ## OpenID Connect Identity Providers
 
@@ -35,7 +38,9 @@ This workshop supports the following identity providers:
 * [Spring Authorization Server](https://spring.io/projects/spring-authorization-server)
 * [Auth0](https://auth0.com/)
 
-The default identity provider that we will use for all workshop parts is the [Spring Authorization Server](https://spring.io/projects/spring-authorization-server).  
+In this workshop we will use a customized version of [Spring Authorization Server](https://github.com/spring-projects/spring-authorization-server) as local identity provider.  
+[Spring Authorization Server](https://github.com/spring-projects/spring-authorization-server) implements OAuth 2.0 and OpenID Connect 1.0.
+
 You will learn how to run this one in the following section.
 
 > __Optional Lab__: In case you have already finished the lab 1 and lab 2 in short time and you 
