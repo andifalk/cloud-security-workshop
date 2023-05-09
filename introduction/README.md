@@ -324,13 +324,18 @@ grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
 
 ![OAuth2 OpenID_Connect](images/oauth_openid_connect.png)
 
+OpenID Connect (OIDC) adds the missing piece of OAuth 2, real authentication of a user identity.
+With OIDC the authorization server in addition to the access token issues an ID token with user identification data to the client side for authenticating a user.
+Same as with OAuth 2 the client then sends the access token to the resource server. This enables two features at the resource server: Authentication and authorization.
+
+![Solution with OpenID Connect](images/solution_with_oidc.png)
+
 #### Roles
 
 OIDC defines the same roles as in OAuth 2.0 but with different namings.
 And it adds another token for identification: The ID token.
 
 ![OpenID_Connect_Roles](images/openid_connect_roles.png)
-
 
 #### Hybrid Flow Grant
 
