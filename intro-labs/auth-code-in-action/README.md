@@ -5,7 +5,9 @@ A client demonstrating all steps of an [OAuth 2.0 Authorization Code Grant](http
 > __Important note:__   
 > This demo client is just for demonstrating purposes. All the mandatory validations
 > and recommended security precautions of a production-ready OAuth 2.0 client library are missing 
-> here. So do __NOT__ use any code of this client for production!
+> here. 
+> 
+> So do __NOT__ use any code of this client for production!
 
 ## Authorization code grant flow in detail
 
@@ -65,3 +67,9 @@ According to the [OAuth2 specification](https://tools.ietf.org/html/rfc6749#sect
 > The client MUST NOT use the authorization code more than once. 
 
 The spring authorization server follows this recommendation and uses a really short authorization code lifetime.
+
+You can also try more features of this demo by specifying these spring profiles:
+
+* Without any profile: The demo just runs as OAuth 2 client and only gets an access token
+* With profile `oidc`: This demo runs in OpenID Connect mode and also gets an ID token
+* With profile `pkce`: This demo enables Proof Key for Code Exchange (PKCE) instead of using client_secret for getting a token.
