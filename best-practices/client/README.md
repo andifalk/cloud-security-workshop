@@ -53,7 +53,7 @@ The OAuth working group at the IETF has published several possible mitigation pa
 
 1. If possible use server side web client implementations (unfortunately this recommendation contradicts modern business requirements. We all know that currently the trend is towards SPA as these clients feel much more like a real desktop app running inside the browser)
 2. Independent of the client type used please always use the _authorization code grant_ flow with _PKCE_ (the only exception is the _client credentials grant_ for non-interactive applications like batch processing apps, but this can only bes used for server-side applications)
-3. When using a SPA then you either can 
+3. When using SPA clients then you either can 
    * try to minimize the risk of having a XSS vulnerability (by using Angular or by using React/Vue.js in combination with [DOMPurify](https://github.com/cure53/DOMPurify))
    * don't store tokens in the browser storage by using the Backend for Frontend (BFF) pattern or service workers
 4. Don't use Redirect URIs with wildcards as these open up attacks like _subdomain takeover_ or _open redirects_.

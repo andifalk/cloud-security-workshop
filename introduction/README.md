@@ -75,7 +75,7 @@ The current SCIM 2.0 version is built on a object model where a Resource is the 
 
 The OAuth 2.0 authorization framework has been specified by the [Internet Engineering Task Force (IETF)](https://www.ietf.org/) as [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html) in 2012.
 
-Why has OAuth 2.0 has been developed at all, what has been the business case for this?
+Why has OAuth 2.0 been developed at all, what has been the business case for this?
 
 In the next picture you can see the problem we had before OAuth 2.0 was there.
 
@@ -96,7 +96,7 @@ This led to a new OAuth 2.1 version that currently is available as a [draft spec
 > 
 > (*OAuth 2.1 draft specification*)
 
-#### Realworld Example
+#### Real-world Example
 
 ![OAuth2 Stackoverflow_Example](images/stackoverflow_login.png)
 
@@ -127,7 +127,7 @@ Access tokens are credentials used to access protected resources.  An access tok
 Tokens  represent specific scopes and durations of access, granted by the resource owner, 
 and enforced by the resource server and authorization server.
 
-> OAuth 2.0/2.1 does __not__ define any token format (it may be a opaque token or a JWT).
+> OAuth 2.0/2.1 does __not__ define any token format (it may be an opaque token or a JWT).
 
 Access tokens are transmitted to the resource server as bearer tokens via the _authorization_ http header to authenticate the client at the resource server as specified in [RFC 6750](https://www.rfc-editor.org/rfc/rfc6750.html). The name bearer token implies that every bearer (holder) of the token is authenticated to retrieve protected resources from the resource server. The resource server cannot distinguish between a valid or malicious client presenting the token.
 
@@ -383,14 +383,14 @@ As you can see here, OIDC can issue 3 types of tokens:
 
 ![OpenID_Connect tokens](images/openid_connect_tokens.png)
 
-With OIDC it is the first time the format of a token is really specified. It is mandatory for the ID token to be defined as a JSON Web Token (JWT).
+With OIDC, it is the first time the format of a token is really specified. It is mandatory for the ID token to be defined as a JSON Web Token (JWT).
 A JWT consists of 3 parts:
 
 1. The header telling that it is a JWT and specifying the algorithm for the token signature
 2. The payload of the token, this is the most important part for clients as this contains all user information as attributes (the _claims_)
 3. The signature of the token. The signatures ensure that the token can only be created by a valid issuer and cannot be changed without noticing it
 
-All tokens are transmitted as bearer tokens using the `Authorization` header with the `Bearer' prefix. So every participant who presents a valid token as the _bearer_ is authenticated.
+All tokens are transmitted as bearer tokens using the `Authorization` header with the `Bearer` prefix. So every participant who presents a valid token as the _bearer_ is authenticated.
 
 ![JWT bearer token](images/oauth2_jwt_bearer_token.png)
 
@@ -406,7 +406,7 @@ The other type of token transmission is the _proof of possession token_. Here, t
 
 OIDC also offers a standard user info endpoint. With this you have the choice to put all information into the ID token or just put some information in the token and ask the user info endpoint for the other user information.  
 
-This way you can avoid overloading your tokens with too much information and mabye running into problems when the maximum of http header size is reached. And you can avoid privacy issues when transmitting tokens to other parties, that may not be trustworthy.
+This way you can avoid overloading your tokens with too much information and maybe running into problems when the maximum of http header size is reached. And you can avoid privacy issues when transmitting tokens to other parties, that may not be trustworthy.
 
 ```http request
 GET /userinfo HTTP/1.1
