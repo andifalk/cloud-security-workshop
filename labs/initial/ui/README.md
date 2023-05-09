@@ -3,8 +3,18 @@
 Now we will implement the corresponding client for the product server to show the product list in a web UI.
 
 > __Tip__:  
-> You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-client)
-> and the [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2client) on how to implement a client.
+> You may look into the [Spring Boot OAuth2 Client Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-client)
+> and the [Spring Security OAuth2 Client Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2client) on how to implement a client.
+
+## Learning Targets
+
+In this lab you will learn:
+
+* Trigger the OAuth2/OIDC authorization code grant (+ PKCE) flow and get ID + access token from authorization server
+* Validate and read information from ID token and user info endpoint
+* Send access tokens (JWT) to resource server as bearer token via HTTP header
+
+## Step 1: Explore the existing client application
 
 To start with this tutorial part, navigate to the project `labs/initial/ui` in your IDE.
 
@@ -25,7 +35,7 @@ product list. But the product server now requires a JWT token instead. This is w
 
 So let's start with fixing this issue by implementing an OAuth2/OIDC client. 
 
-## Step 1: Change Maven dependencies for the client
+## Step 2: Change Maven dependencies for the client
 
 Add the following dependency to the existing maven _pom.xml_ file:
 
@@ -41,7 +51,7 @@ This adds the spring boot starter dependency for building an OAuth2/OIDC client.
 This includes all required classes to manage the authorization code flow of OAuth2 and 
 handle all JWT token related tasks.
 
-## Step 2: Add required properties for the client
+## Step 3: Add required properties for the client
 
 The client requires several configuration parameters from the identity server to be used.
 Thanks to the OpenID Connect discovery specification most identity servers publish all required 
@@ -101,7 +111,7 @@ spring:
 > The client secret is noted here just for the purpose of this tutorial. In your real productive applications 
 > you should __NEVER__ publish sensitive data like this client secret or any other sensitive data!!
 
-## Step 3: Add OAuth2/OIDC client security configuration 
+## Step 4: Add OAuth2/OIDC client security configuration 
 
 To enable the client application to act as a OAuth2/OIDC client for _Auth0_ identity provider
 it is required to add a new security configuration.
@@ -139,7 +149,7 @@ public class WebSecurityConfiguration {
 }
 ```
 
-## Step 4: Update the call to the resource server
+## Step 5: Update the call to the resource server
 
 We already extended the product server requiring a bearer token in the _Authorization_ header with each request.
 To be able to call the server from the client we need to add the access token.
@@ -333,7 +343,7 @@ public class ProductController {
 
 Please note that _"auth0"_ refers to the corresponding id of the client configuration in _application.yml_.
 
-## Step 5: Run the client application
+## Step 6: Run the client application
 
 Now we can run the finished client as well. Please make sure that you also have started the product server from previous part.
 

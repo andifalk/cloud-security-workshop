@@ -73,10 +73,22 @@ The current SCIM 2.0 version is built on a object model where a Resource is the 
 
 ### OAuth 2.0/2.1
 
-The OAuth 2.0 authorization framework has been specified by the [Internet Engineering Task Force (IETF)]() as [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html) in 2012.
+The OAuth 2.0 authorization framework has been specified by the [Internet Engineering Task Force (IETF)](https://www.ietf.org/) as [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html) in 2012.
 
-In 2020 the [IETF]() started to discuss new [general security best practices]() and specific recommendations for [browser based applications]() (single page applications).  
-This led to a new OAuth 2.1 version that currently is available as a [draft specification]() and may be finalized end of this year or next year (unfortunately the IETF does not work based on roadmaps).
+Why has OAuth 2.0 has been developed at all, what has been the business case for this?
+
+In the next picture you can see the problem we had before OAuth 2.0 was there.
+
+![Reasons for OAuth](images/reasons_for_oauth.png)
+
+For each end every service you want to use on the internet you had to create a separate user. In the end you had lots of users for all different services like Stackoverflow, some Photo service or any other such thing. This also led to another problem that people started to reuse the same (maybe insecure) credentials at different services (what is called credential stuffing). So if an attacker had stolen such credentials the attacker may have also success on other services.
+
+With OAuth 2.0 you don't have to register a separate user anymore for each service. Instead, you can use one of the well-known OAuth 2.0 identity providers out there like Google, Facebook or GitHub. The advantage is that you only have one user for all these services. And because these identity providers require secure passwords and also support multi-factor authentication it is much more difficult to steal or brute force such credentials at these providers.
+
+![Solution with OAuth](images/solution_with_oauth.png)
+
+In 2020 the OAuth working group at the [IETF](https://datatracker.ietf.org/wg/oauth/about/) started to discuss new [general security best practices](https://www.ietf.org/archive/id/draft-ietf-oauth-security-topics-22.html) and specific recommendations for [browser based applications](https://www.ietf.org/archive/id/draft-ietf-oauth-browser-based-apps-13.html) (single page applications).  
+This led to a new OAuth 2.1 version that currently is available as a [draft specification](https://www.ietf.org/archive/id/draft-ietf-oauth-v2-1-08.html) and may be finalized end of this year or next year (unfortunately the IETF does not work based on roadmaps).
 
 > The OAuth 2.1 authorization framework enables an application to obtain limited access to a protected resource, 
 > either on behalf of a resource owner by orchestrating an approval interaction between the resource owner and an
@@ -314,10 +326,17 @@ grant_type=authorization_code&code=SplxlOBeZQQYbYS6WxSbIA
 
 #### Roles
 
+OIDC defines the same roles as in OAuth 2.0 but with different namings.
+And it adds another token for identification: The ID token.
+
 ![OpenID_Connect_Roles](images/openid_connect_roles.png)
 
 
 #### Hybrid Flow Grant
+
+OIDC also adds another grant flow. This is basically a combination from the _implicit grant_ and the _authorization code grant_. The intention was that the client gets the ID token a bit faster to improve the duration of initial loading of the client.  
+
+As today the typical SPA clients use server-side rendering techniques the performance of the initial loading is not a problem anymore. Therefore, the risk of the _implicit grant flow_ part again in the _hybrid flow_ is not needed anymore. So in OIDC the _authorization code grant_ with _PKCE_ is also recommended.
 
 ```http request
 GET /authorize?response_type=code%20id_token&client_id=s6BhdRkqt3
@@ -356,8 +375,22 @@ POST /token HTTP/1.1
 
 #### ID and Access Tokens
 
+As you can see here, OIDC can issue 3 types of tokens:
+
+* The ID token for user identification. This token must only be used on the client side
+* The access token. This token must only be used on the server side (the resource server aka the backend API).
+* The refresh token to get a new access token
+
 ![OpenID_Connect tokens](images/openid_connect_tokens.png)
 
+With OIDC it is the first time the format of a token is really specified. It is mandatory for the ID token to be defined as a JSON Web Token (JWT).
+A JWT consists of 3 parts:
+
+1. The header telling that it is a JWT and specifying the algorithm for the token signature
+2. The payload of the token, this is the most important part for clients as this contains all user information as attributes (the _claims_)
+3. The signature of the token. The signatures ensure that the token can only be created by a valid issuer and cannot be changed without noticing it
+
+All tokens are transmitted as bearer tokens using the `Authorization` header with the `Bearer' prefix. So every participant who presents a valid token as the _bearer_ is authenticated.
 
 ![JWT bearer token](images/oauth2_jwt_bearer_token.png)
 
@@ -367,7 +400,13 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjFlOWdkaz...
 Host: api.my-resource-server.com
 ```
 
+The other type of token transmission is the _proof of possession token_. Here, the token is bound to a specific client using cryptographic concepts like for example mutual tls. If another client then presents this kind of token and cannot proof the binding then the token will be denied.
+
 #### User Info Endpoint
+
+OIDC also offers a standard user info endpoint. With this you have the choice to put all information into the ID token or just put some information in the token and ask the user info endpoint for the other user information.  
+
+This way you can avoid overloading your tokens with too much information and mabye running into problems when the maximum of http header size is reached. And you can avoid privacy issues when transmitting tokens to other parties, that may not be trustworthy.
 
 ```http request
 GET /userinfo HTTP/1.1
@@ -391,3 +430,9 @@ Content-Type: application/json
 ```
 
 #### Discovery
+
+At last OIDC also offers a convenient endpoint with all required information a client or server needs to configure the interaction with the authorization server.
+
+This discovery endpoint can be found on the `/.well-known/openid-configuration` endpoint on compliant authorization servers. Please check the [setup](../setup/README.md) section on the specific endpoints for different providers.
+
+As an example Spring Security uses this endpoint to configure most part of the OAuth client automatically. The drawback of this is, that the authorization server must be online and reachable by the OAuth client at startup to load the configuration.

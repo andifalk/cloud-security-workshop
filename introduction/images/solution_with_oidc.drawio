@@ -1,0 +1,124 @@
+<mxfile host="Electron" modified="2023-05-09T14:52:54.345Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="hSzA14BAGN3YcpiThIIH" version="21.2.8" type="device">
+  <diagram name="Page-1" id="ZQaP6m3v3bCAOALgyQ2f">
+    <mxGraphModel dx="2411" dy="819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kzNEx_-M0deKBsbGgkpU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="frm9H07xX9OotdOA53Vy-33" target="kzNEx_-M0deKBsbGgkpU-3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="240" as="sourcePoint" />
+            <mxPoint x="800" y="70.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="160" />
+              <mxPoint x="670" y="160" />
+              <mxPoint x="670" y="86" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kzNEx_-M0deKBsbGgkpU-10" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Register User A + &lt;br&gt;Send User Credentials at Login&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="kzNEx_-M0deKBsbGgkpU-9" vertex="1" connectable="0">
+          <mxGeometry x="-0.07" y="1" relative="1" as="geometry">
+            <mxPoint x="641" y="443" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-26" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Access Token&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="kzNEx_-M0deKBsbGgkpU-9">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="-35" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kzNEx_-M0deKBsbGgkpU-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Microservice A&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="878" y="26" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-1" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Microservice B&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="878" y="186" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-2" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Microservice C&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="878" y="346" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;User&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=middle;verticalAlign=middle;html=1;outlineConnect=0;labelPosition=left;align=right;" vertex="1" parent="1">
+          <mxGeometry x="51.5" y="10" width="45" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="frm9H07xX9OotdOA53Vy-3" target="frm9H07xX9OotdOA53Vy-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="74" y="140" as="sourcePoint" />
+            <mxPoint x="134" y="246" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-7" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Register User + &lt;br&gt;Send User Credentials at Login&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="frm9H07xX9OotdOA53Vy-6">
+          <mxGeometry x="-0.07" y="1" relative="1" as="geometry">
+            <mxPoint x="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;" edge="1" parent="1" source="frm9H07xX9OotdOA53Vy-20" target="frm9H07xX9OotdOA53Vy-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="246" />
+              <mxPoint x="340" y="159" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-20" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Identity Provider &lt;br&gt;(OpenID Connect Authorization Server)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-26" y="186" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-29" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Keycloak, Azure AD, &lt;br&gt;Auth0, Okta, ...&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="316" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-33" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Client A&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="400" y="99" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;" edge="1" parent="1" source="frm9H07xX9OotdOA53Vy-34" target="frm9H07xX9OotdOA53Vy-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-45" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Access Token&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="frm9H07xX9OotdOA53Vy-43">
+          <mxGeometry x="-0.0719" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-34" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Client B&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="400" y="346" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="frm9H07xX9OotdOA53Vy-33" target="frm9H07xX9OotdOA53Vy-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="150" as="sourcePoint" />
+            <mxPoint x="888" y="96" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="160" />
+              <mxPoint x="670" y="160" />
+              <mxPoint x="670" y="246" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-36" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Register User A + &lt;br&gt;Send User Credentials at Login&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="frm9H07xX9OotdOA53Vy-35">
+          <mxGeometry x="-0.07" y="1" relative="1" as="geometry">
+            <mxPoint x="641" y="443" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-37" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Access Token&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="frm9H07xX9OotdOA53Vy-35">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="-35" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="frm9H07xX9OotdOA53Vy-20" target="frm9H07xX9OotdOA53Vy-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="256" as="sourcePoint" />
+            <mxPoint x="410" y="169" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="340" y="246" />
+              <mxPoint x="340" y="406" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-44" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;ID + &lt;br&gt;Access Token&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="frm9H07xX9OotdOA53Vy-42">
+          <mxGeometry x="-0.6333" relative="1" as="geometry">
+            <mxPoint x="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-46" value="&lt;span style=&quot;font-size: 18px;&quot;&gt;Authentication &lt;br&gt;(User Identity)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="415" y="500" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="frm9H07xX9OotdOA53Vy-47" value="&lt;span style=&quot;font-size: 18px;&quot;&gt;Authorization&lt;br&gt;(User Roles)&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="890" y="500" width="170" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

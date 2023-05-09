@@ -2,8 +2,16 @@
 
 > __Tip__:  
 > You may look into the [Spring Boot Reference Documentation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-security-oauth2-server)
-> and the [Spring Security Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2resourceserver) on how 
+> and the [Spring Security OAuth2 Resource Server Reference Documentation](https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#oauth2resourceserver) on how 
 > to implement a resource server.
+
+## Learning Targets
+
+In this lab you will learn:
+
+* Authentication using JSON Web Tokens (JWT) sent via HTTP header
+* Validation of the JWT (Signature and expiry date/time) with loading public key for validating
+* Authorize users by using the roles claim inside the access token
 
 ## Step 1: Explore the existing server application
 

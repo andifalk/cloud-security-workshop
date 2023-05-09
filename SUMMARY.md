@@ -21,3 +21,8 @@
 
 * [Lab 1: The server side (resource server)](labs/initial/product/README.md)
 * [Lab 2: The client side](labs/initial/ui/README.md)
+
+## Best-Practices & Recommendations
+
+* [Client-Side](best-practices/client/README.md)
+* [Server-Side](best-practices/server/README.md)

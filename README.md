@@ -9,6 +9,7 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 * [Introduction](#introduction)
 * [Intro Lab](#intro-lab)
 * [Hands-On Labs](#hands-on-labs)
+* [Best-Practices & Recommendations](#best-practices--recommendations)
 
 ## Setup
 
@@ -29,6 +30,11 @@ Please follow the provided step-by-step [Tutorial](https://andifalk.gitbook.io/o
 
 * [Lab 1: The server side (resource server)](labs/initial/product/README.md)
 * [Lab 2: The client side](labs/initial/ui/README.md)
+
+## Best-Practices & Recommendations
+
+* [Client-Side](best-practices/client/README.md)
+* [Server-Side](best-practices/server/README.md)
 
 ## Feedback
 

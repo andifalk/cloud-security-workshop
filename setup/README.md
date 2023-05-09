@@ -35,10 +35,16 @@ This workshop supports the following identity providers:
 * [Spring Authorization Server](https://spring.io/projects/spring-authorization-server)
 * [Auth0](https://auth0.com/)
 
-The preferred default identity provider that is pre-configured for all workshop parts is the [Spring Authorization Server](https://spring.io/projects/spring-authorization-server).  
+The default identity provider that we will use for all workshop parts is the [Spring Authorization Server](https://spring.io/projects/spring-authorization-server).  
 You will learn how to run this one in the following section.
 
-### Spring Authorization Server
+> __Optional Lab__: In case you have already finished the lab 1 and lab 2 in short time and you 
+> have time left in the workshop, then try to run the applications with one or all of the two 
+> remaining identity providers  
+> (Additional note: As Auth0 does not need any local installation this would
+> be faster than setting up Keycloak locally first). Please have a look in the solution
+
+### Spring Authorization Server (default)
 
 Here we will use a [customized version of the Spring Authorization Server](https://github.com/andifalk/custom-spring-authorization-server). This version contains pre-configured users and registered OAuth/OIDC clients for the sample applications we will use as part of this workshop.
 
@@ -56,6 +62,8 @@ If you can see the openid configuration in the browser (how nice it is shown dep
 
 ![Openid Configuration](images/openid_config.png)
 
+#### User Credentials
+
 You can use the following users to log into the custom Spring Authorization Server:
 
 | User / Password   | Role(s)     |
@@ -64,7 +72,24 @@ You can use the following users to log into the custom Spring Authorization Serv
 | pparker / parker  | USER, ADMIN |
 | ckent / kent      | USER        |
 
-### Keycloak
+#### Client- and Server-Configuration
+
+This is the configuration of Spring Authorization Server, Please use these values to configure your client and your resource server:
+
+| Configuration                | Value                                                 |
+|------------------------------|-------------------------------------------------------|
+| Issuer URL                   | http://localhost:9000                                 |
+| Authorization Endpoint URL   | http://localhost:9000/oauth2/authorize                |
+| Token Endpoint URL           | http://localhost:9000/oauth2/token                    |
+| User Info Endpoint URL       | http://localhost:9000/userinfo                        |
+| JWKS / Public Key(s) URL     | http://localhost:9000/oauth2/jwks                     |
+| Client ID                    | demo-client-pkce                                      |
+| Client Secret                | -- (Uses PKCE)                                        |
+| Redirect URI                 | http://localhost:9095/client/login/oauth2/code/spring |
+| OAuth Grant Type             | authorization_code                                    |
+| Client Authentication Method | none                                                  |
+
+### Keycloak (optional)
 
 To use Keycloak for this workshop, please follow these steps to install and run this identity provider:
 
@@ -92,6 +117,8 @@ Next please select the menu item `Clients` on the left. You should see 3 configu
 
 Now you are all set with Keycloak. To check the OpenID configuration for this `workshop` realm navigate your web browser to http://localhost:8080/realms/workshop/.well-known/openid-configuration.
 
+#### User Credentials
+
 You can use the following users to log into Keycloak:
 
 | User / Password   | Role(s)     |
@@ -100,10 +127,29 @@ You can use the following users to log into Keycloak:
 | pparker / parker  | USER, ADMIN |
 | ckent / kent      | USER        |
 
-### Auth0
+#### Client- and Server-Configuration
+
+This is the configuration of the Keycloak `workshop` realm, Please use these values to configure your client and your resource server:
+
+| Configuration                | Value                                                                  |
+|------------------------------|------------------------------------------------------------------------|
+| Issuer URL                   | http://localhost:8080/realms/workshop                                  |
+| Authorization Endpoint URL   | http://localhost:8080/realms/workshop/protocol/openid-connect/auth     |
+| Token Endpoint URL           | http://localhost:8080/realms/workshop/protocol/openid-connect/token    |
+| User Info Endpoint URL       | http://localhost:8080/realms/workshop/protocol/openid-connect/userinfo |
+| JWKS / Public Key(s) URL     | http://localhost:8080/realms/workshop/protocol/openid-connect/certs    |
+| Client ID                    | product-client                                                         |
+| Client Secret                | -- (Uses PKCE)                                                         |
+| Redirect URI                 | http://localhost:9095/client/login/oauth2/code/keycloak                |
+| OAuth Grant Type             | authorization_code                                                     |
+| Client Authentication Method | none                                                                   |
+
+### Auth0 (optional)
 
 Using [Auth0](https://auth0.com/) for this workshop is quite easy. There is nothing to install.
 Just make sure you can access the corresponding OpenID configuration of the Auth0 at https://access-me.eu.auth0.com/.well-known/openid-configuration.
+
+#### User Credentials
 
 You can use the following users to log into Auth0:
 
@@ -113,3 +159,19 @@ You can use the following users to log into Auth0:
 | peter.parker@example.com / peter_4demo! | USER, ADMIN |
 | clark.kent@example.com / clark_4demo!   | USER        |
 
+#### Client- and Server-Configuration
+
+This is the configuration of the Keycloak `workshop` realm, Please use these values to configure your client and your resource server:
+
+| Configuration                | Value                                                 |
+|------------------------------|-------------------------------------------------------|
+| Issuer URL                   | https://access-me.eu.auth0.com/                       |
+| Authorization Endpoint URL   | https://access-me.eu.auth0.com/authorize              |
+| Token Endpoint URL           | https://access-me.eu.auth0.com/oauth/token            |
+| User Info Endpoint URL       | https://access-me.eu.auth0.com/userinfo               |
+| JWKS / Public Key(s) URL     | https://access-me.eu.auth0.com/.well-known/jwks.json  |
+| Client ID                    | v13BSQLEZnw4N96V36dDdsGRd022isKe                      |
+| Client Secret                | -- (Uses PKCE)                                        |
+| Redirect URI                 | http://localhost:9095/client/login/oauth2/code/auth0  |
+| OAuth Grant Type             | authorization_code                                    |
+| Client Authentication Method | none                                                  |
