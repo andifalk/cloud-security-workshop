@@ -1,8 +1,17 @@
 # Setup
 
+You will need these two GitHub repositories:
+
+* All workshop code:  [https://github.com/andifalk/cloud-security-workshop](https://github.com/andifalk/cloud-security-workshop)
+* The customized Spring Authorization Server that we will use as identity provider: [https://github.com/andifalk/custom-spring-authorization-server](https://github.com/andifalk/custom-spring-authorization-server)
+
+The __workshop project__ has to be imported as __Maven__ project and the __Custom Spring Authorization Server__ project has to be imported as __Gradle__ project.
+
+Please also follow the instructions in the next sections and also for [Running the Spring Authorization Server](#spring-authorization-server-default). 
+
 ## Import the workshop project into your IDE
 
-1. Clone the git repository https://github.com/andifalk/cloud-security-workshop or download it as zip file
+1. Clone the git repository [https://github.com/andifalk/cloud-security-workshop](https://github.com/andifalk/cloud-security-workshop) or download it as zip file
 2. Import the whole directory into your Java IDE as __Maven__ project
    * IntelliJ: File/New/Project from existing sources -> Select directory -> Select __Maven__ in next step
    * Eclipse: File/Import -> Select '__Maven__'/'__Existing Maven Projects__' -> Select directory -> Click 'Finish'
@@ -16,7 +25,7 @@ with changing into the corresponding project directory and issuing a `./mvnw spr
 
 ## Postman Collection
 
-To make it easier to test the REST API endpoints of the product service a postman collection is provided in the directory _/setup/postman_.
+To make it easier to test the REST API endpoints of the product service a postman collection is provided in the directory `/setup/postman`.  
 If you have not yet installed postman please go to [Postman](https://www.postman.com/downloads/). 
 When you have postman installed you can just import the provided collection.
 
