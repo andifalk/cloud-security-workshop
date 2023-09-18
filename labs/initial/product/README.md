@@ -232,14 +232,14 @@ __com.example.ProductInitializer.java__:
 ```java
 package com.example;
 
-import com.example.product.ProductEntityEntity;
+import com.example.product.ProductEntity;
 import com.example.product.ProductEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 /** Initializes some products in database. */
@@ -256,11 +256,11 @@ public class ProductInitializer implements CommandLineRunner {
  @Override
  public void run(String... strings) {
   Stream.of(
-                  new ProductEntity("Apple", "A green apple", 3.50),
-                  new ProductEntity("Banana", "The perfect banana", 7.00),
-                  new ProductEntity("Orange", "Lots of sweet oranges", 33.00),
-                  new ProductEntity("Pineapple", "Exotic pineapple", 1.50),
-                  new ProductEntity("Grapes", "Red wine grapes", 10.75))
+                  new ProductEntity("Apple", "A green apple", BigDecimal.valueOf(3.50)),
+                  new ProductEntity("Banana", "The perfect banana", BigDecimal.valueOf(7.00)),
+                  new ProductEntity("Orange", "Lots of sweet oranges", BigDecimal.valueOf(33.00)),
+                  new ProductEntity("Pineapple", "Exotic pineapple", BigDecimal.valueOf(1.50)),
+                  new ProductEntity("Grapes", "Red wine grapes", BigDecimal.valueOf(10.75)))
           .forEach(productEntityRepository::save);
 
   LOG.info("Created " + productEntityRepository.count() + " products");
@@ -276,6 +276,7 @@ In class `com.example.product.ProductRestController` we do not get `ProductUser`
 Instead, by default the class `org.springframework.security.oauth2.jwt.Jwt` will be provided as input (as this is the standard authenticated principle object when JWT is used in spring security). 
 
 ```java  
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 public class ProductRestController {
   //...
