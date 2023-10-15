@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)][1]
 ![Java CI](https://github.com/andifalk/cloud-security-workshop/workflows/JavaCI/badge.svg)
 
 # OAuth 2.1 and OpenID Connect for Java Developers (Hands-On Workshop)
@@ -43,6 +43,6 @@ Just email _andreas.falk(at)novatec-gmbh.de_ or contact me via Twitter (_@andifa
 
 ## License
 
-Apache 2.0 licensed
+MIT licensed
 
-[1]:http://www.apache.org/licenses/LICENSE-2.0.txt
+[1]:https://opensource.org/license/mit
