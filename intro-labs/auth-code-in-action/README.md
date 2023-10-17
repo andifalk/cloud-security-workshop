@@ -70,6 +70,7 @@ The spring authorization server follows this recommendation and uses a really sh
 
 You can also try more features of this demo by specifying these spring profiles:
 
-* Without any profile: The demo just runs as OAuth 2 client and only gets an access token
+* Without any profile: The demo just runs OAuth 2 mode and only gets an access token
+* With profile `login`: This demo enforces a re-login independent of an existing session at the authorization server.
 * With profile `oidc`: This demo runs in OpenID Connect mode and also gets an ID token
 * With profile `pkce`: This demo enables Proof Key for Code Exchange (PKCE) instead of using client_secret for getting a token.

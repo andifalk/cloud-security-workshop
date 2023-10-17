@@ -91,14 +91,14 @@ This grant cannot be performed in _curl_ or _httpie_ because of the interactive 
 The required parameters for the authorization code grant are shown here:
 
 | Parameter         | Value                                  |
-| ----------------- | -------------------------------------- |
+| ----------------- |----------------------------------------|
 | authorization url | http://localhost:9000/oauth2/authorize |
 | token url         | http://localhost:9000/oauth2/token     |
 | grant\_type       | code                                   |
 | client\_id        | demo-client                            |
 | client\_secret    | secret                                 |
 | scope             | openid                                 |
-| redirect\_uri     | http://127.0.0.1:9095/callback         |
+| redirect\_uri     | http://127.0.0.1:9095/client/callback  |
 
 ### Postman
 
@@ -123,13 +123,13 @@ Spring Authorization Server uses a really short authorization code lifetime of 5
 The required parameters for the authorization code grant + PKCE are shown here:
 
 | Parameter         | Value                                  |
-| ----------------- | -------------------------------------- |
+| ----------------- |----------------------------------------|
 | authorization url | http://localhost:9000/oauth2/authorize |
 | token url         | http://localhost:9000/oauth2/token     |
 | grant\_type       | code                                   |
 | client\_id        | demo-client-pkce                       |
 | scope             | openid                                 |
-| redirect\_uri     | http://127.0.0.1:9095/callback         |
+| redirect\_uri     | http://127.0.0.1:9095/client/callback  |
 
 You might notice that the client\_secret is not required any more. This is because with the addition of PKCE the static credentials of client\_secret is replaced by dynamically generated and calculated credentials (the code verifier and code challenge).
 

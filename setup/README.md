@@ -23,11 +23,25 @@ Please also follow the instructions in the next sections and also for [Running t
 All spring boot based java projects can either be run using your Java IDE or using the command line
 with changing into the corresponding project directory and issuing a `./mvnw spring-boot:run` command.
 
+In case you need to specify a spring profile you can specify this as environment variable, like with maven (i.e. the `spring` profile):
+
+`./mvnw spring-boot:run -Dspring.profiles.active=spring`
+
+If you run the application inside your IDE then you need to specify it as Java VM environment variable as well: `-Dspring.profiles.active=spring`.
+
 ## Postman Collection
 
 To make it easier to test the REST API endpoints of the product service a postman collection is provided in the directory `/setup/postman`.  
 If you have not yet installed postman please go to [Postman](https://www.postman.com/downloads/). 
 When you have postman installed you can just import the provided collection.
+
+### Using Insomnium
+
+As Postman changed the licensing, so that all collections are always stored in the cloud (in the US for free accounts), this may be a problem for some users.
+Unfortunately, the first-class alternative [Insomnia](https://github.com/Kong/insomnia) just went the same way, so cannot save collections locally anymore.
+Luckily, there is a new open-source fork still storing collections locally. You can download this application at [Insomnium](https://github.com/ArchGPT/insomnium).
+
+![Insomnium](images/insomnium.png)
 
 ## OpenID Connect Identity Providers
 

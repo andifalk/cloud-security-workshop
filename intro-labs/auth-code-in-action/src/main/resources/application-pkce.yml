@@ -3,3 +3,8 @@ democlient:
   pkce: true
   token:
     client-secret:
+  authorization:
+    scope:
+      - openid
+      - profile
+      - offline_access
