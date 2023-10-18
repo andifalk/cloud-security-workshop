@@ -114,8 +114,8 @@ spring:
         registration:
           spring:
             client-id: 'demo-client-pkce'
-            authorizationGrantType: authorization_code
-            clientAuthenticationMethod: NONE
+            authorization-grant-type: authorization_code
+            client-authentication-method: none
             redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
             scope:
               - openid
